@@ -23,10 +23,10 @@ public class OI {
 
 
   public double getLeftYAxis(){
-    return drivercontroller.getRawAxis(1);
+    return drivercontroller.getRawAxis(XBoxControllerMap.LEFT_Y_AXIS);
   }
   public double getRightXAxis(){
-    return drivercontroller.getRawAxis(4);
+    return drivercontroller.getRawAxis(XBoxControllerMap.RIGHT_X_AXIS);
   }
   // Button button = new JoystickButton(stick, buttonNumber);
 
