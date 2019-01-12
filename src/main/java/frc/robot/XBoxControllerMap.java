@@ -1,4 +1,4 @@
-package org.usfirst.frc.team1675.robot;
+package frc.robot;
 
 public class XBoxControllerMap {
 
