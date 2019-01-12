@@ -19,7 +19,7 @@ public class OI {
   //// joystick.
   // You create one by telling it which joystick it's on and which button
   // number it is.
-  Joystick drivercontroller = new Joystick(0);
+  Joystick drivercontroller = new Joystick(XBoxControllerMap.DRIVER_CONTROLLER_PORT);
 
 
   public double getLeftYAxis(){
