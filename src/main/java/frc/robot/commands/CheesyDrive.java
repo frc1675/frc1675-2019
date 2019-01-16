@@ -12,11 +12,10 @@ import frc.robot.Robot;
 
 
 /**
- * An example command.  You can replace me with your own command.
- */
+ * This is the Chessey drive comand. It is a command assigning the left Joystick to backwards and forwards and the left to forward and backwards.
+ *  */
 public class CheesyDrive extends Command {
   public CheesyDrive() {
-    // Use requires() here to declare subsystem dependencies
     requires(Robot.driveBase);
   }
 
@@ -28,10 +27,10 @@ public class CheesyDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double turnpower= Robot.m_oi.getRightXAxis();
-    double forwardPower= Robot.m_oi.getLeftYAxis();
-    double rightPower= forwardPower - turnpower;
-    double leftPower= forwardPower + turnpower;
+    double turnpower = Robot.m_oi.getRightXAxis();
+    double forwardPower = Robot.m_oi.getLeftYAxis();
+    double rightPower = forwardPower - turnpower;
+    double leftPower = forwardPower + turnpower;
     Robot.driveBase.setLeftMotors(leftPower);
     Robot.driveBase.setRightMotors(rightPower);
   
