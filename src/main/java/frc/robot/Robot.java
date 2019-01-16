@@ -23,7 +23,7 @@ import frc.robot.subsystems.DriveBase;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static DriveBase m_subsystem = new DriveBase();
+  public static DriveBase driveBase = new DriveBase();
   public static OI m_oi;
 
 
@@ -37,9 +37,9 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_oi = new OI();
-    m_chooser.setDefaultOption("Default Auto", new CheesyDrive());
+    // m_chooser.setDefaultOption("Default Auto", new CheesyDrive());
     // chooser.addOption("My Auto", new MyAutoCommand());
-    SmartDashboard.putData("Auto mode", m_chooser);
+    // SmartDashboard.putData("Auto mode", m_chooser);
   }
 
   /**

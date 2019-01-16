@@ -7,7 +7,10 @@
 
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.VictorSP;
+import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.can.TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.CheesyDrive;
@@ -16,20 +19,25 @@ import frc.robot.commands.CheesyDrive;
  * An example subsystem.  You can replace me with your own Subsystem.
  */
 public class DriveBase extends Subsystem {
-  private VictorSP left2 = new VictorSP(RobotMap.LEFT2);
-  private VictorSP left3 = new VictorSP(RobotMap.LEFT3);
+  private VictorSPX leftFront = new VictorSPX(RobotMap.LEFT_FRONT);
+  private VictorSPX leftBack = new VictorSPX(RobotMap.LEFT_BACK);
 
-  private VictorSP right2 = new VictorSP(RobotMap.RIGHT2);
-  private VictorSP right3 = new VictorSP(RobotMap.RIGHT3);
+  private VictorSPX rightFront = new VictorSPX(RobotMap.RIGHT_FRONT);
+  private VictorSPX rightBack = new VictorSPX(RobotMap.RIGHT_BACK);
+
+  private TalonSRX leftMiddle = new TalonSRX(RobotMap.LEFT_MIDDLE);
+  private TalonSRX rightMiddle = new TalonSRX(RobotMap.LEFT_MIDDLE);
 
   public void setRightMotors(double power){
-    right2.set(power);
-    right3.set(power);
+    rightFront.set(ControlMode.PercentOutput,-power);
+    rightBack.set(ControlMode.PercentOutput,-power);
+    rightMiddle.set(ControlMode.PercentOutput,-power);
   }
 
   public void setLeftMotors(double power){
-    left2.set(power);
-    left3.set(power);
+    leftFront.set(ControlMode.PercentOutput,power);
+    leftBack.set(ControlMode.PercentOutput,power);
+    leftMiddle.set(ControlMode.PercentOutput,power);
   }
   // Put methods for controlling this subsystem
   // here. Call these from Commands.

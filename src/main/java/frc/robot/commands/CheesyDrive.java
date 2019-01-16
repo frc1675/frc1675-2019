@@ -17,7 +17,7 @@ import frc.robot.Robot;
 public class CheesyDrive extends Command {
   public CheesyDrive() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.m_subsystem);
+    requires(Robot.driveBase);
   }
 
   // Called just before this Command runs the first time
@@ -32,8 +32,9 @@ public class CheesyDrive extends Command {
     double forwardPower= Robot.m_oi.getLeftYAxis();
     double rightPower= forwardPower - turnpower;
     double leftPower= forwardPower + turnpower;
-    Robot.m_subsystem.setLeftMotors(leftPower);
-    Robot.m_subsystem.setRightMotors(rightPower);
+    Robot.driveBase.setLeftMotors(leftPower);
+    Robot.driveBase.setRightMotors(rightPower);
+  
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -45,11 +46,14 @@ public class CheesyDrive extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.driveBase.setLeftMotors(0);
+    Robot.driveBase.setRightMotors(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }
