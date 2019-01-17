@@ -5,7 +5,7 @@
 - **Camel case** is a string of words with no spaces where every word starts with a capital letter except the first (ex. `thisIsCamelCase`).
 - Acronyms should be treated as one word in Pascal case or camel case. (ex. `urlIdentifier`, `XmlHttpRequest`).
 - Names should be descriptive. In general, someone who understands the overall system should be able to figure out what a given variable, method, or class is for by the name alone.
-- Don't use acronyms or nicknames that the team hasn't decided upon (ex. don't decide some part of the robot is named the "whammy bar" if the team hasn't come to a concensus). Keeping a somewhat common nomenclature is important.
+- Don't use acronyms or nicknames that the team hasn't decided upon (ex. don't decide some part of the robot is named the "whammy bar" if the team hasn't come to a consensus). Keeping a somewhat common nomenclature is important.
 - Try to be as succinct as possible while still relating an entire idea (ex. `turnLeft`, not `turnTheRobotLeft`).
 
 ### git Branch Names
