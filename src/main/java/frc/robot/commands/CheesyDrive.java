@@ -12,7 +12,8 @@ import frc.robot.Robot;
 
 
 /**
- * This is the Chessey drive comand. It is a command assigning the left Joystick to backwards and forwards and the left to forward and backwards.
+ * This is a command the uses the cheessy drive algorithm which 
+ * sends commands to the drive base.
  *  */
 public class CheesyDrive extends Command {
   public CheesyDrive() {

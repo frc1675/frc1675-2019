@@ -16,7 +16,7 @@ import frc.robot.RobotMap;
 import frc.robot.commands.CheesyDrive;
 
 /**
- * This is the Drive base. It creats and regulates power to eack of the motar Controllers
+ * This is the Drive base. It regulates power to each of the moter Controllers
  */
 public class DriveBase extends Subsystem {
   private VictorSPX leftFront = new VictorSPX(RobotMap.LEFT_FRONT);
@@ -30,6 +30,15 @@ public class DriveBase extends Subsystem {
   
   public DriveBase() {
     super();
+    leftFront = new VictorSPX(RobotMap.LEFT_FRONT);
+    leftBack = new VictorSPX(RobotMap.LEFT_BACK);
+    
+    rightFront = new VictorSPX(RobotMap.RIGHT_FRONT);
+    rightBack = new VictorSPX(RobotMap.RIGHT_BACK);
+
+    leftMiddle = new TalonSRX(RobotMap.LEFT_MIDDLE);
+    rightMiddle = new TalonSRX(RobotMap.LEFT_MIDDLE);
+
     rightMiddle.setInverted(true);
     rightFront.setInverted(true);
     rightBack.setInverted(true);
@@ -47,13 +56,10 @@ public class DriveBase extends Subsystem {
     leftBack.set(ControlMode.PercentOutput,power);
     leftMiddle.set(ControlMode.PercentOutput,power);
   }
-  // Put methods for controlling this subsystem
-  // here. Call these from Commands.
-
+  
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new CheesyDrive());
-    // Set the default command for a subsystem here.
-    // setDefaultCommand(new MySpecialCommand());
+    
   }
 }
