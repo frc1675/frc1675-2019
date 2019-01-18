@@ -19,14 +19,14 @@ import frc.robot.commands.CheesyDrive;
  * This is the Drive base. It regulates power to each of the moter Controllers
  */
 public class DriveBase extends Subsystem {
-  private VictorSPX leftFront = new VictorSPX(RobotMap.LEFT_FRONT);
-  private VictorSPX leftBack = new VictorSPX(RobotMap.LEFT_BACK);
+  private VictorSPX leftFront;
+  private VictorSPX leftBack;
 
-  private VictorSPX rightFront = new VictorSPX(RobotMap.RIGHT_FRONT);
-  private VictorSPX rightBack = new VictorSPX(RobotMap.RIGHT_BACK);
-
-  private TalonSRX leftMiddle = new TalonSRX(RobotMap.LEFT_MIDDLE);
-  private TalonSRX rightMiddle = new TalonSRX(RobotMap.LEFT_MIDDLE);
+  private VictorSPX rightFront;
+  private VictorSPX rightBack;
+  
+  private TalonSRX leftMiddle;
+  private TalonSRX rightMiddle;
   
   public DriveBase() {
     super();

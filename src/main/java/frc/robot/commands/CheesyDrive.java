@@ -13,7 +13,7 @@ import frc.robot.Robot;
 
 /**
  * This is a command the uses the cheessy drive algorithm which 
- * sends commands to the drive base.
+ * sends commands to the drive base.g
  *  */
 public class CheesyDrive extends Command {
   public CheesyDrive() {
@@ -30,11 +30,24 @@ public class CheesyDrive extends Command {
   protected void execute() {
     double turnpower = Robot.m_oi.getRightXAxis();
     double forwardPower = Robot.m_oi.getLeftYAxis();
+    
+   
     double rightPower = forwardPower - turnpower;
     double leftPower = forwardPower + turnpower;
+
+    if (Math.abs(leftPower) > 1.0 || Math.abs(rightPower) > 1.0) {
+      System.out.println("---");
+      System.out.println("left before: " + leftPower);
+      System.out.println("right before: " + rightPower);
+      double Scaler = Math.max( Math.abs(rightPower),Math.abs(leftPower));
+      rightPower = rightPower / Scaler;
+      leftPower = leftPower / Scaler; 
+      System.out.println("left after" + leftPower);
+      System.out.println("right after" + rightPower);
+      System.out.println("---");
+    } 
     Robot.driveBase.setLeftMotors(leftPower);
     Robot.driveBase.setRightMotors(rightPower);
-  
   }
 
   // Make this return true when this Command no longer needs to run execute()
