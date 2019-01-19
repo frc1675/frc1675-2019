@@ -16,7 +16,7 @@ import frc.robot.RobotMap;
 import frc.robot.commands.CheesyDrive;
 
 /**
- * This is the Drive base. It regulates power to each of the moter Controllers
+ *DriveBase is the representation of the physical drive motors and provides access to their motor controllers.
  */
 public class DriveBase extends Subsystem {
   private VictorSPX leftFront;

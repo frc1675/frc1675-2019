@@ -12,8 +12,7 @@ import frc.robot.Robot;
 
 
 /**
- * This is a command the uses the cheessy drive algorithm which 
- * sends commands to the drive base.g
+ * CheesyDrive is an algorithm for turning joystick inputs into commands for the drivebase.
  *  */
 public class CheesyDrive extends Command {
   public CheesyDrive() {
@@ -36,15 +35,10 @@ public class CheesyDrive extends Command {
     double leftPower = forwardPower + turnpower;
 
     if (Math.abs(leftPower) > 1.0 || Math.abs(rightPower) > 1.0) {
-      System.out.println("---");
-      System.out.println("left before: " + leftPower);
-      System.out.println("right before: " + rightPower);
       double Scaler = Math.max( Math.abs(rightPower),Math.abs(leftPower));
       rightPower = rightPower / Scaler;
       leftPower = leftPower / Scaler; 
-      System.out.println("left after" + leftPower);
-      System.out.println("right after" + rightPower);
-      System.out.println("---");
+      
     } 
     Robot.driveBase.setLeftMotors(leftPower);
     Robot.driveBase.setRightMotors(rightPower);
