@@ -10,12 +10,12 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
+
 /**
- * An example command.  You can replace me with your own command.
- */
-public class ExampleCommand extends Command {
-  public ExampleCommand() {
-    // Use requires() here to declare subsystem dependencies
+ * CheesyDrive is an algorithm for turning joystick inputs into commands for the drivebase.
+ *  */
+public class CheesyDrive extends Command {
+  public CheesyDrive() {
     requires(Robot.driveBase);
   }
 
@@ -27,6 +27,21 @@ public class ExampleCommand extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+    double turnpower = Robot.m_oi.getRightXAxis();
+    double forwardPower = Robot.m_oi.getLeftYAxis();
+    
+   
+    double rightPower = forwardPower - turnpower;
+    double leftPower = forwardPower + turnpower;
+
+    if (Math.abs(leftPower) > 1.0 || Math.abs(rightPower) > 1.0) {
+      double Scaler = Math.max( Math.abs(rightPower),Math.abs(leftPower));
+      rightPower = rightPower / Scaler;
+      leftPower = leftPower / Scaler; 
+      
+    } 
+    Robot.driveBase.setLeftMotors(leftPower);
+    Robot.driveBase.setRightMotors(rightPower);
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -38,11 +53,14 @@ public class ExampleCommand extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.driveBase.setLeftMotors(0);
+    Robot.driveBase.setRightMotors(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }
