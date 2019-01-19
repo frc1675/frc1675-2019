@@ -48,10 +48,10 @@ public class OI {
     return driverController.getRawAxis(XBoxControllerMap.LEFT_Y_AXIS);
   }
   public double getDriverLeftXAxis(){
-    return driverController.getRawAxis(XBoxControllerMap.LEFT_X_AXIS);
+    return -driverController.getRawAxis(XBoxControllerMap.LEFT_X_AXIS);
   }
   public double getDriverRightYAxis(){
-    return -driverController.getRawAxis(XBoxControllerMap.RIGHT_Y_AXIS);
+    return driverController.getRawAxis(XBoxControllerMap.RIGHT_Y_AXIS);
   }
   public double getDriverRightXAxis(){
     return -driverController.getRawAxis(XBoxControllerMap.RIGHT_X_AXIS);
@@ -62,10 +62,10 @@ public class OI {
     return operatorController.getRawAxis(XBoxControllerMap.LEFT_Y_AXIS);
   } 
   public double getOperatorLeftXAxis(){
-    return operatorController.getRawAxis(XBoxControllerMap.LEFT_X_AXIS);
+    return -operatorController.getRawAxis(XBoxControllerMap.LEFT_X_AXIS);
   }
   public double getOperatorRightYAxis(){
-    return -operatorController.getRawAxis(XBoxControllerMap.RIGHT_Y_AXIS);
+    return operatorController.getRawAxis(XBoxControllerMap.RIGHT_Y_AXIS);
   }
   public double getOperatorRightXAxis(){
     return -operatorController.getRawAxis(XBoxControllerMap.RIGHT_X_AXIS);
