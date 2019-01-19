@@ -39,9 +39,9 @@ public class DriveBase extends Subsystem {
     leftMiddle = new TalonSRX(RobotMap.LEFT_MIDDLE);
     rightMiddle = new TalonSRX(RobotMap.LEFT_MIDDLE);
 
-    rightMiddle.setInverted(true);
-    rightFront.setInverted(true);
-    rightBack.setInverted(true);
+    leftMiddle.setInverted(true);
+    leftFront.setInverted(true);
+    leftBack.setInverted(true);
   }
 
   public void setRightMotors(double power){

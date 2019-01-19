@@ -27,8 +27,8 @@ public class CheesyDrive extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double turnpower = Robot.m_oi.getRightXAxis();
-    double forwardPower = Robot.m_oi.getLeftYAxis();
+    double turnpower = Robot.m_oi.getDriverRightXAxis();
+    double forwardPower = Robot.m_oi.getDriverLeftYAxis();
     
    
     double rightPower = forwardPower - turnpower;

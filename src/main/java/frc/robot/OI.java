@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -19,15 +20,64 @@ public class OI {
   //// joystick.
   // You create one by telling it which joystick it's on and which button
   // number it is.
-  Joystick drivercontroller = new Joystick(XBoxControllerMap.DRIVER_CONTROLLER_PORT);
+  Joystick driverController = new Joystick(XBoxControllerMap.DRIVER_CONTROLLER_PORT);
+  Joystick operatorController = new Joystick(XBoxControllerMap.OPERATOR_CONTROLLER_PORT);
 
+  //Driver controller buttons
+  JoystickButton driverAButton = new JoystickButton(driverController, XBoxControllerMap.A_BUTTON);
+  JoystickButton driverBButton = new JoystickButton(driverController, XBoxControllerMap.B_BUTTON);
+  JoystickButton driverYButton = new JoystickButton(driverController, XBoxControllerMap.Y_BUTTON);
+  JoystickButton driverXButton = new JoystickButton(driverController, XBoxControllerMap.X_BUTTON);
 
-  public double getLeftYAxis(){
-    return drivercontroller.getRawAxis(XBoxControllerMap.LEFT_Y_AXIS);
+  //Driver controller bumpers
+  JoystickButton driverLeftBumper = new JoystickButton(driverController, XBoxControllerMap.LEFT_BUMPER_BUTTON);  
+  JoystickButton driverRightBumper = new JoystickButton(driverController, XBoxControllerMap.RIGHT_BUMPER_BUTTON);
+  
+  //Operator controller buttons
+  JoystickButton operatorAButton = new JoystickButton(operatorController, XBoxControllerMap.A_BUTTON); 
+  JoystickButton operatorBButton = new JoystickButton(operatorController, XBoxControllerMap.B_BUTTON);
+  JoystickButton operatorYButton = new JoystickButton(operatorController, XBoxControllerMap.Y_BUTTON); 
+  JoystickButton operatorXButton = new JoystickButton(operatorController, XBoxControllerMap.X_BUTTON); 
+
+  //Operator controller bumpers
+  JoystickButton operatorLeftBumper = new JoystickButton(operatorController, XBoxControllerMap.LEFT_BUMPER_BUTTON);
+  JoystickButton operatorRightBumper = new JoystickButton(operatorController, XBoxControllerMap.RIGHT_BUMPER_BUTTON);
+
+  //Driver controller joysticks
+  public double getDriverLeftYAxis(){
+    double value = -driverController.getRawAxis(XBoxControllerMap.LEFT_Y_AXIS);
+    return value;
   }
-  public double getRightXAxis(){
-    return -drivercontroller.getRawAxis(XBoxControllerMap.RIGHT_X_AXIS);
+  public double getDriverLeftXAxis(){
+    double value = driverController.getRawAxis(XBoxControllerMap.LEFT_X_AXIS);
+    return value;
   }
+  public double getDriverRightYAxis(){
+    double value = -driverController.getRawAxis(XBoxControllerMap.RIGHT_Y_AXIS);
+    return value;
+    }
+  public double getDriverRightXAxis(){
+    double value = driverController.getRawAxis(XBoxControllerMap.RIGHT_X_AXIS);
+    return value;
+  }
+
+  //Operator controller joysticks
+  public double getOperatorLeftYAxis(){
+    return -operatorController.getRawAxis(XBoxControllerMap.LEFT_Y_AXIS);
+  } 
+  public double getOperatorLeftXAxis(){
+    return operatorController.getRawAxis(XBoxControllerMap.LEFT_X_AXIS);
+  }
+  public double getOperatorRightYAxis(){
+    return -operatorController.getRawAxis(XBoxControllerMap.RIGHT_Y_AXIS);
+  }
+  public double getOperatorRightXAxis(){
+    return operatorController.getRawAxis(XBoxControllerMap.RIGHT_X_AXIS);
+  }
+  
+
+  
+
   // Button button = new JoystickButton(stick, buttonNumber);
 
   // There are a few additional built in buttons you can use. Additionally,
