@@ -31,19 +31,21 @@ public class Grabber extends Subsystem {
   }
 
   public void raiseArm() {
-    //need physical robot first
+    armRotator.set(false);
   }
 
   public void lowerArm() {
-    //need physical robot first
+    armRotator.set(true);
   }
-  
+
   public void releaseHatch() {
-    //need physical robot first
+    hatchReleaser1.set(true);
+    hatchReleaser2.set(true);
   }
 
   public void retractPistons() {
-    //need physical robot first
+    hatchReleaser1.set(false);
+    hatchReleaser2.set(false);
   }
 
   @Override
