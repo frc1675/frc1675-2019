@@ -45,30 +45,34 @@ public class OI {
 
   //Driver controller joysticks
   public double getDriverLeftYAxis(){
-    return driverController.getRawAxis(XBoxControllerMap.LEFT_Y_AXIS);
+    double value = -driverController.getRawAxis(XBoxControllerMap.LEFT_Y_AXIS);
+    return value;
   }
   public double getDriverLeftXAxis(){
-    return -driverController.getRawAxis(XBoxControllerMap.LEFT_X_AXIS);
+    double value = driverController.getRawAxis(XBoxControllerMap.LEFT_X_AXIS);
+    return value;
   }
   public double getDriverRightYAxis(){
-    return driverController.getRawAxis(XBoxControllerMap.RIGHT_Y_AXIS);
-  }
+    double value = -driverController.getRawAxis(XBoxControllerMap.RIGHT_Y_AXIS);
+    return value;
+    }
   public double getDriverRightXAxis(){
-    return -driverController.getRawAxis(XBoxControllerMap.RIGHT_X_AXIS);
+    double value = driverController.getRawAxis(XBoxControllerMap.RIGHT_X_AXIS);
+    return value;
   }
 
   //Operator controller joysticks
   public double getOperatorLeftYAxis(){
-    return operatorController.getRawAxis(XBoxControllerMap.LEFT_Y_AXIS);
+    return -operatorController.getRawAxis(XBoxControllerMap.LEFT_Y_AXIS);
   } 
   public double getOperatorLeftXAxis(){
-    return -operatorController.getRawAxis(XBoxControllerMap.LEFT_X_AXIS);
+    return operatorController.getRawAxis(XBoxControllerMap.LEFT_X_AXIS);
   }
   public double getOperatorRightYAxis(){
-    return operatorController.getRawAxis(XBoxControllerMap.RIGHT_Y_AXIS);
+    return -operatorController.getRawAxis(XBoxControllerMap.RIGHT_Y_AXIS);
   }
   public double getOperatorRightXAxis(){
-    return -operatorController.getRawAxis(XBoxControllerMap.RIGHT_X_AXIS);
+    return operatorController.getRawAxis(XBoxControllerMap.RIGHT_X_AXIS);
   }
   
 
