@@ -81,10 +81,10 @@ public class OI {
   private double correctDeadzone(double value) {
     double correctDeadzone = 0;
     if ((XBoxControllerMap.DEAD_ZONE < value) && (value <= 1)){
-      correctDeadzone = ((1 /(1 - XBoxControllerMap.DEAD_ZONE)) * value + 1) - 1;
+      correctDeadzone = ((1 - RobotMap.moterDeadzone /(1 - XBoxControllerMap.DEAD_ZONE)) * value + 1) - 1;
     }
     else if ((-1 <= value) && (value < -XBoxControllerMap.DEAD_ZONE)){
-      correctDeadzone = ((-1 /(-1 + XBoxControllerMap.DEAD_ZONE)) * value - 1) + 1;
+      correctDeadzone = ((-1 - RobotMap.moterDeadzone/(-1 + XBoxControllerMap.DEAD_ZONE)) * value - 1) + 1;
     }
     return correctDeadzone;
 
