@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
 
-public class LowerArm extends Command {
-  public LowerArm() {
+public class WristUp extends Command {
+  public WristUp() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     requires(Robot.grabber);
@@ -26,7 +26,7 @@ public class LowerArm extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    Robot.grabber.lowerArm();
+    Robot.grabber.WristUp();
   }
 
   // Make this return true when this Command no longer needs to run execute()
