@@ -30,11 +30,11 @@ public class Grabber extends Subsystem {
     hatchReleaser2 = new Solenoid(RobotMap.HATCH_RELEASER_2);
   }
 
-  public void WristUp() {
+  public void wristUp() {
     armRotator.set(false);
   }
 
-  public void WristDown() {
+  public void wristDown() {
     armRotator.set(true);
   }
 
