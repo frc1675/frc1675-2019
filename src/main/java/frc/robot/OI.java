@@ -46,47 +46,54 @@ public class OI {
   //Driver controller joysticks
   public double getDriverLeftYAxis(){
     double value = -driverController.getRawAxis(XBoxControllerMap.LEFT_Y_AXIS);
-    return correctDeadzone(value);
+    return correctForDeadzone(value);
   }
+  
   public double getDriverLeftXAxis(){
     double value = driverController.getRawAxis(XBoxControllerMap.LEFT_X_AXIS);
-    return correctDeadzone(value);
+    return correctForDeadzone(value);
   }
+
   public double getDriverRightYAxis(){
     double value = -driverController.getRawAxis(XBoxControllerMap.RIGHT_Y_AXIS);
-    return correctDeadzone(value);
+    return correctForDeadzone(value);
   }
+
     public double getDriverRightXAxis(){
     double value = driverController.getRawAxis(XBoxControllerMap.RIGHT_X_AXIS);
-    return correctDeadzone(value);
+    return correctForDeadzone(value);
   }
 
   //Operator controller joysticks
   public double getOperatorLeftYAxis(){
     double value = -operatorController.getRawAxis(XBoxControllerMap.LEFT_Y_AXIS);
-    return correctDeadzone(value);
+    return correctForDeadzone(value);
   } 
+
   public double getOperatorLeftXAxis(){
     double value = operatorController.getRawAxis(XBoxControllerMap.LEFT_X_AXIS);
-    return correctDeadzone(value);
+    return correctForDeadzone(value);
   }
+
   public double getOperatorRightYAxis(){
     double value = -operatorController.getRawAxis(XBoxControllerMap.RIGHT_Y_AXIS);
-    return correctDeadzone(value);
+    return correctForDeadzone(value);
   }
+
   public double getOperatorRightXAxis(){
     double value = operatorController.getRawAxis(XBoxControllerMap.RIGHT_X_AXIS);
-    return correctDeadzone(value);
+    return correctForDeadzone(value);
   }
-  private double correctDeadzone(double value) {
-    double correctDeadzone = 0;
+
+  private double correctForDeadzone(double value) {
+    double correctedValue = 0;
     if ((XBoxControllerMap.DEAD_ZONE < value) && (value <= 1)){
-      correctDeadzone = ((1 - RobotMap.Moter_Deadzone /(1 - XBoxControllerMap.DEAD_ZONE)) * value + 1) - 1;
+      correctedValue = ((1 /(1 - XBoxControllerMap.DEAD_ZONE)) * value + 1) - 1;
     }
     else if ((-1 <= value) && (value < -XBoxControllerMap.DEAD_ZONE)){
-      correctDeadzone = ((-1 - RobotMap.Moter_Deadzone/(-1 + XBoxControllerMap.DEAD_ZONE)) * value - 1) + 1;
+      correctedValue = ((-1 /(-1 + XBoxControllerMap.DEAD_ZONE)) * value - 1) + 1;
     }
-    return correctDeadzone;
+    return correctedValue;
 
   }
 
