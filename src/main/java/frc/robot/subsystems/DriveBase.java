@@ -47,6 +47,7 @@ public class DriveBase extends Subsystem {
 
   public void setRightMotors(double power){
     power = correctForDeadzone(power);
+    System.out.println("Right" + power);
     rightFront.set(ControlMode.PercentOutput,power);
     rightBack.set(ControlMode.PercentOutput,power);
     rightMiddle.set(ControlMode.PercentOutput,power);
@@ -56,6 +57,7 @@ public class DriveBase extends Subsystem {
 
   public void setLeftMotors(double power){
     power = correctForDeadzone(power);
+    System.out.println("Left" + power);
     leftFront.set(ControlMode.PercentOutput,power);
     leftBack.set(ControlMode.PercentOutput,power);
     leftMiddle.set(ControlMode.PercentOutput,power);
@@ -69,10 +71,10 @@ public class DriveBase extends Subsystem {
   private double correctForDeadzone(double power) {
     double correctedPower = 0;
     if ((RobotMap.Motor_DEADZONE < power) && (power <= 1)){
-      correctedPower = ((1 /(1 - RobotMap.Motor_DEADZONE)) * power + 1) - 1;
+      correctedPower = ((1 - RobotMap.Motor_DEADZONE) * power + 1) - 1;
     }
     else if ((-1 <= power) && (power < -RobotMap.Motor_DEADZONE)){
-      correctedPower = ((-1 /(-1 + RobotMap.Motor_DEADZONE)) * power - 1) + 1;
+      correctedPower = (((-1  +  RobotMap.Motor_DEADZONE) / -1) * power - 1) + 1;
 
     }
     return correctedPower;
