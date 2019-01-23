@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.CheesyDrive;
 import frc.robot.subsystems.DriveBase;
+import frc.robot.subsystems.Grabber;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -23,7 +24,8 @@ import frc.robot.subsystems.DriveBase;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static DriveBase driveBase = new DriveBase();
+  public static DriveBase driveBase;
+  public static Grabber grabber;
   public static OI m_oi;
 
 
@@ -37,6 +39,8 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     m_oi = new OI();
+    grabber = new Grabber();
+    driveBase = new DriveBase();
     // m_chooser.setDefaultOption("Default Auto", new CheesyDrive());
     // chooser.addOption("My Auto", new MyAutoCommand());
     // SmartDashboard.putData("Auto mode", m_chooser);
