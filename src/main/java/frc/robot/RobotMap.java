@@ -33,5 +33,5 @@ public class RobotMap {
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
 
-  public static final double Motor_DEADZONE = .15;
+  public static final double MOTOR_DEADZONE = .15;
 }
