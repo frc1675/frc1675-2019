@@ -41,6 +41,9 @@ public class RobotMap {
   public static final int MAX_POSITION = 15;
   public static final int MIN_POSITION = 16;
   public static final int TILT_MAX_POSITION = 17;
+  public static final int BOTTOM_HATCH = 18;
+  public static final int MIDDLE_HATCH = 19;
+  public static final int TOP_HATCH = 20;
 
 
   // For example to map the left and right motors, you could define the
