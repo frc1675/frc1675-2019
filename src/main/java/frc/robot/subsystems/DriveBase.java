@@ -10,6 +10,7 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
+import edu.wpi.first.wpilibj.command.PIDSubsystem;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
@@ -56,6 +57,22 @@ public class DriveBase extends Subsystem {
     leftBack.set(ControlMode.PercentOutput,power);
     leftMiddle.set(ControlMode.PercentOutput,power);
   }
+
+  public void activatePID(){
+    
+  }
+
+  public double getLeftEncoderPosition(){
+    return leftMiddle.getSelectedSensorPosition(0);
+  }
+  public double getRightEncoderPosition(){
+    return rightMiddle.getSelectedSensorPosition(0);
+  }
+
+  public void resetEncoder() {
+    leftMiddle.getSensorCollection().setQuadraturePosition(0, 0);
+    rightMiddle.getSensorCollection().setQuadraturePosition(0, 0);
+}
   
   @Override
   public void initDefaultCommand() {
