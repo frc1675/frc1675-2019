@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.CheesyDrive;
+import frc.robot.commands.DriveForDistance;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Grabber;
 
@@ -41,9 +41,9 @@ public class Robot extends TimedRobot {
     m_oi = new OI();
     grabber = new Grabber();
     driveBase = new DriveBase();
-    // m_chooser.setDefaultOption("Default Auto", new CheesyDrive());
+    m_chooser.setDefaultOption("Default Auto", new DriveForDistance());
     // chooser.addOption("My Auto", new MyAutoCommand());
-    // SmartDashboard.putData("Auto mode", m_chooser);
+    SmartDashboard.putData("Auto mode", m_chooser);
   }
 
   /**

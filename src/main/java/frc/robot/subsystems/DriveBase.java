@@ -20,25 +20,27 @@ import frc.robot.commands.CheesyDrive;
  *DriveBase is the representation of the physical drive motors and provides access to their motor controllers.
  */
 public class DriveBase extends Subsystem {
-  private VictorSPX leftFront;
+  private TalonSRX leftFront;
+  private VictorSPX leftMiddle;
   private VictorSPX leftBack;
 
-  private VictorSPX rightFront;
+  private TalonSRX rightFront;
+  private VictorSPX rightMiddle;
   private VictorSPX rightBack;
-  
-  private TalonSRX leftMiddle;
-  private TalonSRX rightMiddle;
   
   public DriveBase() {
     super();
-    leftFront = new VictorSPX(RobotMap.LEFT_FRONT);
+    leftFront = new TalonSRX(RobotMap.LEFT_FRONT);
+    rightFront = new TalonSRX(RobotMap.RIGHT_FRONT);
+
+    leftMiddle = new VictorSPX(RobotMap.LEFT_MIDDLE);
+    rightMiddle = new VictorSPX(RobotMap.RIGHT_MIDDLE);
+
     leftBack = new VictorSPX(RobotMap.LEFT_BACK);
-    
-    rightFront = new VictorSPX(RobotMap.RIGHT_FRONT);
     rightBack = new VictorSPX(RobotMap.RIGHT_BACK);
 
-    leftMiddle = new TalonSRX(RobotMap.LEFT_MIDDLE);
-    rightMiddle = new TalonSRX(RobotMap.LEFT_MIDDLE);
+    rightMiddle.setSensorPhase(true);
+    leftMiddle.setSensorPhase(true);
 
     leftMiddle.setInverted(true);
     leftFront.setInverted(true);
@@ -57,20 +59,16 @@ public class DriveBase extends Subsystem {
     leftMiddle.set(ControlMode.PercentOutput,power);
   }
 
-  public void activatePID(){
-    
-  }
-
   public double getLeftEncoderPosition(){
-    return leftMiddle.getSelectedSensorPosition(0);
+    return leftFront.getSelectedSensorPosition(0);
   }
   public double getRightEncoderPosition(){
-    return rightMiddle.getSelectedSensorPosition(0);
+    return rightFront.getSelectedSensorPosition(0);
   }
 
   public void resetEncoder() {
-    leftMiddle.getSensorCollection().setQuadraturePosition(0, 0);
-    rightMiddle.getSensorCollection().setQuadraturePosition(0, 0);
+    leftFront.getSensorCollection().setQuadraturePosition(0, 0);
+    rightFront.getSensorCollection().setQuadraturePosition(0, 0);
 }
   
   @Override

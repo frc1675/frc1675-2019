@@ -42,6 +42,9 @@ public class CheesyDrive extends Command {
     } 
     Robot.driveBase.setLeftMotors(leftPower);
     Robot.driveBase.setRightMotors(rightPower);
+
+    System.out.println(Robot.driveBase.getRightEncoderPosition());
+    System.out.println(Robot.driveBase.getLeftEncoderPosition());
   }
 
   // Make this return true when this Command no longer needs to run execute()
