@@ -30,12 +30,18 @@ public class RobotMap {
   public static final int HATCH_RELEASER_2 = 9;
 
   //Elevator
-  public static final int ELEVATOR = 10;
+  public static final int ELEVATOR_MOTOR = 10;
 
   public static final int TILT_ELEVATOR_FORWARD = 11;
   public static final int TILT_ELEVATOR_REVERSE = 12;
 
-  public static final int LIMIT_SWITCH = 13;
+  public static final int LOWER_LIMIT_SWITCH = 13;
+  public static final int UPPER_LIMIT_SWITCH = 14;
+  
+  public static final int MAX_POSITION = 15;
+  public static final int MIN_POSITION = 16;
+  public static final int TILT_MAX_POSITION = 17;
+
 
   // For example to map the left and right motors, you could define the
   // following variables to use with your drivetrain subsystem.

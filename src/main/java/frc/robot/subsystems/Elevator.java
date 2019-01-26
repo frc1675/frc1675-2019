@@ -21,31 +21,60 @@ import frc.robot.RobotMap;
 public class Elevator extends Subsystem {
   private TalonSRX elevatorMotor;
   private DoubleSolenoid tiltElevator;
-  DigitalInput limitSwitch;
+  private DigitalInput lowerLimitSwitch;
+  private DigitalInput upperLimitSwitch;
+  private boolean isLowerLimitDefined = false;
 
   public Elevator(){
 
-    elevatorMotor = new TalonSRX(RobotMap.ELEVATOR);
+    elevatorMotor = new TalonSRX(RobotMap.ELEVATOR_MOTOR);
     tiltElevator = new DoubleSolenoid(RobotMap.TILT_ELEVATOR_FORWARD, RobotMap.TILT_ELEVATOR_REVERSE);
-    limitSwitch = new DigitalInput(RobotMap.LIMIT_SWITCH);
+    lowerLimitSwitch = new DigitalInput(RobotMap.LOWER_LIMIT_SWITCH);
+    upperLimitSwitch = new DigitalInput(RobotMap.UPPER_LIMIT_SWITCH);
+    elevatorMotor.setForwardSoftLimit(RobotMap.MAX_POSITION);
+    elevatorMotor.enableForwardSoftLimit(true);
+    elevatorMotor.setReverseSoftLimit(RobotMap.MIN_POSITION);
+    elevatorMotor.enableReverseSoftLimit(true);
   }
 
   public void resetPosition() {
-    while (limitSwitch.get()){
-
-    }
+    elevatorMotor.setPosition(0);
   }
 
   public void tiltElevatorForward() {
-    tiltElevator.set(Value.kForward);
+    if (lowerLimitswitch.get() == true || elevatorMotor.getPosition() < RobotMap.TILT_MAX_POSITION) {
+      tiltElevator.set(Value.kForward);
+    }
   }
 
   public void tiltElevatorReverse() {
-    tiltElevator.set(Value.kReverse);
+    if (lowerLimitswitch.get() == true || elevatorMotor.getPosition() < RobotMap.TILT_MAX_POSITION) {
+      tiltElevator.set(Value.kReverse);
+      resetPosition();
+    }
   }
 
   public void moveElevator(double power) {
-    elevatorMotor.set(ControlMode.PercentOutput,power);
+
+    double correctedPower = 0;
+    if (isLowerLimitDefined == true) {
+      if ((lowerLimitSwitch.get() == true && power < 0) || (upperLimitSwitch.get() == true && power > 0)) {
+        correctedPower = 0;
+      } 
+      else {
+        correctedPower = power;
+      }
+
+    }
+
+    elevatorMotor.set(ControlMode.PercentOutput,correctedPower);
+  }
+
+  public void periodic(){
+    if (lowerLimitSwitch.get() == true && isLowerLimitDefined == false) {
+      isLowerLimitDefined = true;
+      resetPosition();
+    }
   }
 
   @Override
