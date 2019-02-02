@@ -30,22 +30,13 @@ public class CheesyDrive extends Command {
     double turnPower = Robot.m_oi.getDriverRightXAxis();
     double forwardPower = Robot.m_oi.getDriverLeftYAxis();
     
-    // System.out.println("Right X: " + turnPower);
-    // System.out.println("Left Y: " + forwardPower);
-   
     double leftPower = forwardPower + turnPower;
     double rightPower = forwardPower - turnPower;
 
-    // System.out.println("Left prescale: " + leftPower);
-    // System.out.println("Right prescale: " + rightPower);
-
     if (Math.abs(leftPower) > 1.0 || Math.abs(rightPower) > 1.0) {
-      // System.out.println("Scaling...");
       double Scaler = Math.max( Math.abs(rightPower),Math.abs(leftPower));
       rightPower = rightPower / Scaler;
-      leftPower = leftPower / Scaler; 
-      // System.out.println("Left postscale: " + leftPower);
-      // System.out.println("Right postscale: " + rightPower);
+      leftPower = leftPower / Scaler;
     } 
 
     

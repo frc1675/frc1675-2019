@@ -84,24 +84,24 @@ public class OI {
     double value = operatorController.getRawAxis(XBoxControllerMap.RIGHT_X_AXIS);
     return correctForDeadzone(value);
   }
+  private enum Sign { POSITIVE, NEGATIVE }
 
   private double correctForDeadzone(double value) {
     double correctedValue = 0;
     if ((XBoxControllerMap.DEAD_ZONE < value) && (value <= 1)){
-      correctedValue = scale(value, 1);
-      // correctedValue = ((1 /(1 - XBoxControllerMap.DEAD_ZONE)) * (value - 1)) + 1;
+      correctedValue = scalePastDeadzone(value, Sign.POSITIVE);
     }
     else if ((-1 <= value) && (value < -XBoxControllerMap.DEAD_ZONE)){
-      correctedValue = scale(value, -1);
-      // correctedValue = ((-1 /(-1 + XBoxControllerMap.DEAD_ZONE)) * (value + 1)) - 1;
+      correctedValue = scalePastDeadzone(value, Sign.NEGATIVE);
     }
     return correctedValue;
 
   }
 
-  private double scale(double value, double sign) {
+  private double scalePastDeadzone(double value, Sign sign) {
+    double signMultiplier = (sign == Sign.POSITIVE) ? 1.0 : -1.0;
     double correctedValue = 0;
-    correctedValue = (((1 * sign) /((1 * sign) +  (- XBoxControllerMap.DEAD_ZONE  * sign))) * (value - (1 * sign))) + (1 * sign);
+    correctedValue = (((1 * signMultiplier) /((1 * signMultiplier) +  (- XBoxControllerMap.DEAD_ZONE  * signMultiplier))) * (value - (1 * signMultiplier))) + (1 * signMultiplier);
     return correctedValue;
   }
   
