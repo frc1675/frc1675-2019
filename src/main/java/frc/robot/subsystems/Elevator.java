@@ -7,6 +7,7 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -14,6 +15,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import frc.robot.commands.ManualElevator;
 
 /**
  * Add your docs here.
@@ -31,30 +33,29 @@ public class Elevator extends Subsystem {
     tiltElevator = new DoubleSolenoid(RobotMap.TILT_ELEVATOR_FORWARD, RobotMap.TILT_ELEVATOR_REVERSE);
     lowerLimitSwitch = new DigitalInput(RobotMap.LOWER_LIMIT_SWITCH);
     upperLimitSwitch = new DigitalInput(RobotMap.UPPER_LIMIT_SWITCH);
-    elevatorMotor.setForwardSoftLimit(RobotMap.MAX_POSITION);
-    elevatorMotor.enableForwardSoftLimit(true);
-    elevatorMotor.setReverseSoftLimit(RobotMap.MIN_POSITION);
-    elevatorMotor.enableReverseSoftLimit(true);
+    elevatorMotor.configForwardSoftLimitThreshold(RobotMap.MAX_POSITION);
+    elevatorMotor.configForwardSoftLimitEnable(true);
+    elevatorMotor.configReverseSoftLimitThreshold(RobotMap.MIN_POSITION);
+    elevatorMotor.configReverseSoftLimitEnable(true);
   }
 
   public void resetPosition() {
-    elevatorMotor.setPosition(0);
+    elevatorMotor.setSelectedSensorPosition(0);
   }
 
   public void tiltElevatorForward() {
-    if (lowerLimitswitch.get() == true || elevatorMotor.getPosition() < RobotMap.TILT_MAX_POSITION) {
+    if (lowerLimitSwitch.get() == true || elevatorMotor.getSelectedSensorPosition() < RobotMap.TILT_MAX_POSITION) {
       tiltElevator.set(Value.kForward);
     }
   }
 
   public void tiltElevatorReverse() {
-    if (lowerLimitswitch.get() == true || elevatorMotor.getPosition() < RobotMap.TILT_MAX_POSITION) {
+    if (lowerLimitSwitch.get() == true || elevatorMotor.getSelectedSensorPosition() < RobotMap.TILT_MAX_POSITION) {
       tiltElevator.set(Value.kReverse);
-      resetPosition();
     }
   }
 
-  public void moveElevator(double power) {
+  public void setElevatorMotor(double power) {
 
     double correctedPower = 0;
     if (isLowerLimitDefined == true) {
@@ -66,10 +67,10 @@ public class Elevator extends Subsystem {
       }
 
     }
-
     elevatorMotor.set(ControlMode.PercentOutput,correctedPower);
   }
 
+  // will resolve before match begins
   public void periodic(){
     if (lowerLimitSwitch.get() == true && isLowerLimitDefined == false) {
       isLowerLimitDefined = true;
@@ -81,5 +82,6 @@ public class Elevator extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
+    setDefaultCommand(new ManualElevator());
   }
 }
