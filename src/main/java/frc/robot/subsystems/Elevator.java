@@ -8,6 +8,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.ControlMode;
+import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -34,6 +35,7 @@ public class Elevator extends Subsystem {
     tiltElevator = new DoubleSolenoid(RobotMap.TILT_ELEVATOR_FORWARD, RobotMap.TILT_ELEVATOR_REVERSE);
     lowerLimitSwitch = new DigitalInput(RobotMap.LOWER_LIMIT_SWITCH);
     upperLimitSwitch = new DigitalInput(RobotMap.UPPER_LIMIT_SWITCH);
+    elevatorMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
     elevatorMotor.configForwardSoftLimitThreshold(RobotMap.MAX_POSITION);
     elevatorMotor.configReverseSoftLimitThreshold(RobotMap.MIN_POSITION);
     elevatorMotor.setSensorPhase(true);
