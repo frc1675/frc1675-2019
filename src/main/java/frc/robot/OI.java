@@ -46,36 +46,67 @@ public class OI {
   //Driver controller joysticks
   public double getDriverLeftYAxis(){
     double value = -driverController.getRawAxis(XBoxControllerMap.LEFT_Y_AXIS);
-    return value;
+    return correctForDeadzone(value);
   }
+  
   public double getDriverLeftXAxis(){
     double value = driverController.getRawAxis(XBoxControllerMap.LEFT_X_AXIS);
-    return value;
+    return correctForDeadzone(value);
   }
+
   public double getDriverRightYAxis(){
     double value = -driverController.getRawAxis(XBoxControllerMap.RIGHT_Y_AXIS);
-    return value;
-    }
-  public double getDriverRightXAxis(){
+    return correctForDeadzone(value);
+  }
+
+    public double getDriverRightXAxis(){
     double value = driverController.getRawAxis(XBoxControllerMap.RIGHT_X_AXIS);
-    return value;
+    return correctForDeadzone(value);
   }
 
   //Operator controller joysticks
   public double getOperatorLeftYAxis(){
-    return -operatorController.getRawAxis(XBoxControllerMap.LEFT_Y_AXIS);
+    double value = -operatorController.getRawAxis(XBoxControllerMap.LEFT_Y_AXIS);
+    return correctForDeadzone(value);
   } 
+
   public double getOperatorLeftXAxis(){
-    return operatorController.getRawAxis(XBoxControllerMap.LEFT_X_AXIS);
+    double value = operatorController.getRawAxis(XBoxControllerMap.LEFT_X_AXIS);
+    return correctForDeadzone(value);
   }
+
   public double getOperatorRightYAxis(){
-    return -operatorController.getRawAxis(XBoxControllerMap.RIGHT_Y_AXIS);
+    double value = -operatorController.getRawAxis(XBoxControllerMap.RIGHT_Y_AXIS);
+    return correctForDeadzone(value);
   }
+
   public double getOperatorRightXAxis(){
-    return operatorController.getRawAxis(XBoxControllerMap.RIGHT_X_AXIS);
+    double value = operatorController.getRawAxis(XBoxControllerMap.RIGHT_X_AXIS);
+    return correctForDeadzone(value);
+  }
+  private enum Sign { POSITIVE, NEGATIVE }
+
+  private double correctForDeadzone(double value) {
+    double correctedValue = 0;
+    if ((XBoxControllerMap.DEAD_ZONE < value) && (value <= 1)){
+      correctedValue = scalePastDeadzone(value, Sign.POSITIVE);
+    }
+    else if ((-1 <= value) && (value < -XBoxControllerMap.DEAD_ZONE)){
+      correctedValue = scalePastDeadzone(value, Sign.NEGATIVE);
+    }
+    return correctedValue;
+
+  }
+
+  private double scalePastDeadzone(double value, Sign sign) {
+    double signMultiplier = (sign == Sign.POSITIVE) ? 1.0 : -1.0;
+    double correctedValue = 0;
+    correctedValue = (((1 * signMultiplier) /((1 * signMultiplier) +  (- XBoxControllerMap.DEAD_ZONE  * signMultiplier))) * (value - (1 * signMultiplier))) + (1 * signMultiplier);
+    return correctedValue;
   }
   
 
+  
   
 
   // Button button = new JoystickButton(stick, buttonNumber);
