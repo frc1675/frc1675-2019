@@ -50,8 +50,6 @@ public class DriveBase extends Subsystem {
     rightFront.set(ControlMode.PercentOutput,power);
     rightBack.set(ControlMode.PercentOutput,power);
     rightMiddle.set(ControlMode.PercentOutput,power);
-
-
   }
 
   public void setLeftMotors(double power){
