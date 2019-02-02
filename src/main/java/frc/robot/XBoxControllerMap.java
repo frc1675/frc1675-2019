@@ -37,7 +37,7 @@ public class XBoxControllerMap {
     // Joystick buttons (clicking them in)
     public static final int LEFT_JOYSTICK_BUTTON = 9;
     public static final int RIGHT_JOYSTICK_BUTTON = 10;
-
+    
+    // names limits of the Deadzone
     public static final double DEAD_ZONE = .1675;
-
 }
