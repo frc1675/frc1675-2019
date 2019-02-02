@@ -5,7 +5,7 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-// DELETE THIS FILE BEFORE COMPETITION; for testing only
+// Will not be used during competition
 
 package frc.robot.commands;
 

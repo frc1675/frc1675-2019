@@ -29,15 +29,15 @@ public class RobotMap {
   public static final int HATCH_RELEASER_1 = 1;
   public static final int HATCH_RELEASER_2 = 2;
 
-  //Elevator
+  //Elevator components
   public static final int ELEVATOR_MOTOR = 7;
-
   public static final int TILT_ELEVATOR_FORWARD = 3;
   public static final int TILT_ELEVATOR_REVERSE = 4;
 
   public static final int LOWER_LIMIT_SWITCH = 9;
   public static final int UPPER_LIMIT_SWITCH = 14;
   
+  //Elevator positions
   public static final int MAX_POSITION = 3000;
   public static final int MIN_POSITION = 200;
   public static final int TILT_MAX_POSITION = 17;

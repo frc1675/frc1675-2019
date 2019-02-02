@@ -39,18 +39,28 @@ public class Elevator extends Subsystem {
     elevatorMotor.setSensorPhase(true);
   }
 
+  // The limit switches return false when they're pressed, so this
+  // makes the code more intuitive.
+  private boolean isLowerLimitSwitchPressed() {
+    return !lowerLimitSwitch.get();
+  }
+
+  private boolean isUpperLimitSwitchPressed() {
+    return !upperLimitSwitch.get();
+  }
+  
   public void resetPosition() {
     elevatorMotor.setSelectedSensorPosition(0);
   }
 
   public void tiltElevatorForward() {
-    if (lowerLimitSwitch.get() == false || elevatorMotor.getSelectedSensorPosition() < RobotMap.TILT_MAX_POSITION) {
+    if (isLowerLimitSwitchPressed() == true || elevatorMotor.getSelectedSensorPosition() < RobotMap.TILT_MAX_POSITION) {
       tiltElevator.set(Value.kForward);
     }
   }
 
   public void tiltElevatorReverse() {
-    if (lowerLimitSwitch.get() == false || elevatorMotor.getSelectedSensorPosition() < RobotMap.TILT_MAX_POSITION) {
+    if (isLowerLimitSwitchPressed() == true || elevatorMotor.getSelectedSensorPosition() < RobotMap.TILT_MAX_POSITION) {
       tiltElevator.set(Value.kReverse);
     }
   }
@@ -59,7 +69,7 @@ public class Elevator extends Subsystem {
 
     double correctedPower = 0;
     if (isLowerLimitDefined == true) {
-      if ((lowerLimitSwitch.get() == false && power < 0) || (upperLimitSwitch.get() == false && power > 0)) {
+      if ((isLowerLimitSwitchPressed() == false && power < 0) || (isUpperLimitSwitchPressed() == true && power > 0)) {
         correctedPower = 0;
       } 
       else {
@@ -72,15 +82,16 @@ public class Elevator extends Subsystem {
 
   // will resolve before match begins
   public void periodic(){
-    if (lowerLimitSwitch.get() == false && isLowerLimitDefined == false) {
+    if (isLowerLimitSwitchPressed() == false && isLowerLimitDefined == false) {
       isLowerLimitDefined = true;
       elevatorMotor.configForwardSoftLimitEnable(true);
       elevatorMotor.configReverseSoftLimitEnable(true);
       resetPosition();
     }
-    SmartDashboard.putBoolean("Is lower limit defined?", isLowerLimitDefined);
-    SmartDashboard.putBoolean("lower limit switch", !lowerLimitSwitch.get());
-    SmartDashboard.putNumber("encoder position", elevatorMotor.getSelectedSensorPosition());
+    SmartDashboard.putBoolean("Elevator home position defined", isLowerLimitDefined);
+    SmartDashboard.putBoolean("Elevator lower limit pressed", isLowerLimitSwitchPressed());
+    SmartDashboard.putBoolean("Elevator upper limit pressed", isUpperLimitSwitchPressed());
+    SmartDashboard.putNumber("Elevator position", elevatorMotor.getSelectedSensorPosition());
   }
 
   @Override
