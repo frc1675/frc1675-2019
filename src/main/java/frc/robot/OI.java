@@ -88,14 +88,23 @@ public class OI {
   private double correctForDeadzone(double value) {
     double correctedValue = 0;
     if ((XBoxControllerMap.DEAD_ZONE < value) && (value <= 1)){
-      correctedValue = ((1 /(1 - XBoxControllerMap.DEAD_ZONE)) * (value - 1)) + 1;
+      correctedValue = scale(value, 1);
+      // correctedValue = ((1 /(1 - XBoxControllerMap.DEAD_ZONE)) * (value - 1)) + 1;
     }
     else if ((-1 <= value) && (value < -XBoxControllerMap.DEAD_ZONE)){
-      correctedValue = ((-1 /(-1 + XBoxControllerMap.DEAD_ZONE)) * (value + 1)) - 1;
+      correctedValue = scale(value, -1);
+      // correctedValue = ((-1 /(-1 + XBoxControllerMap.DEAD_ZONE)) * (value + 1)) - 1;
     }
     return correctedValue;
 
   }
+
+  private double scale(double value, double sign) {
+    double correctedValue = 0;
+    correctedValue = (((1 * sign) /((1 * sign) +  (- XBoxControllerMap.DEAD_ZONE  * sign))) * (value - (1 * sign))) + (1 * sign);
+    return correctedValue;
+  }
+  
 
   
   
