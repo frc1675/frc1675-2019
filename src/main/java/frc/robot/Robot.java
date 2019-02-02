@@ -11,9 +11,8 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.CheesyDrive;
 import frc.robot.subsystems.DriveBase;
+import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Grabber;
 
 /**
@@ -26,6 +25,7 @@ import frc.robot.subsystems.Grabber;
 public class Robot extends TimedRobot {
   public static DriveBase driveBase;
   public static Grabber grabber;
+  public static Elevator elevator;
   public static OI m_oi;
 
 
@@ -41,6 +41,7 @@ public class Robot extends TimedRobot {
     m_oi = new OI();
     grabber = new Grabber();
     driveBase = new DriveBase();
+    elevator = new Elevator();
     // m_chooser.setDefaultOption("Default Auto", new CheesyDrive());
     // chooser.addOption("My Auto", new MyAutoCommand());
     // SmartDashboard.putData("Auto mode", m_chooser);
