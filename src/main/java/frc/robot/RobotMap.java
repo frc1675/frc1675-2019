@@ -24,26 +24,26 @@ public class RobotMap {
   public static final int RIGHT_BACK = 6;
 
   //Grabber
-  public static final int ARM_ROTATOR = 7;
+  public static final int ARM_ROTATOR = 0;
   
-  public static final int HATCH_RELEASER_1 = 8;
-  public static final int HATCH_RELEASER_2 = 9;
+  public static final int HATCH_RELEASER_1 = 1;
+  public static final int HATCH_RELEASER_2 = 2;
 
   //Elevator
-  public static final int ELEVATOR_MOTOR = 10;
+  public static final int ELEVATOR_MOTOR = 7;
 
-  public static final int TILT_ELEVATOR_FORWARD = 11;
-  public static final int TILT_ELEVATOR_REVERSE = 12;
+  public static final int TILT_ELEVATOR_FORWARD = 3;
+  public static final int TILT_ELEVATOR_REVERSE = 4;
 
-  public static final int LOWER_LIMIT_SWITCH = 13;
+  public static final int LOWER_LIMIT_SWITCH = 9;
   public static final int UPPER_LIMIT_SWITCH = 14;
   
-  public static final int MAX_POSITION = 15;
-  public static final int MIN_POSITION = 16;
+  public static final int MAX_POSITION = 3000;
+  public static final int MIN_POSITION = 200;
   public static final int TILT_MAX_POSITION = 17;
-  public static final int BOTTOM_HATCH = 18;
-  public static final int MIDDLE_HATCH = 19;
-  public static final int TOP_HATCH = 20;
+  public static final int BOTTOM_HATCH_POSITION = 18;
+  public static final int MIDDLE_HATCH_POSITION = 19;
+  public static final int TOP_HATCH_POSITION = 20;
 
 
   // For example to map the left and right motors, you could define the
