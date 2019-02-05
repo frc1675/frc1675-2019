@@ -17,7 +17,7 @@ import frc.robot.Robot;
 public class DriveForDistance extends PIDCommand {
   private static final double P = 0.7;
   private static final double I = 0;
-  private static final double D = 0.3;
+  private static final double D = 0;
 
   private double setpoint;
   
