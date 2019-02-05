@@ -10,18 +10,17 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-
-public class WristUp extends Command {
-  public WristUp() {
+public class TiltElevatorForward extends Command {
+  public TiltElevatorForward() {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.grabber);
+    requires(Robot.elevator);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.grabber.wristUp();
+    Robot.elevator.tiltElevatorForward();
   }
 
   // Called repeatedly when this Command is scheduled to run

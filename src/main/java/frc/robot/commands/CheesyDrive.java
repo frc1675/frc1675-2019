@@ -30,16 +30,17 @@ public class CheesyDrive extends Command {
     double turnPower = Robot.m_oi.getDriverRightXAxis();
     double forwardPower = Robot.m_oi.getDriverLeftYAxis();
     
-   
-    double rightPower = forwardPower - turnPower;
     double leftPower = forwardPower + turnPower;
+    double rightPower = forwardPower - turnPower;
 
     if (Math.abs(leftPower) > 1.0 || Math.abs(rightPower) > 1.0) {
       double Scaler = Math.max( Math.abs(rightPower),Math.abs(leftPower));
       rightPower = rightPower / Scaler;
-      leftPower = leftPower / Scaler; 
-      
+      leftPower = leftPower / Scaler;
     } 
+
+    
+
     Robot.driveBase.setLeftMotors(leftPower);
     Robot.driveBase.setRightMotors(rightPower);
 
