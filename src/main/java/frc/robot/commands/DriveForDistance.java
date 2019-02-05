@@ -15,9 +15,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 public class DriveForDistance extends PIDCommand {
-  private static final double P = 0.7;
+  private static final double P = 0.0007;
   private static final double I = 0;
-  private static final double D = 0;
+  private static final double D = 0.0003;
 
   private double setpoint;
   
@@ -37,7 +37,6 @@ public class DriveForDistance extends PIDCommand {
     public double pidGet() {
         double encoderval = (Robot.driveBase.getLeftEncoderPosition() + Robot.driveBase.getRightEncoderPosition()) / 2;
         SmartDashboard.putNumber("encoder value", encoderval);
-        System.out.println("encoderval: "+encoderval);
         return encoderval;
     }
 };
@@ -68,11 +67,14 @@ LinearDigitalFilter ldf = LinearDigitalFilter.movingAverage(pst, 10);;
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
+
+    double DriveTolerance = 100;
+
     double testVal = (Math.abs(ldf.pidGet()-setpoint));
 
-    if(this.isTimedOut() || testVal <= 100){
-      System.out.println("true");
-      System.out.println("testVal: "+testVal);
+    SmartDashboard.putNumber("error", testVal);
+
+    if(this.isTimedOut() || testVal <= DriveTolerance){
       return true;
     }
     else{
@@ -97,12 +99,13 @@ LinearDigitalFilter ldf = LinearDigitalFilter.movingAverage(pst, 10);;
 
   @Override
   protected double returnPIDInput(){
-    System.out.println("ldf: "+ldf.pidGet());
+    SmartDashboard.putNumber("Position", ldf.pidGet());
     return ldf.pidGet();
   }
 
   @Override
   protected void usePIDOutput(double output){
+    SmartDashboard.putNumber("Output", output);
     Robot.driveBase.setLeftMotors(output);
     Robot.driveBase.setRightMotors(output);
   }

@@ -39,8 +39,8 @@ public class DriveBase extends Subsystem {
     leftBack = new VictorSPX(RobotMap.LEFT_BACK);
     rightBack = new VictorSPX(RobotMap.RIGHT_BACK);
 
-    rightMiddle.setSensorPhase(true);
-    leftMiddle.setSensorPhase(true);
+    rightFront.setSensorPhase(true);
+    leftFront.setSensorPhase(true);
 
     leftMiddle.setInverted(true);
     leftFront.setInverted(true);
