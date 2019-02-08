@@ -51,18 +51,21 @@ public class Elevator extends Subsystem {
     return !upperLimitSwitch.get();
   }
   
+  public double getElevatorPosition() {
+    return elevatorMotor.getSelectedSensorPosition();
+  }
   public void resetPosition() {
     elevatorMotor.setSelectedSensorPosition(0);
   }
 
   public void tiltElevatorForward() {
-    if (isLowerLimitSwitchPressed() == true || elevatorMotor.getSelectedSensorPosition() < RobotMap.TILT_MAX_POSITION) {
+    if (isLowerLimitSwitchPressed() == true || getElevatorPosition() < RobotMap.TILT_MAX_POSITION) {
       tiltElevator.set(Value.kForward);
     }
   }
 
   public void tiltElevatorReverse() {
-    if (isLowerLimitSwitchPressed() == true || elevatorMotor.getSelectedSensorPosition() < RobotMap.TILT_MAX_POSITION) {
+    if (isLowerLimitSwitchPressed() == true || getElevatorPosition() < RobotMap.TILT_MAX_POSITION) {
       tiltElevator.set(Value.kReverse);
     }
   }
