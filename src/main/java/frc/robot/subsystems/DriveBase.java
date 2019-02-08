@@ -37,11 +37,11 @@ public class DriveBase extends Subsystem {
     rightBack = new VictorSPX(RobotMap.RIGHT_BACK);
 
     leftMiddle = new TalonSRX(RobotMap.LEFT_MIDDLE);
-    rightMiddle = new TalonSRX(RobotMap.LEFT_MIDDLE);
+    rightMiddle = new TalonSRX(RobotMap.RIGHT_MIDDLE);
 
-    leftMiddle.setInverted(true);
-    leftFront.setInverted(true);
-    leftBack.setInverted(true);
+    rightMiddle.setInverted(true);
+    rightFront.setInverted(true);
+    rightBack.setInverted(true);
 
   }
 
