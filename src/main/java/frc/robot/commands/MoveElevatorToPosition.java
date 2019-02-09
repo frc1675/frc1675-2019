@@ -8,26 +8,33 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.PIDCommand;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-public class ScoreBottom extends PIDCommand {
 
+public class MoveElevatorToPosition extends PIDCommand {
 
-  public ScoreBottom() {
+  double setpoint;
+  double timeout;
+  int count = 0;
+
+  public MoveElevatorToPosition(double position) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     super(RobotMap.ELEVATOR_P, RobotMap.ELEVATOR_I, RobotMap.ELEVATOR_D);
     requires(Robot.elevator);
+    setpoint = position;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
     this.getPIDController().reset();
-    this.getPIDController().setSetpoint(0);
-    this.getPIDController().setOutputRange(-.5, .5);
+    this.getPIDController().setSetpoint(setpoint);
+    this.getPIDController().setOutputRange(-.50, .50);
     this.getPIDController().enable();
+    this.setTimeout(20);
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -35,9 +42,24 @@ public class ScoreBottom extends PIDCommand {
   protected void execute() {
   }
 
-  // Make this return true when this Command no longer needs to run execute()
+  public boolean elevatorOnTarget() {
+    if (Math.abs(setpoint - Robot.elevator.getElevatorPosition()) <= RobotMap.ELEVATOR_TOLERANCE) {
+      count ++;
+    } else {
+      count = 0;
+    }
+    if (count >= 5) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  // Make this return true wShen this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
+    boolean onTarget = elevatorOnTarget();
+    SmartDashboard.putBoolean("Elevator on target", onTarget);
     return false;
   }
 
@@ -57,11 +79,11 @@ public class ScoreBottom extends PIDCommand {
 
   @Override
   protected double returnPIDInput() {
-    return 1;
+    return Robot.elevator.getElevatorPosition();
   }
 
   @Override
   protected void usePIDOutput(double output) {
-
+    Robot.elevator.setElevatorMotor(output + .1);
   }
 }

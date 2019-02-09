@@ -9,6 +9,7 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.MoveElevatorToPosition;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -42,6 +43,13 @@ public class OI {
   //Operator controller bumpers
   JoystickButton operatorLeftBumper = new JoystickButton(operatorController, XBoxControllerMap.LEFT_BUMPER_BUTTON);
   JoystickButton operatorRightBumper = new JoystickButton(operatorController, XBoxControllerMap.RIGHT_BUMPER_BUTTON);
+
+  public OI() {
+    operatorAButton.whenPressed(new MoveElevatorToPosition(1000));
+    operatorBButton.whenPressed(new MoveElevatorToPosition(1500));
+    operatorYButton.whenPressed(new MoveElevatorToPosition(2000));
+    operatorXButton.whenPressed(new MoveElevatorToPosition(2500));
+  }
 
   //Driver controller joysticks
   public double getDriverLeftYAxis(){

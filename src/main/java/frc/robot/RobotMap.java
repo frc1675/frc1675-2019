@@ -58,8 +58,10 @@ public class RobotMap {
 
   public static final double MOTOR_DEADZONE = .15;
 
-  public static final double ELEVATOR_P = 1;
+  public static final double ELEVATOR_P = 0.0016;
   public static final double ELEVATOR_I = 0;
   public static final double ELEVATOR_D = 0;
+
+  public static final double ELEVATOR_TOLERANCE = 100;
 
 }

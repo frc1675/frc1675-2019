@@ -74,7 +74,7 @@ public class Elevator extends Subsystem {
 
     double correctedPower = 0;
     if (isLowerLimitDefined == true) {
-      if ((isLowerLimitSwitchPressed() == false && power < 0) || (isUpperLimitSwitchPressed() == true && power > 0)) {
+      if ((isLowerLimitSwitchPressed() == true && power < 0) || (isUpperLimitSwitchPressed() == true && power > 0)) {
         correctedPower = 0;
       } 
       else {
@@ -87,7 +87,7 @@ public class Elevator extends Subsystem {
 
   // will resolve before match begins
   public void periodic(){
-    if (isLowerLimitSwitchPressed() == false && isLowerLimitDefined == false) {
+    if (isLowerLimitSwitchPressed() == true && isLowerLimitDefined == false) {
       isLowerLimitDefined = true;
       elevatorMotor.configForwardSoftLimitEnable(true);
       elevatorMotor.configReverseSoftLimitEnable(true);
