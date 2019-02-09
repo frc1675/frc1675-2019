@@ -9,6 +9,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 
 /**
@@ -29,9 +30,9 @@ public class CheesyDrive extends Command {
   protected void execute() {
     double turnPower = Robot.m_oi.getDriverRightXAxis();
     double forwardPower = Robot.m_oi.getDriverLeftYAxis();
-    
-    double leftPower = forwardPower + turnPower;
-    double rightPower = forwardPower - turnPower;
+
+  double leftPower = forwardPower + Math.pow(turnPower,RobotMap.TURNING_SCALE_FACTOR);
+  double rightPower = forwardPower - Math.pow(turnPower,RobotMap.TURNING_SCALE_FACTOR);
 
     if (Math.abs(leftPower) > 1.0 || Math.abs(rightPower) > 1.0) {
       double Scaler = Math.max( Math.abs(rightPower),Math.abs(leftPower));
