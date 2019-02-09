@@ -10,11 +10,10 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import com.kauailabs.navx.frc.AHRS;
+
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.CheesyDrive;
-import edu.wpi.first.wpilibj.SerialPort;
 /**
  *DriveBase is the representation of the physical drive motors and provides access to their motor controllers.
  */
@@ -27,8 +26,6 @@ public class DriveBase extends Subsystem {
   
   private TalonSRX leftMiddle;
   private TalonSRX rightMiddle;
-  
-  AHRS ahrs;
   public DriveBase() {
     super();
     leftFront = new VictorSPX(RobotMap.LEFT_FRONT);
@@ -43,7 +40,6 @@ public class DriveBase extends Subsystem {
     rightMiddle.setInverted(true);
     rightFront.setInverted(true);
     rightBack.setInverted(true);
-    ahrs = new AHRS(SerialPort.Port.kMXP);
   }
 
   public void setRightMotors(double power){
