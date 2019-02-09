@@ -21,7 +21,7 @@ public class TurnForAngle extends PIDCommand {
   double initialDegrees;
   double setpoint;
   public TurnForAngle(double angleturned, double timeout) {
-    super (RobotMap.Gyro_P,RobotMap.Gyro_I,RobotMap.Gyro_D);
+    super (RobotMap.Gyro_P, RobotMap.Gyro_I, RobotMap.Gyro_D);
     this.angleturned = angleturned;
     this.timeout = timeout;
     // Use requires() here to declare subsystem dependencies

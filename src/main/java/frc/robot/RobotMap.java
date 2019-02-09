@@ -23,6 +23,13 @@ public class RobotMap {
   public static final int RIGHT_MIDDLE = 3;
   public static final int RIGHT_BACK = 2;
 
+  public static final double MOTOR_DEADZONE = .15;
+  public static final double TURNING_SCALE_FACTOR = 2;
+
+  public static final double Gyro_P = 0.0375;
+  public static final double Gyro_I = 0.0;
+  public static final double Gyro_D = 0.0;
+
   //Grabber
   public static final int ARM_ROTATOR = 0;
   
@@ -55,8 +62,4 @@ public class RobotMap {
   // number and the module. For example you with a rangefinder:
   // public static int rangefinderPort = 1;
   // public static int rangefinderModule = 1;
-
-  public static final double MOTOR_DEADZONE = .15;
-
-  public static final double TURNING_SCALE_FACTOR = 2;
 }
