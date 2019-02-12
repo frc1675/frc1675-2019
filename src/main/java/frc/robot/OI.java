@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
@@ -42,6 +43,19 @@ public class OI {
   //Operator controller bumpers
   JoystickButton operatorLeftBumper = new JoystickButton(operatorController, XBoxControllerMap.LEFT_BUMPER_BUTTON);
   JoystickButton operatorRightBumper = new JoystickButton(operatorController, XBoxControllerMap.RIGHT_BUMPER_BUTTON);
+
+ 
+
+public void setDriverRumble(double value) {
+  driverController.setRumble(RumbleType.kRightRumble, value);
+  driverController.setRumble(RumbleType.kLeftRumble, value);
+}
+
+public void setOperatorRumble(double value) {
+  operatorController.setRumble(RumbleType.kRightRumble, value);
+  operatorController.setRumble(RumbleType.kLeftRumble, value);
+}
+
 
   //Driver controller joysticks
   public double getDriverLeftYAxis(){
