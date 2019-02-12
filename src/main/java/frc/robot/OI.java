@@ -48,7 +48,7 @@ public class OI {
     //operatorAButton.whenPressed(new MoveElevatorToPosition(RobotMap.BOTTOM_HATCH_POSITION));
     //operatorBButton.whenPressed(new MoveElevatorToPosition(RobotMap.MIDDLE_HATCH_POSITION));
     //operatorYButton.whenPressed(new MoveElevatorToPosition(RobotMap.TOP_HATCH_POSITION));
-    //operatorXButton.whenPressed(new MoveElevatorToPosition(2500));
+    //operatorXButton.whenPressed(new MoveElevatorToPosition(3500));
   }
 
   //Driver controller joysticks

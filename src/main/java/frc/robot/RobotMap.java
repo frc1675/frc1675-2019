@@ -41,7 +41,7 @@ public class RobotMap {
   public static final int MAX_POSITION = 3000;
   public static final int MIN_POSITION = 200;
   public static final int TILT_MAX_POSITION = 17;
-  public static final int BOTTOM_HATCH_POSITION = 1000;
+  public static final int BOTTOM_HATCH_POSITION = 000;
   public static final int MIDDLE_HATCH_POSITION = 1500;
   public static final int TOP_HATCH_POSITION = 2000;
 

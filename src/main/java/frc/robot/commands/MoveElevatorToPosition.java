@@ -23,10 +23,10 @@ public class MoveElevatorToPosition extends PIDCommand {
     // eg. requires(chassis);
     super(RobotMap.ELEVATOR_P, RobotMap.ELEVATOR_I, RobotMap.ELEVATOR_D);
     requires(Robot.elevator);
-    if (position < RobotMap.MAX_POSITION) {
+    if (position < RobotMap.MIN_POSITION) {
       setpoint = RobotMap.MIN_POSITION;
     } 
-    else if (position < RobotMap.MAX_POSITION) {
+    else if (position > RobotMap.MAX_POSITION) {
       setpoint = RobotMap.MAX_POSITION;
     } 
     else {
