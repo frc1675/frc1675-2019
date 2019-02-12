@@ -13,13 +13,16 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class TurnForAngle extends PIDCommand {
+  
   int count = 0;
   double angleturned;
   double timeout;
   double initialDegrees;
   double setpoint;
+  
   public TurnForAngle(double angleturned, double timeout) {
     super (RobotMap.Gyro_P, RobotMap.Gyro_I, RobotMap.Gyro_D);
+    requires(Robot.driveBase);
     this.angleturned = angleturned;
     this.timeout = timeout;
     // Use requires() here to declare subsystem dependencies
