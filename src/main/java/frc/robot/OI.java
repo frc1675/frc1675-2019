@@ -45,10 +45,10 @@ public class OI {
   JoystickButton operatorRightBumper = new JoystickButton(operatorController, XBoxControllerMap.RIGHT_BUMPER_BUTTON);
 
   public OI() {
-    operatorAButton.whenPressed(new MoveElevatorToPosition(1000));
-    operatorBButton.whenPressed(new MoveElevatorToPosition(1500));
-    operatorYButton.whenPressed(new MoveElevatorToPosition(2000));
-    operatorXButton.whenPressed(new MoveElevatorToPosition(2500));
+    //operatorAButton.whenPressed(new MoveElevatorToPosition(RobotMap.BOTTOM_HATCH_POSITION));
+    //operatorBButton.whenPressed(new MoveElevatorToPosition(RobotMap.MIDDLE_HATCH_POSITION));
+    //operatorYButton.whenPressed(new MoveElevatorToPosition(RobotMap.TOP_HATCH_POSITION));
+    //operatorXButton.whenPressed(new MoveElevatorToPosition(2500));
   }
 
   //Driver controller joysticks

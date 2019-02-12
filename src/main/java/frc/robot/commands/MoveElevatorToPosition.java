@@ -15,8 +15,7 @@ import frc.robot.RobotMap;
 
 public class MoveElevatorToPosition extends PIDCommand {
 
-  double setpoint;
-  double timeout;
+  double setpoint = 0;
   int count = 0;
 
   public MoveElevatorToPosition(double position) {
@@ -24,7 +23,15 @@ public class MoveElevatorToPosition extends PIDCommand {
     // eg. requires(chassis);
     super(RobotMap.ELEVATOR_P, RobotMap.ELEVATOR_I, RobotMap.ELEVATOR_D);
     requires(Robot.elevator);
-    setpoint = position;
+    if (position < RobotMap.MAX_POSITION) {
+      setpoint = RobotMap.MIN_POSITION;
+    } 
+    else if (position < RobotMap.MAX_POSITION) {
+      setpoint = RobotMap.MAX_POSITION;
+    } 
+    else {
+      setpoint = position;
+    }
   }
 
   // Called just before this Command runs the first time
@@ -34,7 +41,6 @@ public class MoveElevatorToPosition extends PIDCommand {
     this.getPIDController().setSetpoint(setpoint);
     this.getPIDController().setOutputRange(-.50, .50);
     this.getPIDController().enable();
-    this.setTimeout(20);
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -42,24 +48,8 @@ public class MoveElevatorToPosition extends PIDCommand {
   protected void execute() {
   }
 
-  public boolean elevatorOnTarget() {
-    if (Math.abs(setpoint - Robot.elevator.getElevatorPosition()) <= RobotMap.ELEVATOR_TOLERANCE) {
-      count ++;
-    } else {
-      count = 0;
-    }
-    if (count >= 5) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  // Make this return true wShen this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    boolean onTarget = elevatorOnTarget();
-    SmartDashboard.putBoolean("Elevator on target", onTarget);
     return false;
   }
 
@@ -84,6 +74,6 @@ public class MoveElevatorToPosition extends PIDCommand {
 
   @Override
   protected void usePIDOutput(double output) {
-    Robot.elevator.setElevatorMotor(output + .1);
+    Robot.elevator.setElevatorMotor(output);
   }
 }
