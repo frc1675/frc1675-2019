@@ -7,13 +7,11 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.PIDSource;
-import edu.wpi.first.wpilibj.PIDSourceType;
+
 import edu.wpi.first.wpilibj.command.PIDCommand;
-import frc.robot.subsystems.DriveBase;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class TurnForAngle extends PIDCommand {
   int count = 0;
   double angleturned;
@@ -33,6 +31,12 @@ public class TurnForAngle extends PIDCommand {
   protected void initialize() {
     this.getPIDController().reset();
     this.getPIDController().setOutputRange(-.5, .5);
+    initialDegrees = Robot.driveBase.getAngle();
+    setpoint = initialDegrees + angleturned;
+    this.getPIDController().setSetpoint(setpoint);
+    SmartDashboard.putNumber("Setpoint", setpoint);
+    this.setTimeout(timeout);
+    this.getPIDController().enable();
   //  initialDegrees = Robot.driveBase.getAngle();
   }
 
@@ -59,6 +63,7 @@ public class TurnForAngle extends PIDCommand {
   }
   @Override
   protected double returnPIDInput(){
+    return Robot.driveBase.getAngle();
   }
   @Override
   protected void usePIDOutput(double output){
