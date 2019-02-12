@@ -8,6 +8,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.MoveElevatorToPosition;
 
@@ -50,6 +51,18 @@ public class OI {
     //operatorYButton.whenPressed(new MoveElevatorToPosition(RobotMap.TOP_HATCH_POSITION));
     //operatorXButton.whenPressed(new MoveElevatorToPosition(3500));
   }
+ 
+
+public void setDriverRumble(double value) {
+  driverController.setRumble(RumbleType.kRightRumble, value);
+  driverController.setRumble(RumbleType.kLeftRumble, value);
+}
+
+public void setOperatorRumble(double value) {
+  operatorController.setRumble(RumbleType.kRightRumble, value);
+  operatorController.setRumble(RumbleType.kLeftRumble, value);
+}
+
 
   //Driver controller joysticks
   public double getDriverLeftYAxis(){
