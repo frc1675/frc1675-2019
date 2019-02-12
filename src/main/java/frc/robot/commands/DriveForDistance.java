@@ -7,17 +7,22 @@
 
 package frc.robot.commands;
 
+import org.w3c.dom.css.Counter;
+
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.command.PIDCommand;
 import edu.wpi.first.wpilibj.filters.LinearDigitalFilter;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+//import sun.security.x509.OIDName;
 
 public class DriveForDistance extends PIDCommand {
   private static final double P = 0.0007;
   private static final double I = 0;
   private static final double D = 0.0003;
+
+  double counter = 0;
 
   private double setpoint;
   
@@ -67,15 +72,21 @@ LinearDigitalFilter ldf = LinearDigitalFilter.movingAverage(pst, 10);;
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
+ 
+    double driveTolerance = 100;
 
-    double DriveTolerance = 100;
+    double error = (Math.abs(ldf.pidGet()-setpoint));
 
-    double testVal = (Math.abs(ldf.pidGet()-setpoint));
+    SmartDashboard.putNumber("error", error);
+    if(error <= driveTolerance){
+      counter ++;
+    }
+    else{
+      counter = 0;
+    }
 
-    SmartDashboard.putNumber("error", testVal);
-
-    if(this.isTimedOut() || testVal <= DriveTolerance){
-      return true;
+    if(this.isTimedOut() || counter > 4){
+        return true;
     }
     else{
       return false;

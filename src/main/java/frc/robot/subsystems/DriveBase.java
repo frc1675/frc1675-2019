@@ -10,7 +10,6 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
-import edu.wpi.first.wpilibj.command.PIDSubsystem;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
@@ -49,6 +48,7 @@ public class DriveBase extends Subsystem {
   }
 
   public void setRightMotors(double power){
+    
     power = correctForDeadzone(power);
     rightFront.set(ControlMode.PercentOutput,power);
     rightBack.set(ControlMode.PercentOutput,power);
