@@ -28,7 +28,7 @@ public class RobotMap {
 
   public static final double Gyro_P = 0.0375;
   public static final double Gyro_I = 0.0;
-  public static final double Gyro_D = 0.0;
+  public static final double Gyro_D = 0.145;
 
   //Grabber
   public static final int ARM_ROTATOR = 0;
