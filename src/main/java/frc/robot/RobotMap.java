@@ -26,8 +26,7 @@ public class RobotMap {
   //Grabber
   public static final int ARM_ROTATOR = 0;
   
-  public static final int HATCH_RELEASER_1 = 1;
-  public static final int HATCH_RELEASER_2 = 2;
+  public static final int HATCH_RELEASER = 1;
 
   //Elevator components
   public static final int ELEVATOR_MOTOR = 4;
@@ -35,13 +34,13 @@ public class RobotMap {
   public static final int TILT_ELEVATOR_REVERSE = 4;
 
   public static final int LOWER_LIMIT_SWITCH = 9;
-  public static final int UPPER_LIMIT_SWITCH = 14;
+  public static final int UPPER_LIMIT_SWITCH = 8;
   
   //Elevator positions
   public static final int MAX_POSITION = 3000;
   public static final int MIN_POSITION = 200;
   public static final int TILT_MAX_POSITION = 17;
-  public static final int BOTTOM_HATCH_POSITION = 000;
+  public static final int BOTTOM_HATCH_POSITION = 400;
   public static final int MIDDLE_HATCH_POSITION = 1500;
   public static final int TOP_HATCH_POSITION = 2000;
 

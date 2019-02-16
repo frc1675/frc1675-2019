@@ -17,8 +17,8 @@ import frc.robot.RobotMap;
 public class Grabber extends Subsystem {
   private Solenoid armRotator;
 
-  private Solenoid hatchReleaser1;
-  private Solenoid hatchReleaser2;
+  private Solenoid hatchReleaser;
+
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
@@ -26,8 +26,8 @@ public class Grabber extends Subsystem {
     super();
     armRotator = new Solenoid(RobotMap.ARM_ROTATOR);
 
-    hatchReleaser1 = new Solenoid(RobotMap.HATCH_RELEASER_1);
-    hatchReleaser2 = new Solenoid(RobotMap.HATCH_RELEASER_2);
+    hatchReleaser = new Solenoid(RobotMap.HATCH_RELEASER);
+
   }
 
   public void wristUp() {
@@ -35,17 +35,15 @@ public class Grabber extends Subsystem {
   }
 
   public void wristDown() {
-    armRotator.set(true);
+    armRotator.set(false);
   }
 
   public void releaseHatch() {
-    hatchReleaser1.set(true);
-    hatchReleaser2.set(true);
+    hatchReleaser.set(true);
   }
 
   public void retractPistons() {
-    hatchReleaser1.set(false);
-    hatchReleaser2.set(false);
+    hatchReleaser.set(false);
   }
 
   @Override
