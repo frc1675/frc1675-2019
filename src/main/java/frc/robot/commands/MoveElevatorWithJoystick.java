@@ -27,7 +27,7 @@ public class MoveElevatorWithJoystick extends Command {
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double elevatorPower = Robot.m_oi.getOperatorLeftYAxis() / 2;
+    double elevatorPower = Robot.oi.getOperatorLeftYAxis() / 2;
 
     Robot.elevator.setElevatorMotor(elevatorPower);
   }

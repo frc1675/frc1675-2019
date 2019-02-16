@@ -7,6 +7,8 @@
 
 package frc.robot.subsystems;
 
+import java.util.ArrayList;
+
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.TalonSRX;
@@ -14,8 +16,10 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
+import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.MoveElevatorToPosition;
 import frc.robot.commands.MoveElevatorWithJoystick;
@@ -105,6 +109,12 @@ public class Elevator extends Subsystem {
       resetPosition();
       
     }
+
+    if (isLowerLimitSwitchPressed() == true || isUpperLimitSwitchPressed() == true ){
+     Robot.oi.setDriverRumble(1);
+     Robot.oi.setOperatorRumble(1);
+     
+    }
     SmartDashboard.putBoolean("Elevator home position defined", isLowerLimitDefined);
     SmartDashboard.putBoolean("Elevator lower limit pressed", isLowerLimitSwitchPressed());
     SmartDashboard.putBoolean("Elevator upper limit pressed", isUpperLimitSwitchPressed());
@@ -116,6 +126,6 @@ public class Elevator extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new MoveElevatorToPosition(RobotMap.BOTTOM_HATCH_POSITION));
+    setDefaultCommand(new MoveElevatorToPosition());
   }
 }
