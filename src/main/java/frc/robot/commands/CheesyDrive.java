@@ -39,12 +39,8 @@ public class CheesyDrive extends Command {
       leftPower = leftPower / Scaler;
     } 
 
-    
-
     Robot.driveBase.setLeftMotors(leftPower);
     Robot.driveBase.setRightMotors(rightPower);
-
-    Robot.oi.setDriverRumble(leftPower+rightPower);
   }
 
   // Make this return true when this Command no longer needs to run execute()

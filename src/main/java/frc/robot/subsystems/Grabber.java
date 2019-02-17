@@ -35,7 +35,7 @@ public class Grabber extends Subsystem {
   }
 
   public void wristDown() {
-    armRotator.set(false);
+    armRotator.set(true);
   }
 
   public void releaseHatch() {

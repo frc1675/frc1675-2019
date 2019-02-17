@@ -10,11 +10,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.PIDCommand;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+import frc.robot.subsystems.Elevator;
 
 public class MoveElevatorToPosition extends PIDCommand {
 
   double setpoint = 0;
-  int count = 0;
 
   public MoveElevatorToPosition(double position) {
     // Use requires() here to declare subsystem dependencies
@@ -37,8 +37,9 @@ public class MoveElevatorToPosition extends PIDCommand {
   protected void initialize() {
     this.getPIDController().reset();
     this.getPIDController().setSetpoint(setpoint);
-    this.getPIDController().setOutputRange(-.50, .50);
+    this.getPIDController().setOutputRange(-.20, .30);
     this.getPIDController().enable();
+    Robot.elevator.setTargetPosition(setpoint);
   }
 
   // Called repeatedly when this Command is scheduled to run

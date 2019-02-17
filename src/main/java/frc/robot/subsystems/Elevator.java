@@ -32,8 +32,8 @@ public class Elevator extends Subsystem {
   private DoubleSolenoid tiltElevator;
   private DigitalInput lowerLimitSwitch;
   private DigitalInput upperLimitSwitch;
-  private boolean isLowerLimitDefined = false; 
-  private int setpoint = 0;
+  private boolean isLowerLimitDefined = false;
+  private double targetPosition = 0;
 
   public Elevator(){
 
@@ -91,8 +91,12 @@ public class Elevator extends Subsystem {
     elevatorMotor.set(ControlMode.PercentOutput,correctedPower);
   }
 
+  public void setTargetPosition(double position) {
+    targetPosition = position;
+  }
+
   public boolean elevatorOnTarget() {
-    if (Math.abs(setpoint - getElevatorPosition()) <= RobotMap.ELEVATOR_TOLERANCE) {
+    if (Math.abs(targetPosition - getElevatorPosition()) <= RobotMap.ELEVATOR_TOLERANCE) {
       return true;
     } 
     else {
