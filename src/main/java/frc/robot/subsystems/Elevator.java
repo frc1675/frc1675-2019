@@ -17,7 +17,6 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
-import frc.robot.commands.MoveElevatorWithJoystick;
 
 /**
  * Add your docs here.
@@ -28,6 +27,7 @@ public class Elevator extends Subsystem {
   private DigitalInput lowerLimitSwitch;
   private DigitalInput upperLimitSwitch;
   private boolean isLowerLimitDefined = false;
+  private double targetPosition = 0;
 
   public Elevator(){
 
@@ -51,18 +51,21 @@ public class Elevator extends Subsystem {
     return !upperLimitSwitch.get();
   }
   
+  public double getElevatorPosition() {
+    return elevatorMotor.getSelectedSensorPosition();
+  }
   public void resetPosition() {
     elevatorMotor.setSelectedSensorPosition(0);
   }
 
   public void tiltElevatorForward() {
-    if (isLowerLimitSwitchPressed() == true || elevatorMotor.getSelectedSensorPosition() < RobotMap.TILT_MAX_POSITION) {
+    if (isLowerLimitSwitchPressed() == true || getElevatorPosition() < RobotMap.TILT_MAX_POSITION) {
       tiltElevator.set(Value.kForward);
     }
   }
 
   public void tiltElevatorReverse() {
-    if (isLowerLimitSwitchPressed() == true || elevatorMotor.getSelectedSensorPosition() < RobotMap.TILT_MAX_POSITION) {
+    if (isLowerLimitSwitchPressed() == true || getElevatorPosition() < RobotMap.TILT_MAX_POSITION) {
       tiltElevator.set(Value.kReverse);
     }
   }
@@ -71,7 +74,7 @@ public class Elevator extends Subsystem {
 
     double correctedPower = 0;
     if (isLowerLimitDefined == true) {
-      if ((isLowerLimitSwitchPressed() == false && power < 0) || (isUpperLimitSwitchPressed() == true && power > 0)) {
+      if ((isLowerLimitSwitchPressed() == true && power < 0) || (isUpperLimitSwitchPressed() == true && power > 0)) {
         correctedPower = 0;
       } 
       else {
@@ -82,24 +85,44 @@ public class Elevator extends Subsystem {
     elevatorMotor.set(ControlMode.PercentOutput,correctedPower);
   }
 
+  public void setTargetPosition(double position) {
+    targetPosition = position;
+  }
+
+  public boolean elevatorOnTarget() {
+    if (Math.abs(targetPosition - getElevatorPosition()) <= RobotMap.ELEVATOR_TOLERANCE) {
+      return true;
+    } 
+    else {
+      return false;
+    }
+  }
+
   // will resolve before match begins
   public void periodic(){
-    if (isLowerLimitSwitchPressed() == false && isLowerLimitDefined == false) {
+    if (isLowerLimitSwitchPressed() == true && isLowerLimitDefined == false) {
       isLowerLimitDefined = true;
       elevatorMotor.configForwardSoftLimitEnable(true);
       elevatorMotor.configReverseSoftLimitEnable(true);
       resetPosition();
+      
     }
+
+    //if (isLowerLimitSwitchPressed() == true || isUpperLimitSwitchPressed() == true ){
+     //Robot.oi.setOperatorRumble(1);
+     
+//}
     SmartDashboard.putBoolean("Elevator home position defined", isLowerLimitDefined);
     SmartDashboard.putBoolean("Elevator lower limit pressed", isLowerLimitSwitchPressed());
     SmartDashboard.putBoolean("Elevator upper limit pressed", isUpperLimitSwitchPressed());
-    SmartDashboard.putNumber("Elevator position", elevatorMotor.getSelectedSensorPosition());
+    SmartDashboard.putNumber("Elevator position", getElevatorPosition());
+    SmartDashboard.putBoolean("Elevator on target", elevatorOnTarget());
   }
 
   @Override
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    setDefaultCommand(new MoveElevatorWithJoystick());
+    //setDefaultCommand(new MoveElevatorWithJoystick());
   }
 }

@@ -25,28 +25,32 @@ public class RobotMap {
 
   public static final double MOTOR_DEADZONE = .15;
   public static final double TURNING_SCALE_FACTOR = 2;
-  //Grabber
-  public static final int ARM_ROTATOR = 0;
   
-  public static final int HATCH_RELEASER_1 = 1;
-  public static final int HATCH_RELEASER_2 = 2;
+  //Grabber
+  public static final int ARM_ROTATOR = 6;                         ;
+  
+  public static final int HATCH_RELEASER = 2;
 
   //Elevator components
-  public static final int ELEVATOR_MOTOR = 7;
-  public static final int TILT_ELEVATOR_FORWARD = 3;
-  public static final int TILT_ELEVATOR_REVERSE = 4;
+  public static final int ELEVATOR_MOTOR = 4;
+  public static final int TILT_ELEVATOR_FORWARD = 0;
+  public static final int TILT_ELEVATOR_REVERSE = 1;
 
   public static final int LOWER_LIMIT_SWITCH = 9;
-  public static final int UPPER_LIMIT_SWITCH = 14;
+  public static final int UPPER_LIMIT_SWITCH = 8;
   
   //Elevator positions
   public static final int MAX_POSITION = 3000;
   public static final int MIN_POSITION = 200;
   public static final int TILT_MAX_POSITION = 17;
-  public static final int BOTTOM_HATCH_POSITION = 18;
-  public static final int MIDDLE_HATCH_POSITION = 19;
-  public static final int TOP_HATCH_POSITION = 20;
+  public static final int BOTTOM_HATCH_POSITION = 0;
+  public static final int MIDDLE_HATCH_POSITION = 1500;
+  public static final int TOP_HATCH_POSITION = 2000;
 
+  public static final double ELEVATOR_P = 0.0016;
+  public static final double ELEVATOR_I = 0;
+  public static final double ELEVATOR_D = 0;
+  public static final double ELEVATOR_TOLERANCE = 100;
 
   // For example to map the left and right motors, you could define the
   // following variables to use with your drivetrain subsystem.

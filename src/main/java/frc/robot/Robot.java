@@ -26,7 +26,7 @@ public class Robot extends TimedRobot {
   public static DriveBase driveBase;
   public static Grabber grabber;
   public static Elevator elevator;
-  public static OI m_oi;
+  public static OI oi;
 
 
   Command m_autonomousCommand;
@@ -38,10 +38,11 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    m_oi = new OI();
     grabber = new Grabber();
     driveBase = new DriveBase();
     elevator = new Elevator();
+    oi = new OI();
+
     // m_chooser.setDefaultOption("Default Auto", new CheesyDrive());
     // chooser.addOption("My Auto", new MyAutoCommand());
     // SmartDashboard.putData("Auto mode", m_chooser);
