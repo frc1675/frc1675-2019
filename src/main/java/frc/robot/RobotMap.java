@@ -23,6 +23,23 @@ public class RobotMap {
   public static final int RIGHT_MIDDLE = 3;
   public static final int RIGHT_BACK = 2;
 
+  //last years numbers testing only please
+  public static final int DRIVE_LEFT_FRONT = 1;
+  public static final int DRIVE_LEFT_MID = 2;
+  public static final int DRIVE_LEFT_BACK = 3;
+  public static final int DRIVE_RIGHT_FRONT = 4;
+  public static final int DRIVE_RIGHT_MID = 5;
+  public static final int DRIVE_RIGHT_BACK = 6;
+  
+  //last years numbers, will need to test and update k thanks
+  public static final double DRIVE_P = 0.62;
+  public static final double DRIVE_I = 0.0;
+  public static final double DRIVE_D = 0.55;
+  public static final double GYRO_P = 0.0375;
+  public static final double GYRO_I = 0.0;
+  public static final double GYRO_D = 0.145;
+
+
   //Grabber
   public static final int ARM_ROTATOR = 0;
   

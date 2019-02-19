@@ -30,18 +30,18 @@ public class DriveBase extends Subsystem {
   
   public DriveBase() {
     super();
-    leftFront = new VictorSPX(RobotMap.LEFT_FRONT);
-    leftBack = new VictorSPX(RobotMap.LEFT_BACK);
+    leftFront = new VictorSPX(RobotMap.DRIVE_LEFT_FRONT);
+    leftBack = new VictorSPX(RobotMap.DRIVE_LEFT_BACK);
     
-    rightFront = new VictorSPX(RobotMap.RIGHT_FRONT);
-    rightBack = new VictorSPX(RobotMap.RIGHT_BACK);
+    rightFront = new VictorSPX(RobotMap.DRIVE_RIGHT_FRONT);
+    rightBack = new VictorSPX(RobotMap.DRIVE_RIGHT_BACK);
 
-    leftMiddle = new TalonSRX(RobotMap.LEFT_MIDDLE);
-    rightMiddle = new TalonSRX(RobotMap.RIGHT_MIDDLE);
+    leftMiddle = new TalonSRX(RobotMap.DRIVE_LEFT_MID);
+    rightMiddle = new TalonSRX(RobotMap.DRIVE_RIGHT_MID);
 
-    rightMiddle.setInverted(true);
-    rightFront.setInverted(true);
-    rightBack.setInverted(true);
+    leftMiddle.setInverted(true);
+    leftFront.setInverted(true);
+    leftBack.setInverted(true);
 
   }
 
@@ -57,6 +57,10 @@ public class DriveBase extends Subsystem {
     leftFront.set(ControlMode.PercentOutput,power);
     leftBack.set(ControlMode.PercentOutput,power);
     leftMiddle.set(ControlMode.PercentOutput,power);
+  }
+  public void setAllMotors(double power){
+    setLeftMotors(power);
+    setRightMotors(power);
   }
   private enum Sign { POSITIVE, NEGATIVE }
 
