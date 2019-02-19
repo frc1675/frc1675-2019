@@ -14,7 +14,6 @@ import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
 import frc.robot.commands.CheesyDrive;
-
 /**
  *DriveBase is the representation of the physical drive motors and provides access to their motor controllers.
  */
@@ -27,22 +26,20 @@ public class DriveBase extends Subsystem {
   
   private TalonSRX leftMiddle;
   private TalonSRX rightMiddle;
-  
   public DriveBase() {
     super();
-    leftFront = new VictorSPX(RobotMap.DRIVE_LEFT_FRONT);
-    leftBack = new VictorSPX(RobotMap.DRIVE_LEFT_BACK);
+    leftFront = new VictorSPX(RobotMap.LEFT_FRONT);
+    leftBack = new VictorSPX(RobotMap.LEFT_BACK);
     
-    rightFront = new VictorSPX(RobotMap.DRIVE_RIGHT_FRONT);
-    rightBack = new VictorSPX(RobotMap.DRIVE_RIGHT_BACK);
+    rightFront = new VictorSPX(RobotMap.RIGHT_FRONT);
+    rightBack = new VictorSPX(RobotMap.RIGHT_BACK);
 
-    leftMiddle = new TalonSRX(RobotMap.DRIVE_LEFT_MID);
-    rightMiddle = new TalonSRX(RobotMap.DRIVE_RIGHT_MID);
+    leftMiddle = new TalonSRX(RobotMap.LEFT_MIDDLE);
+    rightMiddle = new TalonSRX(RobotMap.RIGHT_MIDDLE);
 
-    leftMiddle.setInverted(true);
-    leftFront.setInverted(true);
-    leftBack.setInverted(true);
-
+    rightMiddle.setInverted(true);
+    rightFront.setInverted(true);
+    rightBack.setInverted(true);
   }
 
   public void setRightMotors(double power){

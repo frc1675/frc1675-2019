@@ -5,34 +5,48 @@
 /* the project.                                                               */
 /*----------------------------------------------------------------------------*/
 
-// Will not be used during competition
-
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.PIDCommand;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
+import frc.robot.subsystems.Elevator;
 
-public class MoveElevatorWithJoystick extends Command {
-  public MoveElevatorWithJoystick() {
+public class MoveElevatorToPosition extends PIDCommand {
+
+  double setpoint = 0;
+
+  public MoveElevatorToPosition(double position) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
+    super(RobotMap.ELEVATOR_P, RobotMap.ELEVATOR_I, RobotMap.ELEVATOR_D);
     requires(Robot.elevator);
+    if (position < RobotMap.MIN_POSITION) {
+      setpoint = RobotMap.MIN_POSITION;
+    } 
+    else if (position > RobotMap.MAX_POSITION) {
+      setpoint = RobotMap.MAX_POSITION;
+    } 
+    else {
+      setpoint = position;
+    }
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    this.getPIDController().reset();
+    this.getPIDController().setSetpoint(setpoint);
+    this.getPIDController().setOutputRange(-.20, .30);
+    this.getPIDController().enable();
+    Robot.elevator.setTargetPosition(setpoint);
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-    double elevatorPower = Robot.oi.getOperatorLeftYAxis() / 2;
-
-    Robot.elevator.setElevatorMotor(elevatorPower);
   }
 
-  // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
     return false;
@@ -41,6 +55,7 @@ public class MoveElevatorWithJoystick extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    this.getPIDController().disable();
     Robot.elevator.setElevatorMotor(0);
   }
 
@@ -49,5 +64,15 @@ public class MoveElevatorWithJoystick extends Command {
   @Override
   protected void interrupted() {
     end();
+  }
+
+  @Override
+  protected double returnPIDInput() {
+    return Robot.elevator.getElevatorPosition();
+  }
+
+  @Override
+  protected void usePIDOutput(double output) {
+    Robot.elevator.setElevatorMotor(output);
   }
 }
