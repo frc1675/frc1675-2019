@@ -23,7 +23,7 @@ public class RobotMap {
   public static final int RIGHT_MIDDLE = 3;
   public static final int RIGHT_BACK = 2;
 
-  public static final double MOTOR_DEADZONE = .15;
+  public static final double MOTOR_DEADZONE = .0;
   public static final double TURNING_SCALE_FACTOR = 2;
   
   //Grabber
