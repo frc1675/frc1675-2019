@@ -10,6 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.ActivateVisionPIDMode;
 import frc.robot.commands.ReleaseHatch;
 import frc.robot.commands.TiltElevatorForward;
 import frc.robot.commands.TiltElevatorReverse;
@@ -62,6 +63,7 @@ public class OI {
     operatorLeftBumper.whenPressed(new TiltElevatorForward());
     operatorRightBumper.whenPressed(new TiltElevatorReverse());
     driverAButton.whenPressed(new ReleaseHatch());
+    driverRightBumper.whenPressed(new ActivateVisionPIDMode());
   }
  
 

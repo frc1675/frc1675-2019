@@ -16,6 +16,7 @@ import frc.robot.commands.VisionRoutine;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Grabber;
+import frc.robot.subsystems.PIDDriveBase;
 import frc.robot.subsystems.Vision;
 
 /**
@@ -27,6 +28,7 @@ import frc.robot.subsystems.Vision;
  */
 public class Robot extends TimedRobot {
   public static DriveBase driveBase;
+  public static PIDDriveBase driveBasePID;
   public static Grabber grabber;
   public static Elevator elevator;
   public static OI oi;
@@ -44,6 +46,7 @@ public class Robot extends TimedRobot {
   public void robotInit() {
     grabber = new Grabber();
     driveBase = new DriveBase();
+    driveBasePID = new PIDDriveBase();
     elevator = new Elevator();
     vision = new Vision();
     oi = new OI();
