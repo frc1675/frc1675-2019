@@ -10,11 +10,10 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.ReleaseHatch;
-import frc.robot.commands.TiltElevatorForward;
-import frc.robot.commands.TiltElevatorReverse;
-import frc.robot.commands.WristDown;
-import frc.robot.commands.WristUp;
+import frc.robot.commands.GoToHomePosition;
+import frc.robot.commands.MoveElevatorToPosition;
+import frc.robot.commands.MoveElevatorWithJoystick;
+import frc.robot.commands.Score;
 
 
 /**
@@ -51,17 +50,17 @@ public class OI {
   JoystickButton operatorRightBumper = new JoystickButton(operatorController, XBoxControllerMap.RIGHT_BUMPER_BUTTON);
 
   public OI() {
-    //operatorAButton.whenPressed(new MoveElevatorToPosition(RobotMap.BOTTOM_HATCH_POSITION));
-    //operatorBButton.whenPressed(new MoveElevatorToPosition(RobotMap.MIDDLE_HATCH_POSITION));
-    //operatorYButton.whenPressed(new MoveElevatorToPosition(RobotMap.TOP_HATCH_POSITION));
-    //operatorXButton.whenPressed(new MoveElevatorWithJoystick());
+    operatorAButton.whenPressed(new GoToHomePosition());
+    operatorBButton.whenPressed(new MoveElevatorToPosition(RobotMap.MIDDLE_HATCH_POSITION));
+    operatorYButton.whenPressed(new MoveElevatorToPosition(RobotMap.TOP_HATCH_POSITION));
+    operatorXButton.whenPressed(new MoveElevatorWithJoystick());
 
-    operatorXButton.whenPressed(new WristDown());
-    operatorYButton.whenPressed(new WristUp());
-    operatorAButton.whenPressed(new ReleaseHatch());
-    operatorLeftBumper.whenPressed(new TiltElevatorForward());
-    operatorRightBumper.whenPressed(new TiltElevatorReverse());
-    driverAButton.whenPressed(new ReleaseHatch());
+    //operatorXButton.whenPressed(new WristDown());
+    //operatorYButton.whenPressed(new WristUp());
+    //operatorAButton.whenPressed(new Score());
+    //operatorLeftBumper.whenPressed(new TiltElevatorForward());
+    //operatorRightBumper.whenPressed(new TiltElevatorReverse());
+    driverAButton.whenPressed(new Score());
   }
  
 

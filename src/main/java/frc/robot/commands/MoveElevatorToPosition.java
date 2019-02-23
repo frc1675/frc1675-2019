@@ -73,6 +73,6 @@ public class MoveElevatorToPosition extends PIDCommand {
 
   @Override
   protected void usePIDOutput(double output) {
-    Robot.elevator.setElevatorMotor(output);
+    Robot.elevator.setElevatorMotor(output + RobotMap.HOLD_POWER);
   }
 }

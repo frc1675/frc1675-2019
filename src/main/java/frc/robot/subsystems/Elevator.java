@@ -28,6 +28,7 @@ public class Elevator extends Subsystem {
   private DigitalInput upperLimitSwitch;
   private boolean isLowerLimitDefined = false;
   private double targetPosition = 0;
+  public double holdPower = 0.15;
 
   public Elevator(){
 
@@ -59,13 +60,13 @@ public class Elevator extends Subsystem {
   }
 
   public void tiltElevatorForward() {
-    if (isLowerLimitSwitchPressed() == true || getElevatorPosition() < RobotMap.TILT_MAX_POSITION) {
+    if (isLowerLimitSwitchPressed() == true || getElevatorPosition() < RobotMap.MIN_POSITION) {
       tiltElevator.set(Value.kForward);
     }
   }
 
   public void tiltElevatorReverse() {
-    if (isLowerLimitSwitchPressed() == true || getElevatorPosition() < RobotMap.TILT_MAX_POSITION) {
+    if (isLowerLimitSwitchPressed() == true || getElevatorPosition() < RobotMap.MIN_POSITION) {
       tiltElevator.set(Value.kReverse);
     }
   }
