@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.robot.commands.TurnForAngle;
+import frc.robot.commands.MoveForDistance;
 import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Grabber;
@@ -87,7 +88,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = new TurnForAngle(90, 100);
+    m_autonomousCommand = new MoveForDistance(240, 100);
     //m_autonomousCommand = m_chooser.getSelected();
 
     /*

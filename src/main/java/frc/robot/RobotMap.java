@@ -15,13 +15,13 @@ package frc.robot;
  */
 public class RobotMap {
   //Drive base
-  public static final int LEFT_FRONT = 7;
-  public static final int LEFT_MIDDLE = 5;
-  public static final int LEFT_BACK = 6;
+  public static final int LEFT_FRONT = 1;
+  public static final int LEFT_MIDDLE = 2;
+  public static final int LEFT_BACK = 3;
 
-  public static final int RIGHT_FRONT = 1;
-  public static final int RIGHT_MIDDLE = 3;
-  public static final int RIGHT_BACK = 2;
+  public static final int RIGHT_FRONT = 4;
+  public static final int RIGHT_MIDDLE = 5;
+  public static final int RIGHT_BACK = 6;
 
   public static final double MOTOR_DEADZONE = .15;
   public static final double TURNING_SCALE_FACTOR = 2;
@@ -30,6 +30,11 @@ public class RobotMap {
   public static final double Gyro_I = 0.0;
   public static final double Gyro_D = 0.145;
 
+  public static final double DRIVE_P = 0.000094;
+  public static final double DRIVE_I = 0.0;
+  public static final double DRIVE_D = 0.0006;
+
+  public static final double TICKS_PER_INCH = 407.44;
   //Grabber
   public static final int ARM_ROTATOR = 0;
   

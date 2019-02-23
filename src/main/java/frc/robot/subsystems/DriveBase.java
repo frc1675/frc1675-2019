@@ -19,31 +19,34 @@ import edu.wpi.first.wpilibj.SerialPort;
  *DriveBase is the representation of the physical drive motors and provides access to their motor controllers.
  */
 public class DriveBase extends Subsystem {
-  private VictorSPX leftFront;
+  private VictorSPX leftMiddle;
   private VictorSPX leftBack;
 
-  private VictorSPX rightFront;
+  private VictorSPX rightMiddle;
   private VictorSPX rightBack;
   
-  private TalonSRX leftMiddle;
-  private TalonSRX rightMiddle;
+  private TalonSRX leftFront;
+  private TalonSRX rightFront;
   AHRS ahrs;
   public DriveBase() {
     super();
-    leftFront = new VictorSPX(RobotMap.LEFT_FRONT);
+    leftMiddle = new VictorSPX(RobotMap.LEFT_MIDDLE);
     leftBack = new VictorSPX(RobotMap.LEFT_BACK);
     
-    rightFront = new VictorSPX(RobotMap.RIGHT_FRONT);
+    rightMiddle = new VictorSPX(RobotMap.RIGHT_MIDDLE);
     rightBack = new VictorSPX(RobotMap.RIGHT_BACK);
 
-    leftMiddle = new TalonSRX(RobotMap.LEFT_MIDDLE);
-    rightMiddle = new TalonSRX(RobotMap.RIGHT_MIDDLE);
+    leftFront = new TalonSRX(RobotMap.LEFT_FRONT);
+    rightFront = new TalonSRX(RobotMap.RIGHT_FRONT);
 
     rightMiddle.setInverted(true);
     rightFront.setInverted(true);
     rightBack.setInverted(true);
     
     ahrs = new AHRS(SerialPort.Port.kMXP);
+
+    rightFront.setSensorPhase(true);
+    leftFront.setSensorPhase(true);
   }
 
   public void setRightMotors(double power){
@@ -89,6 +92,19 @@ public class DriveBase extends Subsystem {
   }
   public double getAngle() {
     return ahrs.getAngle();
+  }
+  public void resetEncoder() {
+    leftFront.getSensorCollection().setQuadraturePosition(0, 0);
+    rightFront.getSensorCollection().setQuadraturePosition(0, 0);
+}
+  public double getLeftEncoderValue() {
+
+    return leftFront.getSelectedSensorPosition(0);
+  }
+
+  public double getRightEncoderValue() {
+
+    return rightFront.getSelectedSensorPosition(0);
   }
 }
 

@@ -6,25 +6,20 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-
-
 import edu.wpi.first.wpilibj.command.PIDCommand;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class TurnForAngle extends PIDCommand {
-
-  int count = 0;
-  double angleturned;
-  double timeout;
-  double initialDegrees;
+public class MoveForDistance extends PIDCommand {
   double setpoint;
-  
-  public TurnForAngle(double angleturned, double timeout) {
-    super (RobotMap.Gyro_P, RobotMap.Gyro_I, RobotMap.Gyro_D);
+  double timeout;
+  int count = 0;
+
+  public MoveForDistance(double setpoint, double timeout) {
+    super(RobotMap.DRIVE_P, RobotMap.DRIVE_I, RobotMap.DRIVE_D);
     requires(Robot.driveBase);
-    this.angleturned = angleturned;
+    this.setpoint = setpoint * RobotMap.TICKS_PER_INCH;
     this.timeout = timeout;
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -33,17 +28,14 @@ public class TurnForAngle extends PIDCommand {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.driveBase.resetGyro(); 
+    Robot.driveBase.resetEncoder();
     this.getPIDController().reset();
     this.getPIDController().setOutputRange(-.65, .65);
-    initialDegrees = Robot.driveBase.getAngle();
-    setpoint = initialDegrees + angleturned;
     this.getPIDController().setSetpoint(setpoint);
-    SmartDashboard.putNumber("Angle Setpoint", setpoint);
+    SmartDashboard.putNumber("Distance Setpoint", setpoint);
     this.getPIDController().setAbsoluteTolerance(5);
     this.setTimeout(timeout);
     this.getPIDController().enable();
-  //  initialDegrees = Robot.driveBase.getAngle();
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -54,8 +46,8 @@ public class TurnForAngle extends PIDCommand {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    SmartDashboard.putBoolean("Angle Timeout" , this.isTimedOut());
-    SmartDashboard.putBoolean("Angle Target", this.getPIDController().onTarget());
+    SmartDashboard.putBoolean("Distance Timeout" , this.isTimedOut());
+    SmartDashboard.putBoolean("Distance Target", this.getPIDController().onTarget());
     if (this.getPIDController().onTarget() == true){
       count += 1;
     }
@@ -63,14 +55,14 @@ public class TurnForAngle extends PIDCommand {
       count = 0;
     }
     if (this.isTimedOut()){
-      
+    
       return true;
     }
     if (count == 5){
       return true;
     } else 
       return false;
-    }
+  }
 
   // Called once after isFinished returns true
   @Override
@@ -87,16 +79,15 @@ public class TurnForAngle extends PIDCommand {
   }
   @Override
   protected double returnPIDInput(){
-    double angle = Robot.driveBase.getAngle();
-    SmartDashboard.putNumber("Angle", angle);
-    return angle;
+    double averageEncoderValue = (Robot.driveBase.getLeftEncoderValue() + Robot.driveBase.getRightEncoderValue()) / 2;
+    SmartDashboard.putNumber("Average Encoder Value", averageEncoderValue);
+    return averageEncoderValue;
   }
   @Override
-  protected void usePIDOutput(double output){
-    Robot.driveBase.setRightMotors(-output);
-    SmartDashboard.putNumber("RightMotors", -output);
+  protected void usePIDOutput(double output) {
+    Robot.driveBase.setRightMotors(output);
+    SmartDashboard.putNumber("RightMotors", output);
     Robot.driveBase.setLeftMotors(output);
     SmartDashboard.putNumber("LeftMotors", output);
   }
-  
 }
