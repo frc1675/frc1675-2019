@@ -51,8 +51,8 @@ public class OI {
 
   public OI() {
     operatorAButton.whenPressed(new GoToHomePosition());
-    operatorBButton.whenPressed(new MoveElevatorToPosition(RobotMap.MIDDLE_HATCH_POSITION));
-    operatorYButton.whenPressed(new MoveElevatorToPosition(RobotMap.TOP_HATCH_POSITION));
+    operatorBButton.whenPressed(new MoveElevatorToPosition(RobotMap.MIDDLE_HATCH_POSITION, false));
+    operatorYButton.whenPressed(new MoveElevatorToPosition(RobotMap.TOP_HATCH_POSITION, false));
     operatorXButton.whenPressed(new MoveElevatorWithJoystick());
 
     //operatorXButton.whenPressed(new WristDown());

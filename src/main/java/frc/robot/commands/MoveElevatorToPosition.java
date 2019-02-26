@@ -10,13 +10,13 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.PIDCommand;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.subsystems.Elevator;
 
 public class MoveElevatorToPosition extends PIDCommand {
 
   double setpoint = 0;
+  boolean canBeFinished = false;
 
-  public MoveElevatorToPosition(double position) {
+  public MoveElevatorToPosition(double position, boolean canBeFinished) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     super(RobotMap.ELEVATOR_P, RobotMap.ELEVATOR_I, RobotMap.ELEVATOR_D);
@@ -49,7 +49,11 @@ public class MoveElevatorToPosition extends PIDCommand {
 
   @Override
   protected boolean isFinished() {
-    return false;
+    if (canBeFinished == true && Robot.elevator.elevatorOnTarget() == true) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   // Called once after isFinished returns true

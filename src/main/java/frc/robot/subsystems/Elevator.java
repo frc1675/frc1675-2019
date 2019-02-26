@@ -28,6 +28,7 @@ public class Elevator extends Subsystem {
   private DigitalInput upperLimitSwitch;
   private boolean isLowerLimitDefined = false;
   private double targetPosition = 0;
+  private int count = 0;
   public double holdPower = 0.15;
 
   public Elevator(){
@@ -44,7 +45,7 @@ public class Elevator extends Subsystem {
 
   // The limit switches return false when they're pressed, so this
   // makes the code more intuitive.
-  private boolean isLowerLimitSwitchPressed() {
+  public boolean isLowerLimitSwitchPressed() {
     return !lowerLimitSwitch.get();
   }
 
@@ -91,10 +92,11 @@ public class Elevator extends Subsystem {
   }
 
   public boolean elevatorOnTarget() {
-    if (Math.abs(targetPosition - getElevatorPosition()) <= RobotMap.ELEVATOR_TOLERANCE) {
+    if (Math.abs(targetPosition - getElevatorPosition()) <= RobotMap.ELEVATOR_TOLERANCE && count >= 5) {
       return true;
     } 
     else {
+      count++;
       return false;
     }
   }
