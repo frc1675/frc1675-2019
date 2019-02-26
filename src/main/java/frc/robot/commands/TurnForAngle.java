@@ -33,7 +33,7 @@ public class TurnForAngle extends PIDCommand {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.driveBase.resetGyro(); 
+    //Robot.driveBase.resetGyro(); 
     this.getPIDController().reset();
     this.getPIDController().setOutputRange(-.65, .65);
     initialDegrees = Robot.driveBase.getAngle();
@@ -93,9 +93,9 @@ public class TurnForAngle extends PIDCommand {
   }
   @Override
   protected void usePIDOutput(double output){
-    Robot.driveBase.setRightMotors(-output);
+    Robot.driveBase.setRightMotors(output);
     SmartDashboard.putNumber("RightMotors", -output);
-    Robot.driveBase.setLeftMotors(output);
+    Robot.driveBase.setLeftMotors(-output);
     SmartDashboard.putNumber("LeftMotors", output);
   }
   

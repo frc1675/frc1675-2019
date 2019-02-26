@@ -30,7 +30,7 @@ public class MoveForDistance extends PIDCommand {
   protected void initialize() {
     Robot.driveBase.resetEncoder();
     this.getPIDController().reset();
-    this.getPIDController().setOutputRange(-.65, .65);
+    this.getPIDController().setOutputRange(-.3, .3);
     this.getPIDController().setSetpoint(setpoint);
     SmartDashboard.putNumber("Distance Setpoint", setpoint);
     this.getPIDController().setAbsoluteTolerance(5);
