@@ -92,11 +92,17 @@ public class Elevator extends Subsystem {
   }
 
   public boolean elevatorOnTarget() {
-    if (Math.abs(targetPosition - getElevatorPosition()) <= RobotMap.ELEVATOR_TOLERANCE && count >= 5) {
+    if (Math.abs(targetPosition - getElevatorPosition()) <= RobotMap.ELEVATOR_TOLERANCE) {
+      count ++;
+    }
+    else {
+      count = 0;
+    }
+
+    if (count >= 5) {
       return true;
     } 
     else {
-      count++;
       return false;
     }
   }

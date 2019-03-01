@@ -10,7 +10,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.GoToHomePosition;
+import frc.robot.commands.MoveElevatorToHome;
 import frc.robot.commands.MoveElevatorToPosition;
 import frc.robot.commands.MoveElevatorWithJoystick;
 import frc.robot.commands.Score;
@@ -50,7 +50,7 @@ public class OI {
   JoystickButton operatorRightBumper = new JoystickButton(operatorController, XBoxControllerMap.RIGHT_BUMPER_BUTTON);
 
   public OI() {
-    operatorAButton.whenPressed(new GoToHomePosition());
+    operatorAButton.whenPressed(new MoveElevatorToHome());
     operatorBButton.whenPressed(new MoveElevatorToPosition(RobotMap.MIDDLE_HATCH_POSITION, false));
     operatorYButton.whenPressed(new MoveElevatorToPosition(RobotMap.TOP_HATCH_POSITION, false));
     operatorXButton.whenPressed(new MoveElevatorWithJoystick());

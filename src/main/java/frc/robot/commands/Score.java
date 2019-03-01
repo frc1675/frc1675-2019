@@ -15,7 +15,7 @@ public class Score extends CommandGroup {
    */
   public Score() {
     addSequential(new ReleaseHatch());
-    addSequential(new GoToHomePosition());
+    addSequential(new MoveElevatorToHome());
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());

@@ -11,15 +11,15 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 
-public class GoToHomePosition extends CommandGroup {
+public class MoveElevatorToHome extends CommandGroup {
   /**
    * Add your docs here.
    */
-  public GoToHomePosition() {
-    if (Robot.elevator.isLowerLimitSwitchPressed() == true) {
+  public MoveElevatorToHome() {
+    if (Robot.elevator.getElevatorPosition() > RobotMap.SAFE_DROP_POSITION) {
       addSequential(new MoveElevatorToPosition(RobotMap.SAFE_DROP_POSITION, true));
-      addSequential(new DropElevator());
     }
+    addSequential(new DropElevator());
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());
