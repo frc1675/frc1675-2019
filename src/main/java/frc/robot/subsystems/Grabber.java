@@ -19,6 +19,7 @@ public class Grabber extends Subsystem {
 
   private Solenoid hatchReleaser;
 
+  private Solenoid hook;
   // Put methods for controlling this subsystem
   // here. Call these from Commands.
 
@@ -28,6 +29,7 @@ public class Grabber extends Subsystem {
 
     hatchReleaser = new Solenoid(RobotMap.HATCH_RELEASER);
 
+    hook = new Solenoid(RobotMap.HOOK);
   }
 
   public void wristUp() {
@@ -44,6 +46,14 @@ public class Grabber extends Subsystem {
 
   public void retractPistons() {
     hatchReleaser.set(false);
+  }
+
+  public void extendHook(){
+    hook.set(true);
+  }
+
+  public void retractHook(){
+    hook.set(false);
   }
 
   @Override
