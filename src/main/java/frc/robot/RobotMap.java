@@ -26,9 +26,9 @@ public class RobotMap {
   public static final double MOTOR_DEADZONE = .15;
   public static final double TURNING_SCALE_FACTOR = 2;
 
-  public static final double Gyro_P = 0.0375;
-  public static final double Gyro_I = 0.0;
-  public static final double Gyro_D = 0.145;
+  public static final double GYRO_P = 0.0375;
+  public static final double GYRO_I = 0.0;
+  public static final double GYRO_D = 0.145;
 
   public static final double DRIVE_P = 0.000094;
   public static final double DRIVE_I = 0.0;

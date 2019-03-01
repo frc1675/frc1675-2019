@@ -11,12 +11,12 @@ import frc.robot.Robot;
 import frc.robot.RobotMap;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class MoveForDistance extends PIDCommand {
-  double setpoint;
-  double timeout;
+public class DriveForDistance extends PIDCommand {
+  double setpoint = 0;
+  double timeout = 0;
   int count = 0;
 
-  public MoveForDistance(double setpoint, double timeout) {
+  public DriveForDistance(double setpoint, double timeout) {
     super(RobotMap.DRIVE_P, RobotMap.DRIVE_I, RobotMap.DRIVE_D);
     requires(Robot.driveBase);
     this.setpoint = setpoint * RobotMap.TICKS_PER_INCH;
@@ -49,11 +49,11 @@ public class MoveForDistance extends PIDCommand {
     SmartDashboard.putBoolean("Distance Timeout" , this.isTimedOut());
     SmartDashboard.putBoolean("Distance Target", this.getPIDController().onTarget());
     if (this.getPIDController().onTarget() == true){
-      count += 1;
+      count ++;
     }
-    if (this.getPIDController().onTarget() == false){
+    else{
       count = 0;
-    }
+    }  
     if (this.isTimedOut()){
     
       return true;

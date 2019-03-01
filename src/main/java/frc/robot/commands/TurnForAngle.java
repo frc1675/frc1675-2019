@@ -16,13 +16,12 @@ import frc.robot.RobotMap;
 public class TurnForAngle extends PIDCommand {
 
   int count = 0;
-  double angleturned;
-  double timeout;
-  double initialDegrees;
-  double setpoint;
+  double angleturned = 0;
+  double timeout = 0;
+  double initialDegrees = 0;
   
   public TurnForAngle(double angleturned, double timeout) {
-    super (RobotMap.Gyro_P, RobotMap.Gyro_I, RobotMap.Gyro_D);
+    super (RobotMap.GYRO_P, RobotMap.GYRO_I, RobotMap.GYRO_D);
     requires(Robot.driveBase);
     this.angleturned = angleturned;
     this.timeout = timeout;
@@ -33,7 +32,7 @@ public class TurnForAngle extends PIDCommand {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    //Robot.driveBase.resetGyro(); 
+    double setpoint = 0; 
     this.getPIDController().reset();
     this.getPIDController().setOutputRange(-.65, .65);
     initialDegrees = Robot.driveBase.getAngle();
@@ -59,7 +58,7 @@ public class TurnForAngle extends PIDCommand {
     if (this.getPIDController().onTarget() == true){
       count += 1;
     }
-    if (this.getPIDController().onTarget() == false){
+    else{
       count = 0;
     }
     if (this.isTimedOut()){
@@ -84,6 +83,7 @@ public class TurnForAngle extends PIDCommand {
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
   @Override
   protected double returnPIDInput(){
