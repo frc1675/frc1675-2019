@@ -126,6 +126,7 @@ public class Elevator extends Subsystem {
     SmartDashboard.putBoolean("Elevator upper limit pressed", isUpperLimitSwitchPressed());
     SmartDashboard.putNumber("Elevator position", getElevatorPosition());
     SmartDashboard.putBoolean("Elevator on target", elevatorOnTarget());
+    SmartDashboard.putNumber("Target Position", targetPosition);
   }
 
   @Override

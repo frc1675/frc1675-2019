@@ -14,6 +14,7 @@ import frc.robot.RobotMap;
 public class MoveElevatorToPosition extends PIDCommand {
 
   double setpoint = 0;
+  double timeout = 5;
   boolean canBeFinished = false;
 
   public MoveElevatorToPosition(double position, boolean canBeFinished) {
@@ -30,6 +31,7 @@ public class MoveElevatorToPosition extends PIDCommand {
     else {
       setpoint = position;
     }
+
   }
 
   // Called just before this Command runs the first time
@@ -39,6 +41,7 @@ public class MoveElevatorToPosition extends PIDCommand {
     this.getPIDController().setSetpoint(setpoint);
     this.getPIDController().setOutputRange(-.20, .30);
     this.getPIDController().enable();
+    this.setTimeout(timeout);
     Robot.elevator.setTargetPosition(setpoint);
   }
 
@@ -49,10 +52,14 @@ public class MoveElevatorToPosition extends PIDCommand {
 
   @Override
   protected boolean isFinished() {
-    if (canBeFinished == true && Robot.elevator.elevatorOnTarget() == true) {
+    if (this.isTimedOut() == true) {
       return true;
     } else {
-      return false;
+      if (canBeFinished == true && Robot.elevator.elevatorOnTarget() == true) {
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 

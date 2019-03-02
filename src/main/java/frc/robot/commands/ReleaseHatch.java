@@ -21,7 +21,7 @@ public class ReleaseHatch extends Command {
   @Override
   protected void initialize() {
     Robot.grabber.releaseHatch();
-    setTimeout(0.5);
+    setTimeout(1);
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -38,6 +38,7 @@ public class ReleaseHatch extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    System.out.println("ReleaseHatch has ended");
     Robot.grabber.retractPistons();
   }
 
