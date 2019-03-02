@@ -9,6 +9,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.Robot;
 import frc.robot.RobotMap;
 
 /**
@@ -31,11 +32,15 @@ public class Grabber extends Subsystem {
   }
 
   public void wristUp() {
-    armRotator.set(false);
+    if (Robot.elevator.getElevatorPosition() <= RobotMap.MIN_POSITION) {
+      armRotator.set(false); 
+    }
   }
 
   public void wristDown() {
-    armRotator.set(true);
+    if (Robot.elevator.getElevatorPosition() <= RobotMap.MIN_POSITION) {
+      armRotator.set(true); 
+    }
   }
 
   public void releaseHatch() {
