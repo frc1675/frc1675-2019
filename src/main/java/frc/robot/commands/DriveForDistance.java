@@ -31,10 +31,10 @@ public class DriveForDistance extends PIDCommand {
     Robot.driveBase.resetEncoder();
     count = 0;
     this.getPIDController().reset();
-    this.getPIDController().setOutputRange(-.3, .3);
+    this.getPIDController().setOutputRange(-.65, .65);
     this.getPIDController().setSetpoint(setpoint);
-    SmartDashboard.putNumber("Distance Setpoint", setpoint);
-    this.getPIDController().setAbsoluteTolerance(5);
+   // SmartDashboard.putNumber("Distance Setpoint", setpoint);
+    this.getPIDController().setAbsoluteTolerance(2*RobotMap.TICKS_PER_INCH);
     this.setTimeout(timeout);
     this.getPIDController().enable();
   }
@@ -47,10 +47,10 @@ public class DriveForDistance extends PIDCommand {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    SmartDashboard.putBoolean("Distance Timeout" , this.isTimedOut());
-    SmartDashboard.putBoolean("Distance Target", this.getPIDController().onTarget());
+   // SmartDashboard.putBoolean("Distance Timeout" , this.isTimedOut());
+   // SmartDashboard.putBoolean("Distance Target", this.getPIDController().onTarget());
     if (this.getPIDController().onTarget() == true){
-      count ++;
+      count++;
     }
     else{
       count = 0;
@@ -81,14 +81,14 @@ public class DriveForDistance extends PIDCommand {
   @Override
   protected double returnPIDInput(){
     double averageEncoderValue = (Robot.driveBase.getLeftEncoderValue() + Robot.driveBase.getRightEncoderValue()) / 2;
-    SmartDashboard.putNumber("Average Encoder Value", averageEncoderValue);
+   // SmartDashboard.putNumber("Average Encoder Value", averageEncoderValue);
     return averageEncoderValue;
   }
   @Override
   protected void usePIDOutput(double output) {
     Robot.driveBase.setRightMotors(output);
-    SmartDashboard.putNumber("RightMotors", output);
+   // SmartDashboard.putNumber("RightMotors", output);
     Robot.driveBase.setLeftMotors(output);
-    SmartDashboard.putNumber("LeftMotors", output);
+   // SmartDashboard.putNumber("LeftMotors", output);
   }
 }

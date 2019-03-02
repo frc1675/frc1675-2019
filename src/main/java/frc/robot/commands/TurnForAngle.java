@@ -16,14 +16,14 @@ import frc.robot.RobotMap;
 public class TurnForAngle extends PIDCommand {
 
   int count = 0;
-  double angleturned = 0;
+  double targrtangle = 0;
   double timeout = 0;
   double initialDegrees = 0;
   
   public TurnForAngle(double angleturned, double timeout) {
     super (RobotMap.GYRO_P, RobotMap.GYRO_I, RobotMap.GYRO_D);
     requires(Robot.driveBase);
-    this.angleturned = angleturned;
+    this.targrtangle = angleturned;
     this.timeout = timeout;
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
@@ -37,13 +37,12 @@ public class TurnForAngle extends PIDCommand {
     this.getPIDController().reset();
     this.getPIDController().setOutputRange(-.65, .65);
     initialDegrees = Robot.driveBase.getAngle();
-    setpoint = initialDegrees + angleturned;
+    setpoint = initialDegrees + targrtangle;
     this.getPIDController().setSetpoint(setpoint);
-    SmartDashboard.putNumber("Angle Setpoint", setpoint);
+    //SmartDashboard.putNumber("Angle Setpoint", setpoint);
     this.getPIDController().setAbsoluteTolerance(5);
     this.setTimeout(timeout);
     this.getPIDController().enable();
-  //  initialDegrees = Robot.driveBase.getAngle();
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -54,8 +53,8 @@ public class TurnForAngle extends PIDCommand {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    SmartDashboard.putBoolean("Angle Timeout" , this.isTimedOut());
-    SmartDashboard.putBoolean("Angle Target", this.getPIDController().onTarget());
+    //SmartDashboard.putBoolean("Angle Timeout" , this.isTimedOut());
+    //SmartDashboard.putBoolean("Angle Target", this.getPIDController().onTarget());
     if (this.getPIDController().onTarget() == true){
       count ++ ;
     }
@@ -89,15 +88,15 @@ public class TurnForAngle extends PIDCommand {
   @Override
   protected double returnPIDInput(){
     double angle = Robot.driveBase.getAngle();
-    SmartDashboard.putNumber("Angle", angle);
+//    SmartDashboard.putNumber("Angle", angle);
     return angle;
   }
   @Override
   protected void usePIDOutput(double output){
     Robot.driveBase.setRightMotors(output);
-    SmartDashboard.putNumber("RightMotors", -output);
+ //   SmartDashboard.putNumber("RightMotors", -output);
     Robot.driveBase.setLeftMotors(-output);
-    SmartDashboard.putNumber("LeftMotors", output);
+ //   SmartDashboard.putNumber("LeftMotors", output);
   }
   
 }

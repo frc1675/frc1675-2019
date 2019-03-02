@@ -88,7 +88,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = new TurnForAngle(90, 100);
+    m_autonomousCommand = new DriveForDistance(240, 100);
     //m_autonomousCommand = m_chooser.getSelected();
 
     /*
