@@ -29,6 +29,7 @@ public class DriveForDistance extends PIDCommand {
   @Override
   protected void initialize() {
     Robot.driveBase.resetEncoder();
+    count = 0;
     this.getPIDController().reset();
     this.getPIDController().setOutputRange(-.3, .3);
     this.getPIDController().setSetpoint(setpoint);
@@ -58,7 +59,7 @@ public class DriveForDistance extends PIDCommand {
     
       return true;
     }
-    if (count == 5){
+    if (count >= 5){
       return true;
     } else 
       return false;

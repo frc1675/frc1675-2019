@@ -33,6 +33,7 @@ public class TurnForAngle extends PIDCommand {
   @Override
   protected void initialize() {
     double setpoint = 0; 
+    count = 0;
     this.getPIDController().reset();
     this.getPIDController().setOutputRange(-.65, .65);
     initialDegrees = Robot.driveBase.getAngle();
@@ -56,7 +57,7 @@ public class TurnForAngle extends PIDCommand {
     SmartDashboard.putBoolean("Angle Timeout" , this.isTimedOut());
     SmartDashboard.putBoolean("Angle Target", this.getPIDController().onTarget());
     if (this.getPIDController().onTarget() == true){
-      count += 1;
+      count ++ ;
     }
     else{
       count = 0;
@@ -65,7 +66,7 @@ public class TurnForAngle extends PIDCommand {
       
       return true;
     }
-    if (count == 5){
+    if (count >= 5){
       return true;
     } else 
       return false;
