@@ -38,7 +38,6 @@ public class ReleaseHatch extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    System.out.println("ReleaseHatch has ended");
     Robot.grabber.retractPistons();
   }
 

@@ -15,7 +15,7 @@ package frc.robot;
  */
 public class RobotMap {
   //Drive base
-  public static final int LEFT_FRONT = 4;
+  public static final int LEFT_FRONT = 7;
   public static final int LEFT_MIDDLE = 5;
   public static final int LEFT_BACK = 6;
 
@@ -34,7 +34,7 @@ public class RobotMap {
   public static final int HOOK = 7;
 
   //Elevator components
-  public static final int ELEVATOR_MOTOR = 7;
+  public static final int ELEVATOR_MOTOR = 4;
   public static final int TILT_ELEVATOR_FORWARD = 0;
   public static final int TILT_ELEVATOR_REVERSE = 1;
 
@@ -44,7 +44,7 @@ public class RobotMap {
   //Elevator positions
   public static final int MAX_POSITION = 4000;
   public static final int MIN_POSITION = 0;
-  public static final int SAFE_DROP_POSITION = 200;
+  public static final int BOTTOM_HATCH_POSITION = 200;
   public static final int MIDDLE_HATCH_POSITION = 1500;
   public static final int TOP_HATCH_POSITION = 3500;
 

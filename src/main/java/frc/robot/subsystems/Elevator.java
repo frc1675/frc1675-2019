@@ -98,7 +98,7 @@ public class Elevator extends Subsystem {
       count = 0;
     }
 
-    if (count >= 5) {
+    if (count >= 10) {
       return true;
     } 
     else {
