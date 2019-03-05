@@ -21,7 +21,7 @@ public class ReleaseHatch extends Command {
   @Override
   protected void initialize() {
     Robot.grabber.releaseHatch();
-    setTimeout(0.5);
+    setTimeout(1);
   }
 
   // Called repeatedly when this Command is scheduled to run

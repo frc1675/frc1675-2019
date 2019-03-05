@@ -10,7 +10,10 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.commands.MoveElevatorToPosition;
+import frc.robot.commands.MoveElevatorWithJoystick;
 import frc.robot.commands.ReleaseHatch;
+import frc.robot.commands.Score;
 import frc.robot.commands.TiltElevatorForward;
 import frc.robot.commands.TiltElevatorReverse;
 import frc.robot.commands.WristDown;
@@ -51,10 +54,10 @@ public class OI {
   JoystickButton operatorRightBumper = new JoystickButton(operatorController, XBoxControllerMap.RIGHT_BUMPER_BUTTON);
 
   public OI() {
-    //operatorAButton.whenPressed(new MoveElevatorToPosition(RobotMap.BOTTOM_HATCH_POSITION));
-    //operatorBButton.whenPressed(new MoveElevatorToPosition(RobotMap.MIDDLE_HATCH_POSITION));
-    //operatorYButton.whenPressed(new MoveElevatorToPosition(RobotMap.TOP_HATCH_POSITION));
-    //operatorXButton.whenPressed(new MoveElevatorWithJoystick());
+    /*operatorAButton.whenPressed(new Score());
+    operatorBButton.whenPressed(new MoveElevatorToPosition(RobotMap.MIDDLE_HATCH_POSITION, false));
+    operatorYButton.whenPressed(new MoveElevatorToPosition(RobotMap.TOP_HATCH_POSITION, false));
+    operatorXButton.whenPressed(new MoveElevatorWithJoystick());*/
 
     operatorXButton.whenPressed(new WristDown());
     operatorYButton.whenPressed(new WristUp());

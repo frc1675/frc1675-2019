@@ -10,13 +10,14 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj.command.PIDCommand;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
-import frc.robot.subsystems.Elevator;
 
 public class MoveElevatorToPosition extends PIDCommand {
 
   double setpoint = 0;
+  boolean canBeFinished = false;
+  double holdPower = 0;
 
-  public MoveElevatorToPosition(double position) {
+  public MoveElevatorToPosition(double position, boolean canBeFinished) {
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
     super(RobotMap.ELEVATOR_P, RobotMap.ELEVATOR_I, RobotMap.ELEVATOR_D);
@@ -30,11 +31,13 @@ public class MoveElevatorToPosition extends PIDCommand {
     else {
       setpoint = position;
     }
+    this.canBeFinished = canBeFinished;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    holdPower = RobotMap.HOLD_POWER;
     this.getPIDController().reset();
     this.getPIDController().setSetpoint(setpoint);
     this.getPIDController().setOutputRange(-.20, .30);
@@ -49,12 +52,17 @@ public class MoveElevatorToPosition extends PIDCommand {
 
   @Override
   protected boolean isFinished() {
-    return false;
-  }
+    if (canBeFinished == true && Robot.elevator.elevatorOnTarget() == true) {
+        return true;
+      } else {
+        return false;
+      }
+    }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    holdPower = 0;
     this.getPIDController().disable();
     Robot.elevator.setElevatorMotor(0);
   }
@@ -73,6 +81,6 @@ public class MoveElevatorToPosition extends PIDCommand {
 
   @Override
   protected void usePIDOutput(double output) {
-    Robot.elevator.setElevatorMotor(output);
+    Robot.elevator.setElevatorMotor(output + holdPower);
   }
 }
