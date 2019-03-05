@@ -31,6 +31,8 @@ public class RobotMap {
   
   public static final int HATCH_RELEASER = 2;
 
+  public static final int HOOK = 7;
+
   //Elevator components
   public static final int ELEVATOR_MOTOR = 4;
   public static final int TILT_ELEVATOR_FORWARD = 0;
