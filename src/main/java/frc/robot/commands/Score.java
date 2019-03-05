@@ -8,6 +8,7 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import frc.robot.RobotMap;
 
 public class Score extends CommandGroup {
   /**
@@ -15,7 +16,7 @@ public class Score extends CommandGroup {
    */
   public Score() {
     addSequential(new ReleaseHatch());
-    addSequential(new MoveElevatorToHome());
+    addSequential(new MoveElevatorToPosition(RobotMap.SAFE_DROP_POSITION, true));
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());

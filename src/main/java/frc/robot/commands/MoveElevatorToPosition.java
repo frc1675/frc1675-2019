@@ -14,8 +14,8 @@ import frc.robot.RobotMap;
 public class MoveElevatorToPosition extends PIDCommand {
 
   double setpoint = 0;
-  double timeout = 5;
   boolean canBeFinished = false;
+  double holdPower = 0;
 
   public MoveElevatorToPosition(double position, boolean canBeFinished) {
     // Use requires() here to declare subsystem dependencies
@@ -31,17 +31,17 @@ public class MoveElevatorToPosition extends PIDCommand {
     else {
       setpoint = position;
     }
-
+    this.canBeFinished = canBeFinished;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    holdPower = RobotMap.HOLD_POWER;
     this.getPIDController().reset();
     this.getPIDController().setSetpoint(setpoint);
     this.getPIDController().setOutputRange(-.20, .30);
     this.getPIDController().enable();
-    this.setTimeout(timeout);
     Robot.elevator.setTargetPosition(setpoint);
   }
 
@@ -52,20 +52,17 @@ public class MoveElevatorToPosition extends PIDCommand {
 
   @Override
   protected boolean isFinished() {
-    if (this.isTimedOut() == true) {
-      return true;
-    } else {
-      if (canBeFinished == true && Robot.elevator.elevatorOnTarget() == true) {
+    if (canBeFinished == true && Robot.elevator.elevatorOnTarget() == true) {
         return true;
       } else {
         return false;
       }
     }
-  }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    holdPower = 0;
     this.getPIDController().disable();
     Robot.elevator.setElevatorMotor(0);
   }
@@ -84,6 +81,6 @@ public class MoveElevatorToPosition extends PIDCommand {
 
   @Override
   protected void usePIDOutput(double output) {
-    Robot.elevator.setElevatorMotor(output + RobotMap.HOLD_POWER);
+    Robot.elevator.setElevatorMotor(output + holdPower);
   }
 }

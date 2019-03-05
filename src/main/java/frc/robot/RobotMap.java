@@ -42,7 +42,7 @@ public class RobotMap {
   //Elevator positions
   public static final int MAX_POSITION = 4000;
   public static final int MIN_POSITION = 0;
-  public static final int SAFE_DROP_POSITION = 1500;
+  public static final int SAFE_DROP_POSITION = 200;
   public static final int MIDDLE_HATCH_POSITION = 1500;
   public static final int TOP_HATCH_POSITION = 3500;
 
