@@ -6,27 +6,23 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-
-import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
 
-public class SimpleDriveWithVision extends Command {
-  double endpoint = 0;
-  double tolerance = 1;
-  double power = .5;
-  int count = 0;
-  public SimpleDriveWithVision() {
-    // Use requires() here to declare subsystem dependencies
-    requires(Robot.driveBasePID);
-    requires(Robot.vision);
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+public class ChangeProcessingMode extends Command {
+  double change = 0;
+  public ChangeProcessingMode(double in) {
+     requires(Robot.vision);
+     change = in;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    if(Robot.vision.hasTarget()){
-    Robot.driveBasePID.setAllMotors(power);
-    }
+    Robot.vision.setPipeline(change);
+   
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -34,34 +30,20 @@ public class SimpleDriveWithVision extends Command {
   protected void execute() {
   }
 
-  public boolean onTarget(){
-    if(Robot.vision.getYOffset() <= endpoint+tolerance && Robot.vision.getYOffset() >= endpoint-tolerance){
-      count++;
-    }
-    else{
-      count = 0;
-    }
-    if(count == 5){
-      return true;
-    }
-    return false;
-  }
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return onTarget();
+    return true;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.driveBasePID.setAllMotors(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    end();
   }
 }

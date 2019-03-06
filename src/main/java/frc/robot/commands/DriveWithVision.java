@@ -26,7 +26,6 @@ public class DriveWithVision extends PIDCommand {
 
     @Override
     public PIDSourceType getPIDSourceType() {
-      // TODO Auto-generated method stub
       return pidType;
     }
 
@@ -34,34 +33,27 @@ public class DriveWithVision extends PIDCommand {
     public double pidGet() {
       samples++;
       SmartDashboard.putNumber("samples", samples);
-      // TODO Auto-generated method stub
       double yoffset = Robot.vision.getYOffset();
       SmartDashboard.putNumber("Y offset", yoffset);
       return yoffset;
     }
   };
   int count = 0;
-  double setpoint;
-  double timeout;
-  double initialPosition;
-  boolean close;
+  double setpoint = 0;
+  double timeout = 10;
+  boolean close = false;
   LinearDigitalFilter ldf = LinearDigitalFilter.movingAverage(pst, 10);
   public DriveWithVision(double timeout) {
     super(RobotMap.DRIVE_P, RobotMap.DRIVE_I, RobotMap.DRIVE_D);
     requires(Robot.vision);
-    requires(Robot.driveBase);
-    setpoint = 0;
+    requires(Robot.driveBasePID);
     this.timeout = timeout;
-    close = false;
   }
 
-  // Called just before this Command runs the first time
-  @Override
   protected void initialize() {
     this.getPIDController().reset();
-    if (Robot.vision.HasTarget() == true) {
+    if (Robot.vision.hasTarget() == true) {
       this.getPIDController().setOutputRange(-.65, .65);
-      initialPosition = Robot.vision.getXOffset();
       this.getPIDController().setSetpoint(setpoint);
       SmartDashboard.putNumber("It", setpoint);
       this.setTimeout(timeout);
@@ -77,8 +69,7 @@ public class DriveWithVision extends PIDCommand {
 
   }
   public boolean averageOnTarget() {
-    if ((Math.abs(ldf.pidGet() - setpoint)) <= 1|| (Math.abs(ldf.pidGet() - setpoint)) >= 1) {
-
+    if ((Math.abs(ldf.pidGet() - setpoint)) <= RobotMap.VISION_TOLERANCE|| (Math.abs(ldf.pidGet() - setpoint)) >= RobotMap.VISION_TOLERANCE) {
       count++;
     } else {
       count = 0;
@@ -105,13 +96,14 @@ public class DriveWithVision extends PIDCommand {
   @Override
   protected void end() {
     this.getPIDController().disable();
-    Robot.driveBase.setAllMotors(0);
+    Robot.driveBasePID.setAllMotors(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
   protected double returnPIDInput() {
     return (ldf.pidGet());
@@ -119,9 +111,8 @@ public class DriveWithVision extends PIDCommand {
 
   @Override
   protected void usePIDOutput(double output) {
-    //SmartDashboard.putNumber("GyroPIDAngle", Robot.driveBase.getAngle());
     SmartDashboard.putNumber("This", output);
-    Robot.driveBase.setRightMotors(output);
-    Robot.driveBase.setLeftMotors(output);
+    Robot.driveBasePID.setRightMotors(output);
+    Robot.driveBasePID.setLeftMotors(output);
   }
 }

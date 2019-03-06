@@ -8,12 +8,12 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 
 public class ActivateVisionPIDMode extends Command {
   public ActivateVisionPIDMode() {
     // Use requires() here to declare subsystem dependencies
-     requires(Robot.vision);
      requires(Robot.driveBasePID);
   }
 
@@ -23,14 +23,16 @@ public class ActivateVisionPIDMode extends Command {
     if(Robot.driveBasePID.getVisionPIDEnabled() == false){
     Robot.driveBasePID.activateVisionPIDMode();
     }
-    if(Robot.driveBasePID.getVisionPIDEnabled() == true){
+    else{
       Robot.driveBasePID.disableVisionPIDMode();
     }
+  
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+   
   }
 
   // Make this return true when this Command no longer needs to run execute()

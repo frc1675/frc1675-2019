@@ -12,6 +12,7 @@ import com.ctre.phoenix.motorcontrol.can.TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.VictorSPX;
 
 import edu.wpi.first.wpilibj.command.PIDSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
 import frc.robot.commands.CheesyDrive;
@@ -31,8 +32,10 @@ public class PIDDriveBase extends PIDSubsystem {
   
   private boolean visionPIDEnabled;
 
+  private double correction;
+
   public PIDDriveBase() {
-    super(RobotMap.GYRO_P,RobotMap.GYRO_I,RobotMap.GYRO_D);
+    super(RobotMap.TURN_P,RobotMap.TURN_I,RobotMap.TURN_D);
     leftFront = new VictorSPX(RobotMap.LEFT_FRONT);
     leftBack = new VictorSPX(RobotMap.LEFT_BACK);
     
@@ -49,20 +52,47 @@ public class PIDDriveBase extends PIDSubsystem {
 
   public void setRightMotors(double power){
     power = correctForDeadzone(power);
-    rightFront.set(ControlMode.PercentOutput,power);
-    rightBack.set(ControlMode.PercentOutput,power);
-    rightMiddle.set(ControlMode.PercentOutput,power);
+    if (Math.abs(power) + Math.abs(correction) > 1) {
+      if (power > 0) {
+          power = power - correction;
+      } else {
+          power = power + correction;
+      }
+  }
+  double rightpower = (power - correction);
+    rightFront.set(ControlMode.PercentOutput,rightpower);
+    rightBack.set(ControlMode.PercentOutput,rightpower);
+    rightMiddle.set(ControlMode.PercentOutput,rightpower);
+    SmartDashboard.putNumber("right power",rightpower);
   }
 
   public void setLeftMotors(double power){
     power = correctForDeadzone(power);
-    leftFront.set(ControlMode.PercentOutput,power);
-    leftBack.set(ControlMode.PercentOutput,power);
-    leftMiddle.set(ControlMode.PercentOutput,power);
+    if (Math.abs(power) + Math.abs(correction) > 1) {
+      if (power > 0) {
+          power = power - correction;
+      } else {
+          power = power + correction;
+      }
+  }
+  double leftpower = (power + correction);
+    leftFront.set(ControlMode.PercentOutput,leftpower);
+    leftBack.set(ControlMode.PercentOutput,leftpower);
+    leftMiddle.set(ControlMode.PercentOutput,leftpower);
+    SmartDashboard.putNumber("left power", leftpower);
   }
   public void setAllMotors(double power){
-    setLeftMotors(power);
-    setRightMotors(power);
+    if (Math.abs(power) + Math.abs(correction) > 1) {
+      if (power > 0) {
+          power = power - correction;
+      } else {
+          power = power + correction;
+      }
+  }
+  double leftpower = (power + correction);
+  double rightpower = (power - correction);
+    setLeftMotors(leftpower);
+    setRightMotors(rightpower);
   }
   private enum Sign { POSITIVE, NEGATIVE }
 
@@ -76,13 +106,16 @@ public class PIDDriveBase extends PIDSubsystem {
   }
   public void activateVisionPIDMode(){
     if(!this.getPIDController().isEnabled()){
+      if(Robot.vision.hasTarget()){
       this.getPIDController().reset();
       this.getPIDController().setAbsoluteTolerance(1);
-      this.getPIDController().setOutputRange(-.65, .65);
+      this.getPIDController().setOutputRange(-1, 1);
       this.getPIDController().setSetpoint(0);
       this.getPIDController().enable();
       visionPIDEnabled = true;
+      
     }
+  }
   }
   public void disableVisionPIDMode(){
     this.getPIDController().disable();
@@ -106,20 +139,20 @@ public class PIDDriveBase extends PIDSubsystem {
     correctedPower = (((1 * signMultiplier) /((1 * signMultiplier) +  (-RobotMap.MOTOR_DEADZONE  * signMultiplier))) * (power - (1 * signMultiplier))) + (1 * signMultiplier);
     return correctedPower;
   }
+
+
+  public void periodic() {
+    SmartDashboard.putBoolean("pid mode on", getVisionPIDEnabled());
+  }
   
 
   @Override
   protected double returnPIDInput() {
-    // Return your input value for the PID loop
-    // e.g. a sensor, like a potentiometer:
-    // yourPot.getAverageVoltage() / kYourMaxVoltage;
     return Robot.vision.getXOffset();
   }
 
   @Override
   protected void usePIDOutput(double output) {
-    // Use output to drive your system, like a motor
-     setLeftMotors(output);
-     setRightMotors(-output);
+    correction = output;
   }
 }

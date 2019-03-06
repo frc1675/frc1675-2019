@@ -26,7 +26,6 @@ public class TurnWithVision extends PIDCommand {
 
     @Override
     public PIDSourceType getPIDSourceType() {
-      // TODO Auto-generated method stub
       return pidType;
     }
 
@@ -34,23 +33,20 @@ public class TurnWithVision extends PIDCommand {
     public double pidGet() {
       samples++;
       SmartDashboard.putNumber("samples", samples);
-      // TODO Auto-generated method stub
       double xoffset = Robot.vision.getXOffset();
       SmartDashboard.putNumber("X offset", xoffset);
       return xoffset;
     }
   };
   int count = 0;
-  double setpoint;
-  double timeout;
-  double initialPosition;
+  double setpoint = 0;
+  double timeout = 15;
   LinearDigitalFilter ldf = LinearDigitalFilter.movingAverage(pst, 10);
 
   public TurnWithVision(double timeout) {
-    super(RobotMap.GYRO_P, RobotMap.GYRO_I, RobotMap.GYRO_D);
+    super(RobotMap.TURN_P, RobotMap.TURN_I, RobotMap.TURN_D);
     requires(Robot.vision);
-    requires(Robot.driveBase);
-    setpoint = 0;
+    requires(Robot.driveBasePID);
     this.timeout = timeout;
   }
 
@@ -58,9 +54,8 @@ public class TurnWithVision extends PIDCommand {
   @Override
   protected void initialize() {
     this.getPIDController().reset();
-    if (Robot.vision.HasTarget() == true) {
+    if (Robot.vision.hasTarget() == true) {
       this.getPIDController().setOutputRange(-.65, .65);
-      initialPosition = Robot.vision.getXOffset();
       this.getPIDController().setSetpoint(setpoint);
       SmartDashboard.putNumber("Setpoint", setpoint);
       this.setTimeout(timeout);
@@ -101,7 +96,7 @@ public class TurnWithVision extends PIDCommand {
   @Override
   protected void end() {
     this.getPIDController().disable();
-    Robot.driveBase.setAllMotors(0);
+    Robot.driveBasePID.setAllMotors(0);
   }
 
   // Called when another command which requires one or more of the same
@@ -117,15 +112,14 @@ public class TurnWithVision extends PIDCommand {
 
   @Override
   protected void usePIDOutput(double output) {
-    //SmartDashboard.putNumber("GyroPIDAngle", Robot.driveBase.getAngle());
     SmartDashboard.putNumber("out", output);
     if(Robot.vision.getXOffset() > 0){
-      Robot.driveBase.setRightMotors(output);
-      Robot.driveBase.setLeftMotors(-output);
+      Robot.driveBasePID.setRightMotors(output);
+      Robot.driveBasePID.setLeftMotors(-output);
     }
     else if (Robot.vision.getXOffset() < 0){
-    Robot.driveBase.setRightMotors(-output);
-    Robot.driveBase.setLeftMotors(output);
+    Robot.driveBasePID.setRightMotors(-output);
+    Robot.driveBasePID.setLeftMotors(output);
     }
   }
 }

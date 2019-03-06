@@ -13,7 +13,6 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import frc.robot.commands.DriveWithVision;
 import frc.robot.commands.VisionRoutine;
-import frc.robot.subsystems.DriveBase;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Grabber;
 import frc.robot.subsystems.PIDDriveBase;
@@ -27,7 +26,6 @@ import frc.robot.subsystems.Vision;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static DriveBase driveBase;
   public static PIDDriveBase driveBasePID;
   public static Grabber grabber;
   public static Elevator elevator;
@@ -45,7 +43,6 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     grabber = new Grabber();
-    driveBase = new DriveBase();
     driveBasePID = new PIDDriveBase();
     elevator = new Elevator();
     vision = new Vision();
@@ -95,7 +92,7 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void autonomousInit() {
-    m_autonomousCommand = new VisionRoutine();
+    m_autonomousCommand = null;
 
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
