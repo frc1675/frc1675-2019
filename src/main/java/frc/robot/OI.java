@@ -11,7 +11,6 @@ import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.commands.ActivateVisionPIDMode;
-import frc.robot.commands.ChangeProcessingMode;
 import frc.robot.commands.ReleaseHatch;
 import frc.robot.commands.TiltElevatorForward;
 import frc.robot.commands.TiltElevatorReverse;
@@ -67,8 +66,6 @@ public class OI {
     driverAButton.whenPressed(new ReleaseHatch());
     driverBButton.whenPressed(new VisionRoutine());
     driverRightBumper.whenPressed(new ActivateVisionPIDMode());
-    driverLeftBumper.whileHeld(new ChangeProcessingMode(0));
-    //driverLeftBumper.toggleWhenPressed(new ChangeProcessingMode(1));
   }
  
 

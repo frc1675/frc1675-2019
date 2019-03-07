@@ -36,7 +36,7 @@ public class RobotMap {
   public static final double TURNING_SCALE_FACTOR = 2;
   public static final double RAM_POWER = .65;
   //Grabber
-  public static final int ARM_ROTATOR = 6;                         ;
+  public static final int ARM_ROTATOR = 6;
   
   public static final int HATCH_RELEASER = 2;
 

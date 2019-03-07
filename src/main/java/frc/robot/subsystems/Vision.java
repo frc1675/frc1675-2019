@@ -3,7 +3,6 @@ package frc.robot.subsystems;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import frc.robot.commands.ChangeProcessingMode;
 
 /**
  * Add your docs here.
@@ -13,7 +12,7 @@ public class Vision extends Subsystem {
 
   public Vision() {
     table = NetworkTableInstance.getDefault().getTable("limelight");
-    setPipeline(0);
+    setPipeline(1);
   }
 
   public double getXOffset() {
@@ -73,6 +72,5 @@ public class Vision extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
-    setDefaultCommand(new ChangeProcessingMode(1));
   }
 }

@@ -21,10 +21,13 @@ public class ActivateVisionPIDMode extends Command {
   @Override
   protected void initialize() {
     if(Robot.driveBasePID.getVisionPIDEnabled() == false){
+    Robot.vision.setPipeline(0);
     Robot.driveBasePID.activateVisionPIDMode();
     }
     else{
+      Robot.vision.setPipeline(1);
       Robot.driveBasePID.disableVisionPIDMode();
+     
     }
   
   }
