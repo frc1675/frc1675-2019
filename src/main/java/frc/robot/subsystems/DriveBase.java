@@ -43,6 +43,7 @@ public class DriveBase extends Subsystem {
   }
 
   public void setRightMotors(double power){
+    System.out.println("Set right " + power);
     power = correctForDeadzone(power);
     rightFront.set(ControlMode.PercentOutput,power);
     rightBack.set(ControlMode.PercentOutput,power);
@@ -50,6 +51,8 @@ public class DriveBase extends Subsystem {
   }
 
   public void setLeftMotors(double power){
+    System.out.println("Set left " + power);
+
     power = correctForDeadzone(power);
     leftFront.set(ControlMode.PercentOutput,power);
     leftBack.set(ControlMode.PercentOutput,power);

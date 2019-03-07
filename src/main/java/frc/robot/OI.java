@@ -10,14 +10,14 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.MoveElevatorToPosition;
-import frc.robot.commands.MoveElevatorWithJoystick;
+import frc.robot.commands.ExtendHook;
 import frc.robot.commands.ReleaseHatch;
-import frc.robot.commands.Score;
+import frc.robot.commands.RetractHook;
 import frc.robot.commands.TiltElevatorForward;
 import frc.robot.commands.TiltElevatorReverse;
 import frc.robot.commands.WristDown;
 import frc.robot.commands.WristUp;
+import frc.robot.commands.ToggleHook;
 
 
 /**
@@ -60,11 +60,14 @@ public class OI {
     operatorXButton.whenPressed(new MoveElevatorWithJoystick());*/
 
     operatorXButton.whenPressed(new WristDown());
-    operatorYButton.whenPressed(new WristUp());
+    operatorXButton.whenPressed(new RetractHook());
+    operatorXButton.whenReleased(new WristUp());
     operatorAButton.whenPressed(new ReleaseHatch());
+    operatorBButton.toggleWhenPressed(new ToggleHook());
     operatorLeftBumper.whenPressed(new TiltElevatorForward());
     operatorRightBumper.whenPressed(new TiltElevatorReverse());
     driverAButton.whenPressed(new ReleaseHatch());
+    //driverBButton.toggleWhenPressed(new ToggleHook());
   }
  
 
