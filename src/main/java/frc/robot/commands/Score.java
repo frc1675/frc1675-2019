@@ -16,7 +16,7 @@ public class Score extends CommandGroup {
    */
   public Score() {
     addSequential(new ReleaseHatch());
-    addSequential(new MoveElevatorToPosition(RobotMap.BOTTOM_HATCH_POSITION));
+    addSequential(new MoveElevatorToPosition(RobotMap.BOTTOM_HATCH_POSITION, true));
     // Add Commands here:
     // e.g. addSequential(new Command1());
     // addSequential(new Command2());

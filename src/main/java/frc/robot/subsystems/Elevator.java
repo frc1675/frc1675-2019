@@ -28,6 +28,7 @@ public class Elevator extends Subsystem {
   private DigitalInput upperLimitSwitch;
   private boolean isLowerLimitDefined = false;
   private double targetPosition = 0;
+  private int count = 0;
 
   public Elevator(){
 
@@ -43,7 +44,7 @@ public class Elevator extends Subsystem {
 
   // The limit switches return false when they're pressed, so this
   // makes the code more intuitive.
-  private boolean isLowerLimitSwitchPressed() {
+  public boolean isLowerLimitSwitchPressed() {
     return !lowerLimitSwitch.get();
   }
 
@@ -59,19 +60,19 @@ public class Elevator extends Subsystem {
   }
 
   public void tiltElevatorForward() {
-    if (isLowerLimitSwitchPressed() == true || getElevatorPosition() < RobotMap.TILT_MAX_POSITION) {
+    if (isLowerLimitSwitchPressed() == true || getElevatorPosition() < RobotMap.MIN_POSITION) {
       tiltElevator.set(Value.kForward);
     }
   }
 
   public void tiltElevatorReverse() {
-    if (isLowerLimitSwitchPressed() == true || getElevatorPosition() < RobotMap.TILT_MAX_POSITION) {
+    if (isLowerLimitSwitchPressed() == true || getElevatorPosition() < RobotMap.MIN_POSITION) {
       tiltElevator.set(Value.kReverse);
     }
   }
 
   public void setElevatorMotor(double power) {
-
+    SmartDashboard.putNumber("Motor power", power);
     double correctedPower = 0;
     if (isLowerLimitDefined == true) {
       if ((isLowerLimitSwitchPressed() == true && power < 0) || (isUpperLimitSwitchPressed() == true && power > 0)) {
@@ -91,6 +92,13 @@ public class Elevator extends Subsystem {
 
   public boolean elevatorOnTarget() {
     if (Math.abs(targetPosition - getElevatorPosition()) <= RobotMap.ELEVATOR_TOLERANCE) {
+      count ++;
+    }
+    else {
+      count = 0;
+    }
+
+    if (count >= 10) {
       return true;
     } 
     else {
@@ -117,6 +125,8 @@ public class Elevator extends Subsystem {
     SmartDashboard.putBoolean("Elevator upper limit pressed", isUpperLimitSwitchPressed());
     SmartDashboard.putNumber("Elevator position", getElevatorPosition());
     SmartDashboard.putBoolean("Elevator on target", elevatorOnTarget());
+    SmartDashboard.putNumber("Target Position", targetPosition);
+    SmartDashboard.putNumber("Count", count);
   }
 
   @Override
