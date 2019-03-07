@@ -65,7 +65,7 @@ public class OI {
     operatorLeftBumper.whenPressed(new TiltElevatorForward());
     operatorRightBumper.whenPressed(new TiltElevatorReverse());
     driverAButton.whenPressed(new ReleaseHatch());
-    driverBButton.whenPressed(new VisionRoutine());
+    //driverBButton.whenPressed(new VisionRoutine());
     driverRightBumper.whenPressed(new ActivateVisionPIDMode());
   }
  

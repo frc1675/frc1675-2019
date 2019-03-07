@@ -21,7 +21,7 @@ public class CheesyDrive extends Command {
 
   public CheesyDrive() {
     requires(Robot.driveBasePID);
-    // Robot.driveBasePID.activateVisionPIDMode();
+  
   }
 
   // Called just before this Command runs the first time
@@ -45,7 +45,7 @@ public class CheesyDrive extends Command {
       rightPower = rightPower / Scaler;
       leftPower = leftPower / Scaler;
     }
-    // SmartDashboard.putBoolean("IsPIDEnabled", isPIDEnabled);
+    
     Robot.driveBasePID.setLeftMotors(leftPower);
     Robot.driveBasePID.setRightMotors(rightPower);
   }
