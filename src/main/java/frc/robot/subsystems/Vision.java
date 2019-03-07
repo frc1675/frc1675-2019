@@ -10,9 +10,18 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 public class Vision extends Subsystem {
   NetworkTable table;
 
+  public static enum Pipeline{
+    PROCESSING(0),DRIVING(1);
+    double pipeline;
+    private Pipeline(double pipeline){
+      this.pipeline = pipeline;
+    }
+  }
+
+
   public Vision() {
     table = NetworkTableInstance.getDefault().getTable("limelight");
-    setPipeline(1);
+    setPipeline(Vision.Pipeline.DRIVING);
   }
 
   public double getXOffset() {
@@ -35,8 +44,13 @@ public class Vision extends Subsystem {
     return pipeline;
   }
 
-  public void setPipeline(double p) {
-    table.getEntry("pipeline").setDouble(p);
+  public void setPipeline(Pipeline pipeline) {
+    if(pipeline == Pipeline.DRIVING ){
+    table.getEntry("pipeline").setDouble(1);
+    }
+    else if(pipeline == Pipeline.PROCESSING){
+      table.getEntry("pipeline").setDouble(0);
+    }
   }
 
   public void setCameraMode(double mode) {

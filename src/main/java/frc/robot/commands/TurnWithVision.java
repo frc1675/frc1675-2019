@@ -45,7 +45,6 @@ public class TurnWithVision extends PIDCommand {
 
   public TurnWithVision(double timeout) {
     super(RobotMap.TURN_P, RobotMap.TURN_I, RobotMap.TURN_D);
-    requires(Robot.vision);
     requires(Robot.driveBasePID);
     this.timeout = timeout;
   }
@@ -69,7 +68,7 @@ public class TurnWithVision extends PIDCommand {
   }
 
   public boolean averageOnTarget() {
-    if ((Math.abs(ldf.pidGet() - setpoint)) <= 1) {
+    if ((Math.abs(ldf.pidGet() - setpoint)) <= RobotMap.VISION_TOLERANCE) {
 
       count++;
     } else {

@@ -32,9 +32,7 @@ public class DriveWithVision extends PIDCommand {
     @Override
     public double pidGet() {
       samples++;
-      SmartDashboard.putNumber("samples", samples);
       double yoffset = Robot.vision.getYOffset();
-      SmartDashboard.putNumber("Y offset", yoffset);
       return yoffset;
     }
   };
@@ -45,7 +43,6 @@ public class DriveWithVision extends PIDCommand {
   LinearDigitalFilter ldf = LinearDigitalFilter.movingAverage(pst, 10);
   public DriveWithVision(double timeout) {
     super(RobotMap.DRIVE_P, RobotMap.DRIVE_I, RobotMap.DRIVE_D);
-    requires(Robot.vision);
     requires(Robot.driveBasePID);
     this.timeout = timeout;
   }

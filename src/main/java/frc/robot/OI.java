@@ -10,15 +10,12 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.ActivateVisionPIDMode;
 import frc.robot.commands.ReleaseHatch;
-import frc.robot.commands.Score;
 import frc.robot.commands.TiltElevatorForward;
 import frc.robot.commands.TiltElevatorReverse;
-import frc.robot.commands.VisionRoutine;
+import frc.robot.commands.ToggleVisionPIDMode;
 import frc.robot.commands.WristDown;
 import frc.robot.commands.WristUp;
-
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -33,31 +30,34 @@ public class OI {
   Joystick driverController = new Joystick(XBoxControllerMap.DRIVER_CONTROLLER_PORT);
   Joystick operatorController = new Joystick(XBoxControllerMap.OPERATOR_CONTROLLER_PORT);
 
-  //Driver controller buttons
+  // Driver controller buttons
   JoystickButton driverAButton = new JoystickButton(driverController, XBoxControllerMap.A_BUTTON);
   JoystickButton driverBButton = new JoystickButton(driverController, XBoxControllerMap.B_BUTTON);
   JoystickButton driverYButton = new JoystickButton(driverController, XBoxControllerMap.Y_BUTTON);
   JoystickButton driverXButton = new JoystickButton(driverController, XBoxControllerMap.X_BUTTON);
 
-  //Driver controller bumpers
-  JoystickButton driverLeftBumper = new JoystickButton(driverController, XBoxControllerMap.LEFT_BUMPER_BUTTON);  
+  // Driver controller bumpers
+  JoystickButton driverLeftBumper = new JoystickButton(driverController, XBoxControllerMap.LEFT_BUMPER_BUTTON);
   JoystickButton driverRightBumper = new JoystickButton(driverController, XBoxControllerMap.RIGHT_BUMPER_BUTTON);
-  
-  //Operator controller buttons
-  JoystickButton operatorAButton = new JoystickButton(operatorController, XBoxControllerMap.A_BUTTON); 
-  JoystickButton operatorBButton = new JoystickButton(operatorController, XBoxControllerMap.B_BUTTON);
-  JoystickButton operatorYButton = new JoystickButton(operatorController, XBoxControllerMap.Y_BUTTON); 
-  JoystickButton operatorXButton = new JoystickButton(operatorController, XBoxControllerMap.X_BUTTON); 
 
-  //Operator controller bumpers
+  // Operator controller buttons
+  JoystickButton operatorAButton = new JoystickButton(operatorController, XBoxControllerMap.A_BUTTON);
+  JoystickButton operatorBButton = new JoystickButton(operatorController, XBoxControllerMap.B_BUTTON);
+  JoystickButton operatorYButton = new JoystickButton(operatorController, XBoxControllerMap.Y_BUTTON);
+  JoystickButton operatorXButton = new JoystickButton(operatorController, XBoxControllerMap.X_BUTTON);
+
+  // Operator controller bumpers
   JoystickButton operatorLeftBumper = new JoystickButton(operatorController, XBoxControllerMap.LEFT_BUMPER_BUTTON);
   JoystickButton operatorRightBumper = new JoystickButton(operatorController, XBoxControllerMap.RIGHT_BUMPER_BUTTON);
 
   public OI() {
-    /*operatorAButton.whenPressed(new Score());
-    operatorBButton.whenPressed(new MoveElevatorToPosition(RobotMap.MIDDLE_HATCH_POSITION, false));
-    operatorYButton.whenPressed(new MoveElevatorToPosition(RobotMap.TOP_HATCH_POSITION, false));
-    operatorXButton.whenPressed(new MoveElevatorWithJoystick());*/
+    /*
+     * operatorAButton.whenPressed(new Score()); operatorBButton.whenPressed(new
+     * MoveElevatorToPosition(RobotMap.MIDDLE_HATCH_POSITION, false));
+     * operatorYButton.whenPressed(new
+     * MoveElevatorToPosition(RobotMap.TOP_HATCH_POSITION, false));
+     * operatorXButton.whenPressed(new MoveElevatorWithJoystick());
+     */
 
     operatorXButton.whenPressed(new WristDown());
     operatorYButton.whenPressed(new WristUp());
@@ -65,71 +65,71 @@ public class OI {
     operatorLeftBumper.whenPressed(new TiltElevatorForward());
     operatorRightBumper.whenPressed(new TiltElevatorReverse());
     driverAButton.whenPressed(new ReleaseHatch());
-    //driverBButton.whenPressed(new VisionRoutine());
-    driverRightBumper.whenPressed(new ActivateVisionPIDMode());
+    // driverBButton.whenPressed(new VisionRoutine());
+    driverRightBumper.whenPressed(new ToggleVisionPIDMode());
   }
- 
 
-public void setDriverRumble(double value) {
-  driverController.setRumble(RumbleType.kRightRumble, value);
-  driverController.setRumble(RumbleType.kLeftRumble, value);
-}
+  public void setDriverRumble(double value) {
+    driverController.setRumble(RumbleType.kRightRumble, value);
+    driverController.setRumble(RumbleType.kLeftRumble, value);
+  }
 
-public void setOperatorRumble(double value) {
-  operatorController.setRumble(RumbleType.kRightRumble, value);
-  operatorController.setRumble(RumbleType.kLeftRumble, value);
-}
+  public void setOperatorRumble(double value) {
+    operatorController.setRumble(RumbleType.kRightRumble, value);
+    operatorController.setRumble(RumbleType.kLeftRumble, value);
+  }
 
-
-  //Driver controller joysticks
-  public double getDriverLeftYAxis(){
+  // Driver controller joysticks
+  public double getDriverLeftYAxis() {
     double value = -driverController.getRawAxis(XBoxControllerMap.LEFT_Y_AXIS);
     return correctForDeadzone(value);
   }
-  
-  public double getDriverLeftXAxis(){
+
+  public double getDriverLeftXAxis() {
     double value = driverController.getRawAxis(XBoxControllerMap.LEFT_X_AXIS);
     return correctForDeadzone(value);
   }
 
-  public double getDriverRightYAxis(){
+  public double getDriverRightYAxis() {
     double value = -driverController.getRawAxis(XBoxControllerMap.RIGHT_Y_AXIS);
     return correctForDeadzone(value);
   }
 
-    public double getDriverRightXAxis(){
+  public double getDriverRightXAxis() {
     double value = driverController.getRawAxis(XBoxControllerMap.RIGHT_X_AXIS);
     return correctForDeadzone(value);
   }
 
-  //Operator controller joysticks
-  public double getOperatorLeftYAxis(){
+  // Operator controller joysticks
+  public double getOperatorLeftYAxis() {
     double value = -operatorController.getRawAxis(XBoxControllerMap.LEFT_Y_AXIS);
     return correctForDeadzone(value);
-  } 
+  }
 
-  public double getOperatorLeftXAxis(){
+  public double getOperatorLeftXAxis() {
     double value = operatorController.getRawAxis(XBoxControllerMap.LEFT_X_AXIS);
     return correctForDeadzone(value);
   }
 
-  public double getOperatorRightYAxis(){
+  public double getOperatorRightYAxis() {
     double value = -operatorController.getRawAxis(XBoxControllerMap.RIGHT_Y_AXIS);
     return correctForDeadzone(value);
   }
 
-  public double getOperatorRightXAxis(){
+  public double getOperatorRightXAxis() {
     double value = operatorController.getRawAxis(XBoxControllerMap.RIGHT_X_AXIS);
     return correctForDeadzone(value);
   }
-  private enum Sign { POSITIVE, NEGATIVE }
+
+  private enum Sign {
+    POSITIVE, NEGATIVE
+  }
 
   private double correctForDeadzone(double value) {
     double correctedValue = 0;
-    if ((XBoxControllerMap.DEAD_ZONE < value) && (value <= 1)){
+    if ((XBoxControllerMap.DEAD_ZONE < value) && (value <= 1)) {
       correctedValue = scalePastDeadzone(value, Sign.POSITIVE);
-    }
-    else if ((-1 <= value) && (value < -XBoxControllerMap.DEAD_ZONE)){
+    } else if ((-1 <= value) && (value < -XBoxControllerMap.DEAD_ZONE)) {
       correctedValue = scalePastDeadzone(value, Sign.NEGATIVE);
     }
     return correctedValue;
@@ -139,13 +139,10 @@ public void setOperatorRumble(double value) {
   private double scalePastDeadzone(double value, Sign sign) {
     double signMultiplier = (sign == Sign.POSITIVE) ? 1.0 : -1.0;
     double correctedValue = 0;
-    correctedValue = (((1 * signMultiplier) /((1 * signMultiplier) +  (- XBoxControllerMap.DEAD_ZONE  * signMultiplier))) * (value - (1 * signMultiplier))) + (1 * signMultiplier);
+    correctedValue = (((1 * signMultiplier) / ((1 * signMultiplier) + (-XBoxControllerMap.DEAD_ZONE * signMultiplier)))
+        * (value - (1 * signMultiplier))) + (1 * signMultiplier);
     return correctedValue;
   }
-  
-
-  
-  
 
   // Button button = new JoystickButton(stick, buttonNumber);
 

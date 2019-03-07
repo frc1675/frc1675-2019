@@ -106,21 +106,19 @@ public class PIDDriveBase extends PIDSubsystem {
 
   public void activateVisionPIDMode() {
     if (!this.getPIDController().isEnabled()) {
-      if (Robot.vision.hasTarget()) {
         this.getPIDController().reset();
         this.getPIDController().setAbsoluteTolerance(1);
         this.getPIDController().setOutputRange(-1, 1);
         this.getPIDController().setSetpoint(0);
         this.getPIDController().enable();
         visionPIDEnabled = true;
-
-      }
     }
   }
 
   public void disableVisionPIDMode() {
     this.getPIDController().disable();
     visionPIDEnabled = false;
+    correction = 0;
   }
 
   private double correctForDeadzone(double power) {

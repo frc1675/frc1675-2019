@@ -14,7 +14,6 @@ import frc.robot.RobotMap;
 public class DriveIntoTarget extends Command {
   public DriveIntoTarget() {
     // Use requires() here to declare subsystem dependencies
-    requires(Robot.vision);
     requires(Robot.driveBasePID);
   }
 

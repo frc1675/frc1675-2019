@@ -8,34 +8,34 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Robot;
+import frc.robot.subsystems.Vision.Pipeline;
 
-public class ActivateVisionPIDMode extends Command {
-  public ActivateVisionPIDMode() {
+public class ToggleVisionPIDMode extends Command {
+  public ToggleVisionPIDMode() {
     // Use requires() here to declare subsystem dependencies
-     requires(Robot.driveBasePID);
+    requires(Robot.driveBasePID);
   }
 
+ 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    if(Robot.driveBasePID.getVisionPIDEnabled() == false){
-    Robot.vision.setPipeline(0);
-    Robot.driveBasePID.activateVisionPIDMode();
-    }
-    else{
-      Robot.vision.setPipeline(1);
+    if (Robot.driveBasePID.getVisionPIDEnabled() == false) {
+      Robot.vision.setPipeline(Pipeline.PROCESSING);
+      Robot.driveBasePID.activateVisionPIDMode();
+    } else {
+      Robot.vision.setPipeline(Pipeline.DRIVING);
       Robot.driveBasePID.disableVisionPIDMode();
-     
+
     }
-  
+
   }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
-   
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
@@ -49,7 +49,7 @@ public class ActivateVisionPIDMode extends Command {
   protected void end() {
   }
 
-  // Called when another command which requires one or more of the same
+  // Called when another command which requires one or mo re of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
