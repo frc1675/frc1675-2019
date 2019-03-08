@@ -75,7 +75,9 @@ public class Elevator extends Subsystem {
   public void setElevatorMotor(double power) {
     double correctedPower = 0;
     if (isLowerLimitDefined == true) {
-      if ((isLowerLimitSwitchPressed() == true && power < 0) || (isUpperLimitSwitchPressed() == true && power > 0)) {
+      if ((isLowerLimitSwitchPressed() == true && power < 0)
+      || (isUpperLimitSwitchPressed() == true && power > 0)
+      || (tiltElevator.get() == Value.kReverse)) {
         correctedPower = 0;
       } 
       else {
