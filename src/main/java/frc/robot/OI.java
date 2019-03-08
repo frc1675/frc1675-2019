@@ -63,11 +63,14 @@ public class OI {
     operatorXButton.whenPressed(new RetractHook());
     operatorXButton.whenReleased(new WristUp());
     operatorAButton.whenPressed(new ReleaseHatch());
+    operatorAButton.whenPressed(new RetractHook());
     operatorBButton.toggleWhenPressed(new ToggleHook());
     operatorLeftBumper.whenPressed(new TiltElevatorForward());
     operatorRightBumper.whenPressed(new TiltElevatorReverse());
+
     driverAButton.whenPressed(new ReleaseHatch());
-    //driverBButton.toggleWhenPressed(new ToggleHook());
+    driverAButton.whenPressed(new RetractHook());
+    driverBButton.toggleWhenPressed(new ToggleHook());
   }
  
 
