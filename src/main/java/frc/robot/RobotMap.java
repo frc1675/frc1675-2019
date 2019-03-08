@@ -53,7 +53,7 @@ public class RobotMap {
   public static final double ELEVATOR_I = 0;
   public static final double ELEVATOR_D = 0;
   public static final double ELEVATOR_TOLERANCE = 100;
-  public static final double HOLD_POWER = 0.15;
+  public static final double HOLD_POWER = 0;
 
   // For example to map the left and right motors, you could define the
   // following variables to use with your drivetrain subsystem.

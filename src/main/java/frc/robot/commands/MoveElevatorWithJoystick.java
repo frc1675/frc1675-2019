@@ -11,6 +11,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
 import frc.robot.Robot;
+import frc.robot.RobotMap;
 
 public class MoveElevatorWithJoystick extends Command {
   public MoveElevatorWithJoystick() {
@@ -29,7 +30,7 @@ public class MoveElevatorWithJoystick extends Command {
   protected void execute() {
     double elevatorPower = Robot.oi.getOperatorLeftYAxis() / 2;
 
-    Robot.elevator.setElevatorMotor(elevatorPower);
+    Robot.elevator.setElevatorMotor(elevatorPower + RobotMap.HOLD_POWER);
   }
 
   // Make this return true when this Command no longer needs to run execute()
