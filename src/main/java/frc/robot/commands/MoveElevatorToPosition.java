@@ -65,6 +65,7 @@ public class MoveElevatorToPosition extends PIDCommand {
     holdPower = 0;
     this.getPIDController().disable();
     Robot.elevator.setElevatorMotor(0);
+    Robot.elevator.setTargetPosition(0);
   }
 
   // Called when another command which requires one or more of the same
