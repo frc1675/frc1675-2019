@@ -10,15 +10,14 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import frc.robot.commands.ExtendHook;
 import frc.robot.commands.ReleaseHatch;
+import frc.robot.commands.ReleaseHatchRoutine;
 import frc.robot.commands.RetractHook;
 import frc.robot.commands.TiltElevatorForward;
 import frc.robot.commands.TiltElevatorReverse;
+import frc.robot.commands.ToggleHook;
 import frc.robot.commands.WristDown;
 import frc.robot.commands.WristUp;
-import frc.robot.commands.ToggleHook;
-
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -62,15 +61,14 @@ public class OI {
     operatorXButton.whenPressed(new WristDown());
     operatorXButton.whenPressed(new RetractHook());
     operatorXButton.whenReleased(new WristUp());
-    operatorAButton.whenPressed(new ReleaseHatch());
-    operatorAButton.whenPressed(new RetractHook());
+    operatorAButton.whenPressed(new ReleaseHatchRoutine());
     operatorBButton.toggleWhenPressed(new ToggleHook());
     operatorLeftBumper.whenPressed(new TiltElevatorForward());
     operatorRightBumper.whenPressed(new TiltElevatorReverse());
 
-    driverAButton.whenPressed(new ReleaseHatch());
-    driverAButton.whenPressed(new RetractHook());
+    driverAButton.whenPressed(new ReleaseHatchRoutine());
     driverBButton.toggleWhenPressed(new ToggleHook());
+
   }
  
 
