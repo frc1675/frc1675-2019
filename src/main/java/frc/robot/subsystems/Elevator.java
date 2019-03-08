@@ -60,13 +60,13 @@ public class Elevator extends Subsystem {
   }
 
   public void tiltElevatorForward() {
-    if (isLowerLimitSwitchPressed() == true || getElevatorPosition() < RobotMap.MIN_POSITION) {
+    if (isLowerLimitSwitchPressed() == true || getElevatorPosition() < RobotMap.SAFE_TILT_POSITION) {
       tiltElevator.set(Value.kForward);
     }
   }
 
   public void tiltElevatorReverse() {
-    if (isLowerLimitSwitchPressed() == true || getElevatorPosition() < RobotMap.MIN_POSITION) {
+    if (isLowerLimitSwitchPressed() == true || getElevatorPosition() < RobotMap.SAFE_TILT_POSITION) {
       tiltElevator.set(Value.kReverse);
     }
   }
