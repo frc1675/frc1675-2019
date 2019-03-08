@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
+import frc.robot.commands.MoveElevatorWithJoystick;
 
 /**
  * Add your docs here.
@@ -108,10 +109,10 @@ public class Elevator extends Subsystem {
 
   // will resolve before match begins
   public void periodic(){
-    if (isLowerLimitSwitchPressed() == true && isLowerLimitDefined == false) {
+    if (isLowerLimitSwitchPressed() == true) {
       isLowerLimitDefined = true;
       elevatorMotor.configForwardSoftLimitEnable(true);
-      elevatorMotor.configReverseSoftLimitEnable(true);
+      elevatorMotor.configReverseSoftLimitEnable(false);
       resetPosition();
       
     }
@@ -133,6 +134,6 @@ public class Elevator extends Subsystem {
   public void initDefaultCommand() {
     // Set the default command for a subsystem here.
     // setDefaultCommand(new MySpecialCommand());
-    //setDefaultCommand(new MoveElevatorWithJoystick());
+    setDefaultCommand(new MoveElevatorWithJoystick());
   }
 }
