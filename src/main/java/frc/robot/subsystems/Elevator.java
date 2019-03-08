@@ -72,7 +72,6 @@ public class Elevator extends Subsystem {
   }
 
   public void setElevatorMotor(double power) {
-    SmartDashboard.putNumber("Motor power", power);
     double correctedPower = 0;
     if (isLowerLimitDefined == true) {
       if ((isLowerLimitSwitchPressed() == true && power < 0) || (isUpperLimitSwitchPressed() == true && power > 0)) {
@@ -83,6 +82,7 @@ public class Elevator extends Subsystem {
       }
 
     }
+    SmartDashboard.putNumber("Motor power", correctedPower);
     elevatorMotor.set(ControlMode.PercentOutput,correctedPower);
   }
 

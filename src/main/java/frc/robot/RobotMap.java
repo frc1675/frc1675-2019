@@ -42,18 +42,18 @@ public class RobotMap {
   public static final int UPPER_LIMIT_SWITCH = 8;
   
   //Elevator positions
-  public static final int MAX_POSITION = 4000;
+  public static final int MAX_POSITION = 21000;
   public static final int MIN_POSITION = 0;
-  public static final int SAFE_TILT_POSITION = 300;
-  public static final int BOTTOM_HATCH_POSITION = 200;
-  public static final int MIDDLE_HATCH_POSITION = 1500;
-  public static final int TOP_HATCH_POSITION = 3500;
+  public static final int SAFE_TILT_POSITION = 2000;
+  public static final int BOTTOM_HATCH_POSITION = 2000;
+  public static final int MIDDLE_HATCH_POSITION = 5000;
+  public static final int TOP_HATCH_POSITION = 10000;
 
   public static final double ELEVATOR_P = 0.0016;
   public static final double ELEVATOR_I = 0;
   public static final double ELEVATOR_D = 0;
   public static final double ELEVATOR_TOLERANCE = 100;
-  public static final double HOLD_POWER = 0;
+  public static final double HOLD_POWER = 0.15;
 
   // For example to map the left and right motors, you could define the
   // following variables to use with your drivetrain subsystem.
