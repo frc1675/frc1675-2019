@@ -10,6 +10,8 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import frc.robot.Utils.DPadButton;
+import frc.robot.commands.MoveElevatorToPosition;
 import frc.robot.commands.MoveElevatorWithJoystick;
 import frc.robot.commands.ReleaseHatch;
 import frc.robot.commands.RetractHook;
@@ -47,16 +49,22 @@ public class OI {
   JoystickButton operatorBButton = new JoystickButton(operatorController, XBoxControllerMap.B_BUTTON);
   JoystickButton operatorYButton = new JoystickButton(operatorController, XBoxControllerMap.Y_BUTTON); 
   JoystickButton operatorXButton = new JoystickButton(operatorController, XBoxControllerMap.X_BUTTON); 
+  
+  //Operator D-pad buttons
+  DPadButton operatorDPadUp = new DPadButton(operatorController, DPadButton.Direction.UP);
+  DPadButton operatorDPadLeft = new DPadButton(operatorController, DPadButton.Direction.LEFT);
+  DPadButton operatorDPadDown = new DPadButton(operatorController, DPadButton.Direction.DOWN);
+  DPadButton operatorDPadRight = new DPadButton(operatorController, DPadButton.Direction.RIGHT);
 
   //Operator controller bumpers
   JoystickButton operatorLeftBumper = new JoystickButton(operatorController, XBoxControllerMap.LEFT_BUMPER_BUTTON);
   JoystickButton operatorRightBumper = new JoystickButton(operatorController, XBoxControllerMap.RIGHT_BUMPER_BUTTON);
 
   public OI() {
-    /*operatorAButton.whenPressed(new MoveElevatorToPosition(RobotMap.BOTTOM_HATCH_POSITION, true));
-    operatorBButton.whenPressed(new MoveElevatorToPosition(RobotMap.MIDDLE_HATCH_POSITION, false));
-    operatorYButton.whenPressed(new MoveElevatorToPosition(RobotMap.TOP_HATCH_POSITION, false));*/
-    //operatorXButton.whenPressed(new MoveElevatorWithJoystick());
+    operatorDPadDown.whenPressed(new MoveElevatorToPosition(RobotMap.BOTTOM_HATCH_POSITION, true));
+    operatorDPadLeft.whenPressed(new MoveElevatorToPosition(RobotMap.MIDDLE_HATCH_POSITION, false));
+    operatorDPadUp.whenPressed(new MoveElevatorToPosition(RobotMap.TOP_HATCH_POSITION, false));
+    operatorDPadRight.whenPressed(new MoveElevatorWithJoystick());
 
     operatorXButton.whenPressed(new WristDown());
     operatorXButton.whenPressed(new RetractHook());
