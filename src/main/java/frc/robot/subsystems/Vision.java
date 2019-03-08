@@ -27,17 +27,13 @@ SmartDashboard.putNumber("LimelightArea", area);
  * Add your docs here.
  */
 public class Vision extends Subsystem {
- 
+ NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
   
   public Vision() {
-  NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
-  NetworkTableEntry ledmode = table.getEntry("ledMode");
-  NetworkTableEntry cammode = table.getEntry("camMode");
-    cammode.setNumber(1);
-    table.getEntry("ledMode").setNumber(1);
-    table.getEntry("camMode").setNumber(1);
-    SmartDashboard.putNumber("camera mode",cammode.getDouble(0));
-    ledmode.setNumber(1);
+  setPipeline();
+  }
+  public void setPipeline(){
+    table.getEntry("pipeline").setDouble(1);
   }
 
   @Override

@@ -27,7 +27,7 @@ public class Robot extends TimedRobot {
   public static DriveBase driveBase;
   public static Grabber grabber;
   public static Elevator elevator;
-  //public static Vision vision;
+  public static Vision vision;
   public static OI oi;
 
 
@@ -43,8 +43,9 @@ public class Robot extends TimedRobot {
     grabber = new Grabber();
     driveBase = new DriveBase();
     elevator = new Elevator();
-    //vision = new Vision();
+    vision = new Vision();
     oi = new OI();
+    vision.setPipeline();
 
     // m_chooser.setDefaultOption("Default Auto", new CheesyDrive());
     // chooser.addOption("My Auto", new MyAutoCommand());
