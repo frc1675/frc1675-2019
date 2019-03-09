@@ -62,9 +62,9 @@ public class OI {
 
   public OI() {
     operatorDPadDown.whenPressed(new MoveElevatorToPosition(RobotMap.BOTTOM_HATCH_POSITION, true));
-    operatorDPadLeft.whenPressed(new MoveElevatorToPosition(RobotMap.MIDDLE_HATCH_POSITION, false));
+    operatorDPadRight.whenPressed(new MoveElevatorToPosition(RobotMap.MIDDLE_HATCH_POSITION, false));
     operatorDPadUp.whenPressed(new MoveElevatorToPosition(RobotMap.TOP_HATCH_POSITION, false));
-    operatorDPadRight.whenPressed(new MoveElevatorWithJoystick());
+    operatorDPadLeft.whenPressed(new MoveElevatorWithJoystick());
 
     operatorXButton.whenPressed(new WristDown());
     operatorXButton.whenPressed(new RetractHook());
