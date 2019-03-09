@@ -29,8 +29,8 @@ public class Robot extends TimedRobot {
   public static PIDDriveBase driveBasePID;
   public static Grabber grabber;
   public static Elevator elevator;
-  public static OI oi;
   public static Vision vision;
+  public static OI oi;
 
 
   Command m_autonomousCommand;
@@ -47,6 +47,7 @@ public class Robot extends TimedRobot {
     elevator = new Elevator();
     vision = new Vision();
     oi = new OI();
+    vision.setPipeline();
 
     // m_chooser.setDefaultOption("Default Auto", new CheesyDrive());
     // chooser.addOption("My Auto", new MyAutoCommand());
@@ -116,6 +117,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    System.out.println("kjhfhkljadshfk");
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove

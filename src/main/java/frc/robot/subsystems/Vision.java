@@ -11,7 +11,7 @@ public class Vision extends Subsystem {
   NetworkTable table;
 
   public static enum Pipeline{
-    PROCESSING(0),DRIVING(1);
+    PROCESSING(1),DRIVING(0);
     double pipeline;
     private Pipeline(double pipeline){
       this.pipeline = pipeline;
@@ -46,10 +46,10 @@ public class Vision extends Subsystem {
 
   public void setPipeline(Pipeline pipeline) {
     if(pipeline == Pipeline.DRIVING ){
-    table.getEntry("pipeline").setDouble(1);
+    table.getEntry("pipeline").setDouble(0);
     }
     else if(pipeline == Pipeline.PROCESSING){
-      table.getEntry("pipeline").setDouble(0);
+      table.getEntry("pipeline").setDouble(1);
     }
   }
 

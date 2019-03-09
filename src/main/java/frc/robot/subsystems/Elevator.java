@@ -17,6 +17,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotMap;
+import frc.robot.commands.MoveElevatorWithJoystick;
 
 /**
  * Add your docs here.
@@ -60,22 +61,23 @@ public class Elevator extends Subsystem {
   }
 
   public void tiltElevatorForward() {
-    if (isLowerLimitSwitchPressed() == true || getElevatorPosition() < RobotMap.MIN_POSITION) {
+    if (isLowerLimitSwitchPressed() == true || getElevatorPosition() < RobotMap.SAFE_TILT_POSITION) {
       tiltElevator.set(Value.kForward);
     }
   }
 
   public void tiltElevatorReverse() {
-    if (isLowerLimitSwitchPressed() == true || getElevatorPosition() < RobotMap.MIN_POSITION) {
+    if (isLowerLimitSwitchPressed() == true || getElevatorPosition() < RobotMap.SAFE_TILT_POSITION) {
       tiltElevator.set(Value.kReverse);
     }
   }
 
   public void setElevatorMotor(double power) {
-    SmartDashboard.putNumber("Motor power", power);
     double correctedPower = 0;
     if (isLowerLimitDefined == true) {
-      if ((isLowerLimitSwitchPressed() == true && power < 0) || (isUpperLimitSwitchPressed() == true && power > 0)) {
+      if ((isLowerLimitSwitchPressed() == true && power < 0)
+      || (isUpperLimitSwitchPressed() == true && power > 0)
+      || (tiltElevator.get() == Value.kReverse)) {
         correctedPower = 0;
       } 
       else {
@@ -83,6 +85,7 @@ public class Elevator extends Subsystem {
       }
 
     }
+    SmartDashboard.putNumber("Motor power", correctedPower);
     elevatorMotor.set(ControlMode.PercentOutput,correctedPower);
   }
 
@@ -108,10 +111,10 @@ public class Elevator extends Subsystem {
 
   // will resolve before match begins
   public void periodic(){
-    if (isLowerLimitSwitchPressed() == true && isLowerLimitDefined == false) {
+    if (isLowerLimitSwitchPressed() == true) {
       isLowerLimitDefined = true;
       elevatorMotor.configForwardSoftLimitEnable(true);
-      elevatorMotor.configReverseSoftLimitEnable(true);
+      elevatorMotor.configReverseSoftLimitEnable(false);
       resetPosition();
       
     }
