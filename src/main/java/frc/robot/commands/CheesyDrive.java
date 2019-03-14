@@ -30,9 +30,6 @@ public class CheesyDrive extends Command {
   protected void execute() {
     double turnPower = Robot.oi.getDriverRightXAxis();
     double forwardPower = Robot.oi.getDriverLeftYAxis();
-
-    System.out.println("I'ma doin tha cheesydrive: turn " + turnPower + " fwd " + forwardPower);
-
   
     turnPower = Math.signum(turnPower) * Math.pow(turnPower,RobotMap.TURNING_SCALE_FACTOR);
 
