@@ -40,7 +40,7 @@ public class MoveElevatorToPosition extends PIDCommand {
     holdPower = RobotMap.HOLD_POWER;
     this.getPIDController().reset();
     this.getPIDController().setSetpoint(setpoint);
-    this.getPIDController().setOutputRange(-.20, .30);
+    this.getPIDController().setOutputRange(-0.6, 0.6);
     this.getPIDController().enable();
     Robot.elevator.setTargetPosition(setpoint);
   }
@@ -65,6 +65,7 @@ public class MoveElevatorToPosition extends PIDCommand {
     holdPower = 0;
     this.getPIDController().disable();
     Robot.elevator.setElevatorMotor(0);
+    Robot.elevator.setTargetPosition(0);
   }
 
   // Called when another command which requires one or more of the same
