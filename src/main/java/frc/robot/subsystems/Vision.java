@@ -27,9 +27,10 @@ SmartDashboard.putNumber("LimelightArea", area);
  * Add your docs here.
  */
 public class Vision extends Subsystem {
- NetworkTable table = NetworkTableInstance.getDefault().getTable("limelight");
+ NetworkTable table;
   
   public Vision() {
+  table = NetworkTableInstance.getDefault().getTable("limelight");
   setPipeline();
   }
   public void setPipeline(){
