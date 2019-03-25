@@ -53,7 +53,7 @@ public class PIDDriveBase extends PIDSubsystem {
   public void setRightMotors(double power) {
     power = correctForDeadzone(power);
     power = scaleCorrection(power);
-    double rightpower = (power - correction);
+    double rightpower = (power + correction);
     rightFront.set(ControlMode.PercentOutput, rightpower);
     rightBack.set(ControlMode.PercentOutput, rightpower);
     rightMiddle.set(ControlMode.PercentOutput, rightpower);
@@ -63,7 +63,7 @@ public class PIDDriveBase extends PIDSubsystem {
   public void setLeftMotors(double power) {
     power = correctForDeadzone(power);
     power = scaleCorrection(power);
-    double leftpower = (power + correction);
+    double leftpower = (power - correction);
     leftFront.set(ControlMode.PercentOutput,leftpower);
     leftBack.set(ControlMode.PercentOutput, leftpower);
     leftMiddle.set(ControlMode.PercentOutput, leftpower);

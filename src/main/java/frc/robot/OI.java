@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.GenericHID.RumbleType;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import frc.robot.Utils.DPadButton;
+import frc.robot.commands.EnableTargetingMode;
 import frc.robot.commands.MoveElevatorToPosition;
 import frc.robot.commands.MoveElevatorWithJoystick;
 import frc.robot.commands.ReleaseHatch;
@@ -18,6 +19,7 @@ import frc.robot.commands.RetractHook;
 import frc.robot.commands.TiltElevatorForward;
 import frc.robot.commands.TiltElevatorReverse;
 import frc.robot.commands.ToggleHook;
+import frc.robot.commands.ToggleVisionPIDMode;
 import frc.robot.commands.WristDown;
 import frc.robot.commands.WristUp;
 
@@ -77,6 +79,7 @@ public class OI {
 
     driverAButton.whenPressed(new ReleaseHatch());
     driverRightBumper.whenPressed(new ToggleVisionPIDMode());
+    driverLeftBumper.whileHeld(new EnableTargetingMode());
     driverAButton.whenPressed(new RetractHook());
     driverBButton.toggleWhenPressed(new ToggleHook());
   }

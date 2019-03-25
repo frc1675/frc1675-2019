@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import frc.robot.commands.EnableDrivingMode;
 
 /**
  * Add your docs here.
@@ -39,9 +40,14 @@ public class Vision extends Subsystem {
     return area;
   }
 
-  public double getPipeline() {
+  public Pipeline getPipeline() {
     double pipeline = table.getEntry("pipeline").getDouble(0);
-    return pipeline;
+    if(pipeline == 1){
+      return Pipeline.PROCESSING;
+    }
+    else{
+      return Pipeline.DRIVING;
+    }
   }
 
   public void setPipeline(Pipeline pipeline) {
@@ -72,6 +78,7 @@ public class Vision extends Subsystem {
     }
     return hasTarget;
   }
+  
 
   public double findDistance(double h1, double h2) {
     double degrad = Math.toRadians(this.getYOffset());
@@ -86,5 +93,6 @@ public class Vision extends Subsystem {
 
   @Override
   public void initDefaultCommand() {
+    this.setDefaultCommand(new EnableDrivingMode());
   }
 }

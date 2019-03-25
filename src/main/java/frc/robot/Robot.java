@@ -47,7 +47,6 @@ public class Robot extends TimedRobot {
     elevator = new Elevator();
     vision = new Vision();
     oi = new OI();
-    vision.setPipeline();
 
     // m_chooser.setDefaultOption("Default Auto", new CheesyDrive());
     // chooser.addOption("My Auto", new MyAutoCommand());
