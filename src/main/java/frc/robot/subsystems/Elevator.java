@@ -52,6 +52,10 @@ public class Elevator extends Subsystem {
   private boolean isUpperLimitSwitchPressed() {
     return !upperLimitSwitch.get();
   }
+
+  public Value isTiltedBack() {
+    return tiltElevator.get();
+  }
   
   public double getElevatorPosition() {
     return elevatorMotor.getSelectedSensorPosition();
@@ -77,7 +81,7 @@ public class Elevator extends Subsystem {
     if (isLowerLimitDefined == true) {
       if ((isLowerLimitSwitchPressed() == true && power < 0)
       || (isUpperLimitSwitchPressed() == true && power > 0)
-      || (tiltElevator.get() == Value.kReverse)) {
+      || (isTiltedBack() == Value.kReverse)) {
         correctedPower = 0;
       } 
       else {
