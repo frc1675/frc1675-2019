@@ -6,18 +6,29 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
+import frc.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-public class BackwardsWithPistonExtended extends Command {
-  public BackwardsWithPistonExtended() {
+public class DriveForTime extends Command {
+  
+  double time = 0;
+  double power = 0;
+
+  public DriveForTime(double time, double power){
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
+    requires(Robot.driveBase);
+    this.time = 1;
+    this.power = 0.5;
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
+    Robot.driveBase.setLeftMotors(power);
+    Robot.driveBase.setRightMotors(power);
+    setTimeout(time);
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -28,17 +39,20 @@ public class BackwardsWithPistonExtended extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return false;
+    return isTimedOut();
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
+    Robot.driveBase.setLeftMotors(0);
+    Robot.driveBase.setRightMotors(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
+    end();
   }
 }
