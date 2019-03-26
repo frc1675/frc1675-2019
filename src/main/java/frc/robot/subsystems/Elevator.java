@@ -39,6 +39,7 @@ public class Elevator extends Subsystem {
     elevatorMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative, 0, 0);
     elevatorMotor.configForwardSoftLimitThreshold(RobotMap.MAX_POSITION);
     elevatorMotor.configReverseSoftLimitThreshold(RobotMap.MIN_POSITION);
+    elevatorMotor.configOpenloopRamp(RobotMap.RAMP_VALUE);
     elevatorMotor.setSensorPhase(true);
   }
 
