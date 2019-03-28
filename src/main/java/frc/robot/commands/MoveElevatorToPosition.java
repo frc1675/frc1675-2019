@@ -7,6 +7,7 @@
 
 package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.command.PIDCommand;
 import frc.robot.Robot;
 import frc.robot.RobotMap;
@@ -52,7 +53,8 @@ public class MoveElevatorToPosition extends PIDCommand {
 
   @Override
   protected boolean isFinished() {
-    if (canBeFinished == true && Robot.elevator.elevatorOnTarget() == true) {
+    if ((canBeFinished == true && Robot.elevator.elevatorOnTarget() == true)
+    || Robot.elevator.isTiltedBack() == Value.kReverse) {
         return true;
       } else {
         return false;
