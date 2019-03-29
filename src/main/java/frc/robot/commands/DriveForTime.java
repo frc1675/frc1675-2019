@@ -18,7 +18,7 @@ public class DriveForTime extends Command {
   public DriveForTime(double time, double power){
     // Use requires() here to declare subsystem dependencies
     // eg. requires(chassis);
-    requires(Robot.driveBase);
+    requires(Robot.driveBasePID);
     this.time = 1;
     this.power = 0.5;
   }
@@ -26,8 +26,8 @@ public class DriveForTime extends Command {
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.driveBase.setLeftMotors(power);
-    Robot.driveBase.setRightMotors(power);
+    Robot.driveBasePID.setLeftMotors(power);
+    Robot.driveBasePID.setRightMotors(power);
     setTimeout(time);
   }
 
@@ -45,8 +45,8 @@ public class DriveForTime extends Command {
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.driveBase.setLeftMotors(0);
-    Robot.driveBase.setRightMotors(0);
+    Robot.driveBasePID.setLeftMotors(0);
+    Robot.driveBasePID.setRightMotors(0);
   }
 
   // Called when another command which requires one or more of the same

@@ -45,7 +45,7 @@ public class CheesyDrive extends Command {
       rightPower = rightPower / Scaler;
       leftPower = leftPower / Scaler;
     }
-    
+    //SmartDashboard.putBoolean("Is this it, Chief?", Robot.driveBasePID.isCentered());
     Robot.driveBasePID.setLeftMotors(leftPower);
     Robot.driveBasePID.setRightMotors(rightPower);
   }

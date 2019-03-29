@@ -57,7 +57,7 @@ public class PIDDriveBase extends PIDSubsystem {
     rightFront.set(ControlMode.PercentOutput, rightpower);
     rightBack.set(ControlMode.PercentOutput, rightpower);
     rightMiddle.set(ControlMode.PercentOutput, rightpower);
-    SmartDashboard.putNumber("right power", rightpower);
+   // SmartDashboard.putNumber("right power", rightpower);
   }
 
   public void setLeftMotors(double power) {
@@ -67,7 +67,7 @@ public class PIDDriveBase extends PIDSubsystem {
     leftFront.set(ControlMode.PercentOutput,leftpower);
     leftBack.set(ControlMode.PercentOutput, leftpower);
     leftMiddle.set(ControlMode.PercentOutput, leftpower);
-    SmartDashboard.putNumber("left power",leftpower);
+   // SmartDashboard.putNumber("left power",leftpower);
   }
 
   public void setAllMotors(double power) {
@@ -97,7 +97,6 @@ public class PIDDriveBase extends PIDSubsystem {
   @Override
   public void initDefaultCommand() {
     setDefaultCommand(new CheesyDrive());
-
   }
 
   public boolean getVisionPIDEnabled() {
@@ -113,6 +112,9 @@ public class PIDDriveBase extends PIDSubsystem {
         this.getPIDController().enable();
         visionPIDEnabled = true;
     }
+  }
+  public boolean isCentered(){
+    return this.getPIDController().onTarget();
   }
 
   public void disableVisionPIDMode() {

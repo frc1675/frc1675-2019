@@ -26,9 +26,9 @@ public class RobotMap {
   public static final double DRIVE_P = 0.62;
   public static final double DRIVE_I = 0.0;
   public static final double DRIVE_D = 0.55;
-  public static final double TURN_P = 0.0375;
+  public static final double TURN_P = 0.02;
   public static final double TURN_I = 0.0;
-  public static final double TURN_D = 0.145;
+  public static final double TURN_D = 0.07;
 
   public static final double VISION_TOLERANCE = 1;
 
