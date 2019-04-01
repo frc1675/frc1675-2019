@@ -80,8 +80,9 @@ public class Elevator extends Subsystem {
     double correctedPower = 0;
     if (isLowerLimitDefined == true) {
       if ((isLowerLimitSwitchPressed() == true && power < 0)
-      || (isUpperLimitSwitchPressed() == true && power > 0)
-      || (isTiltedBack() == Value.kReverse)) {
+      || (isUpperLimitSwitchPressed() == true && power > 0))
+      // || (isTiltedBack() == Value.kReverse)) 
+      {
         correctedPower = 0;
       } 
       else {

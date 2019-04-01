@@ -23,9 +23,20 @@ public class RobotMap {
   public static final int RIGHT_MIDDLE = 3;
   public static final int RIGHT_BACK = 2;
 
-  public static final double MOTOR_DEADZONE = .0;
+  public static final double DRIVE_P = 0.62;
+  public static final double DRIVE_I = 0.0;
+  public static final double DRIVE_D = 0.55;
+  public static final double TURN_P = 0.02;
+  public static final double TURN_I = 0.0;
+  public static final double TURN_D = 0.07;
+
+  public static final double VISION_TOLERANCE = 1;
+
+  public static final double MOTOR_DEADZONE = 0.0;
+
+
   public static final double TURNING_SCALE_FACTOR = 2;
-  
+  public static final double RAM_POWER = .65;
   //Grabber
   public static final int ARM_ROTATOR = 6;
   

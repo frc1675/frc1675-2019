@@ -11,9 +11,11 @@ import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import frc.robot.subsystems.DriveBase;
+import frc.robot.commands.DriveWithVision;
+import frc.robot.commands.VisionRoutine;
 import frc.robot.subsystems.Elevator;
 import frc.robot.subsystems.Grabber;
+import frc.robot.subsystems.PIDDriveBase;
 import frc.robot.subsystems.Vision;
 
 /**
@@ -24,7 +26,7 @@ import frc.robot.subsystems.Vision;
  * project.
  */
 public class Robot extends TimedRobot {
-  public static DriveBase driveBase;
+  public static PIDDriveBase driveBasePID;
   public static Grabber grabber;
   public static Elevator elevator;
   public static Vision vision;
@@ -41,11 +43,10 @@ public class Robot extends TimedRobot {
   @Override
   public void robotInit() {
     grabber = new Grabber();
-    driveBase = new DriveBase();
+    driveBasePID = new PIDDriveBase();
     elevator = new Elevator();
     vision = new Vision();
     oi = new OI();
-    vision.setPipeline();
 
     // m_chooser.setDefaultOption("Default Auto", new CheesyDrive());
     // chooser.addOption("My Auto", new MyAutoCommand());
@@ -92,7 +93,6 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     //m_autonomousCommand = m_chooser.getSelected();
-
     /*
      * String autoSelected = SmartDashboard.getString("Auto Selector",
      * "Default"); switch(autoSelected) { case "My Auto": autonomousCommand

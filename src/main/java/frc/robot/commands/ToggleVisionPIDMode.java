@@ -6,29 +6,33 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-import frc.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import frc.robot.Robot;
+import frc.robot.subsystems.Vision.Pipeline;
 
-public class DriveForTime extends Command {
-  
-  double time = 0;
-  double power = 0;
-
-  public DriveForTime(double time, double power){
+public class ToggleVisionPIDMode extends Command {
+  private boolean enabled;
+  public ToggleVisionPIDMode() {
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
     requires(Robot.driveBasePID);
-    this.time = 1;
-    this.power = 0.5;
   }
 
+ 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.driveBasePID.setLeftMotors(power);
-    Robot.driveBasePID.setRightMotors(power);
-    setTimeout(time);
+    if (Robot.driveBasePID.getVisionPIDEnabled() == false) {
+      Robot.vision.setPipeline(Pipeline.PROCESSING);
+      Robot.driveBasePID.activateVisionPIDMode();
+      enabled = true;
+    } else {
+      Robot.vision.setPipeline(Pipeline.DRIVING);
+      Robot.driveBasePID.disableVisionPIDMode();
+      enabled = false;
+    }
+    SmartDashboard.putBoolean("Sicko Mode", enabled);
   }
 
   // Called repeatedly when this Command is scheduled to run
@@ -39,20 +43,17 @@ public class DriveForTime extends Command {
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return isTimedOut();
+    return true;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.driveBasePID.setLeftMotors(0);
-    Robot.driveBasePID.setRightMotors(0);
   }
 
-  // Called when another command which requires one or more of the same
+  // Called when another command which requires one or mo re of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    end();
   }
 }

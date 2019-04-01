@@ -6,53 +6,45 @@
 /*----------------------------------------------------------------------------*/
 
 package frc.robot.commands;
-import frc.robot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import frc.robot.Robot;
+import frc.robot.subsystems.Vision.Pipeline;
 
-public class DriveForTime extends Command {
-  
-  double time = 0;
-  double power = 0;
-
-  public DriveForTime(double time, double power){
+public class EnableTargetingMode extends Command {
+  boolean in;
+  public EnableTargetingMode() {
     // Use requires() here to declare subsystem dependencies
-    // eg. requires(chassis);
-    requires(Robot.driveBasePID);
-    this.time = 1;
-    this.power = 0.5;
+    requires(Robot.vision);
   }
 
   // Called just before this Command runs the first time
   @Override
   protected void initialize() {
-    Robot.driveBasePID.setLeftMotors(power);
-    Robot.driveBasePID.setRightMotors(power);
-    setTimeout(time);
-  }
+   Robot.vision.setPipeline(Pipeline.PROCESSING);
+    }
 
   // Called repeatedly when this Command is scheduled to run
   @Override
   protected void execute() {
+
   }
 
   // Make this return true when this Command no longer needs to run execute()
   @Override
   protected boolean isFinished() {
-    return isTimedOut();
+    return false;
   }
 
   // Called once after isFinished returns true
   @Override
   protected void end() {
-    Robot.driveBasePID.setLeftMotors(0);
-    Robot.driveBasePID.setRightMotors(0);
   }
 
   // Called when another command which requires one or more of the same
   // subsystems is scheduled to run
   @Override
   protected void interrupted() {
-    end();
+    
   }
 }
